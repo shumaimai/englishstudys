@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>聞き方ノート</title>
+<style>
+  :root{
+    --ink:#16202B; --sheet:#E3E9E5; --card:#F3F6F3; --rule:#AEBDB7;
+    --graphite:#56655F; --mark:#4B3A8F; --pin:#8A6413; --live:#1D6B58;
+    --danger:#8A2018; --tap:rgba(29,107,88,.14);
+    --ja:"Hiragino Sans","Noto Sans JP","Yu Gothic",system-ui,sans-serif;
+    --en:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  [hidden]{display:none!important}
+  html,body{height:100%}
+  body{background:var(--sheet);color:var(--ink);font-family:var(--ja);font-size:15px;
+       line-height:1.7;display:flex;flex-direction:column;
+       padding-bottom:env(safe-area-inset-bottom)}
+  button,select,input{font:inherit}
+  button:focus-visible,select:focus-visible,input:focus-visible,[tabindex]:focus-visible{
+    outline:2px solid var(--live);outline-offset:2px}
+
+  header{padding:10px 12px;border-bottom:1.5px solid var(--ink);display:flex;
+         align-items:center;justify-content:space-between;gap:8px;flex-shrink:0;flex-wrap:nowrap}
+  h1{font-size:15px;font-weight:800;letter-spacing:.04em;white-space:nowrap;
+     overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .hright{display:flex;align-items:center;gap:6px;flex-shrink:0}
+  .hbtn{height:32px;min-width:32px;padding:0 8px;border:1px solid var(--rule);background:transparent;
+        color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:5px;
+        justify-content:center;font-size:12px;line-height:1;white-space:nowrap}
+  .hbtn:hover{border-color:var(--ink)}
+  .hbtn[aria-expanded="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+  .hbtn .ic{font-size:14px;line-height:1}
+  .hbtn .lb{display:none}
+  /* 「データの入手」は何をする場所か分かりにくいので、文字を優先して残す。
+     狭いときは記号のほうを省く。 */
+  #getBtn .lb{display:inline}
+  #getBtn .ic{display:none}
+  .rate{font-family:var(--mono);font-size:12px;height:32px;padding:0 4px;border:1px solid var(--rule);
+        background:transparent;color:var(--ink);cursor:pointer}
+  @media (min-width:400px){
+    #getBtn .ic{display:inline}
+  }
+  @media (min-width:470px){
+    h1{font-size:16px}
+    .hbtn .lb{display:inline}
+    .hbtn{padding:0 11px}
+  }
+  .gear[aria-expanded="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+
+  main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+
+  .intro{padding:22px 16px}
+  .intro p{font-size:13px;color:var(--graphite);margin-bottom:16px;max-width:34em}
+  .pick{display:block;width:100%;padding:18px;text-align:center;border:1.5px dashed var(--rule);
+        background:var(--card);font-weight:700;color:var(--ink);cursor:pointer}
+  .pick:hover{border-color:var(--live);border-style:solid}
+  .pick small{display:block;font-weight:400;font-size:11px;color:var(--graphite);margin-top:5px}
+  input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+  .notice{background:var(--card);border-left:3px solid var(--graphite);padding:11px 13px;
+          font-size:12.5px;color:var(--graphite);line-height:1.75;margin-top:16px}
+
+  .index{border-bottom:1px solid var(--rule);background:var(--card);padding:10px 0 12px;flex-shrink:0}
+  .index h2{font-size:10px;letter-spacing:.18em;color:var(--graphite);font-weight:600;
+            padding:0 16px 8px;display:flex;align-items:center;gap:6px}
+  .index h2 .sp{flex:1}
+  .tiny{font-size:10px;letter-spacing:.06em;color:var(--graphite);background:transparent;
+        border:1px solid var(--rule);padding:3px 9px;cursor:pointer}
+  .tiny:hover{border-color:var(--ink);color:var(--ink)}
+  .strip{display:flex;gap:6px;overflow-x:auto;padding:0 16px 4px}
+  .trk{flex:0 0 auto;width:40px;height:40px;border:1.5px solid var(--rule);background:transparent;
+       font-family:var(--mono);font-size:13px;color:var(--graphite);display:grid;place-items:center;cursor:pointer}
+  .trk:hover{border-color:var(--ink);color:var(--ink)}
+  .trk[data-state="done"]{border-color:var(--ink);color:var(--ink);font-weight:700}
+  .trk[data-state="ja"]{border-style:dotted;color:var(--rule)}
+  .trk[data-state="busy"]{border-color:var(--live);color:var(--live)}
+  .trk[aria-current="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+
+  .stage{padding:14px 16px 22px}
+  .status{font-size:12px;color:var(--graphite);margin-bottom:12px;display:flex;
+          align-items:center;gap:8px;min-height:20px}
+  .bar{flex:1;height:3px;background:var(--rule);overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--live);width:0;transition:width .25s}
+  .offer{background:var(--card);border:1px solid var(--rule);padding:12px 14px;
+         display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .offer p{font-size:12.5px;color:var(--graphite);line-height:1.7;flex:1;min-width:200px}
+  .offer p b{color:var(--ink)}
+  .ask{border-color:var(--ink);border-width:1.5px}
+  .run{padding:11px 20px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);
+       font-weight:700;font-size:13px;letter-spacing:.04em;cursor:pointer;flex-shrink:0}
+  .run:hover{background:var(--ink);color:var(--card)}
+  .run.ghost{border-color:var(--rule);color:var(--graphite)}
+  .run.ghost:hover{background:var(--rule);color:var(--card)}
+
+  .script{margin-top:16px}
+  .sent{display:flex;gap:10px;padding:11px 10px;border:1px solid transparent;
+        border-bottom-color:var(--rule);cursor:pointer;align-items:flex-start}
+  .sent:hover{background:var(--card)}
+  .sent[aria-current="true"]{background:var(--card);border-color:var(--ink)}
+  .sent .no{font-family:var(--mono);font-size:11px;color:var(--graphite);padding-top:5px;
+            width:22px;flex-shrink:0;text-align:right}
+  .sent .txt{flex:1;font-family:var(--en);font-size:18px;line-height:1.95}
+  .sent .loop{flex-shrink:0;width:30px;height:30px;border:1px solid var(--rule);background:transparent;
+              color:var(--graphite);cursor:pointer;font-size:13px;line-height:1;padding:0;margin-top:2px}
+  .sent .loop:hover{border-color:var(--ink);color:var(--ink)}
+  .sent .loop.on{background:var(--live);border-color:var(--live);color:var(--card)}
+  .w{position:relative;padding:0 1px}
+  .w.doubt{border-bottom:2px solid var(--mark)}
+  .w.pin{border-bottom:2px dotted var(--pin)}
+  .w.doubt::before,.w.pin::before{content:"";position:absolute;left:50%;top:-8px;
+    transform:translateX(-50%);width:13px;height:6px;
+    clip-path:polygon(0 0,100% 0,100% 60%,50% 100%,0 60%)}
+  .w.doubt::before{background:var(--mark)}
+  .w.pin::before{background:var(--pin)}
+
+  .legend{margin-top:18px;padding-top:14px;border-top:1px solid var(--rule);
+          font-size:12px;color:var(--graphite);line-height:1.9}
+  .legend b{color:var(--ink)}
+  .chip{display:inline-block;width:20px;height:0;vertical-align:middle;margin-right:6px}
+  .chip.d{border-bottom:2px solid var(--mark)}
+  .chip.p{border-bottom:2px dotted var(--pin)}
+  .runlog{margin-top:14px;font-family:var(--mono);font-size:11px;color:var(--graphite);
+          border-top:1px dotted var(--rule);padding-top:10px;line-height:1.9}
+  .runlog b{color:var(--ink);font-weight:600}
+
+  .panel{margin-top:26px;padding-top:18px;border-top:1.5px solid var(--ink)}
+  .panel h2{font-size:13px;font-weight:800;letter-spacing:.06em;margin-bottom:6px}
+  .panel .lead{font-size:12.5px;color:var(--graphite);margin-bottom:14px;line-height:1.75}
+  .scope{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:12px;font-size:13px}
+  .scope label{display:flex;align-items:center;gap:6px;cursor:pointer}
+  .scope input[type=radio]{width:17px;height:17px;accent-color:var(--live)}
+  .scope select{font-size:12px;padding:4px 6px;border:1px solid var(--rule);
+                background:var(--card);color:var(--ink);max-width:200px}
+  .row{display:flex;gap:8px;flex-wrap:wrap}
+  .btn{flex:1;min-width:130px;padding:13px;border:1.5px solid var(--ink);background:transparent;
+       font-weight:700;font-size:13px;color:var(--ink);cursor:pointer}
+  .btn:hover{background:var(--ink);color:var(--card)}
+  .btn:disabled{border-color:var(--rule);color:var(--rule);background:transparent;cursor:default}
+  .btn.on{background:var(--danger);border-color:var(--danger);color:var(--card)}
+  .btn.on::before{content:"●　"}
+  .recinfo{font-size:12px;color:var(--graphite);margin-top:10px;min-height:18px}
+  .score{display:flex;align-items:baseline;gap:10px;margin:16px 0 4px}
+  .score b{font-size:30px;font-family:var(--mono);font-weight:700;line-height:1}
+  .score span{font-size:12px;color:var(--graphite)}
+  .diff{font-family:var(--en);font-size:18px;line-height:2.3;margin-top:10px}
+  .d-sub{background:rgba(75,58,143,.13);border-bottom:2px solid var(--mark);padding:1px 2px}
+  .d-sub i{font-family:var(--mono);font-style:normal;font-size:11px;color:var(--mark);vertical-align:2px}
+  .d-miss{color:var(--graphite);border-bottom:2px dotted var(--danger);padding:1px 2px}
+  .d-extra{font-family:var(--mono);font-size:12px;color:var(--rule);text-decoration:line-through}
+
+  .overlay{position:fixed;inset:0;z-index:40;background:rgba(22,32,43,.42);
+           display:flex;align-items:center;justify-content:center;padding:20px}
+  .sheet{background:var(--card);border-radius:14px;padding:20px;width:100%;max-width:400px;
+         max-height:88vh;overflow-y:auto;box-shadow:0 18px 48px rgba(22,32,43,.28)}
+  .sheet.wide{max-width:520px;max-height:92vh}
+  .glead{font-size:12.5px;color:var(--graphite);line-height:1.8;margin-bottom:16px}
+  .steps{list-style:none;counter-reset:st}
+  .steps li{counter-increment:st;position:relative;padding:0 0 16px 34px;font-size:13px;line-height:1.7}
+  .steps li::before{content:counter(st);position:absolute;left:0;top:1px;width:23px;height:23px;
+    border-radius:50%;background:var(--ink);color:var(--card);display:grid;place-items:center;
+    font-family:var(--mono);font-size:11px;font-weight:700}
+  .steps small{display:block;font-size:11px;color:var(--graphite);margin-top:3px}
+  .glink{display:inline-block;margin-top:7px;padding:9px 13px;border:1.5px solid var(--ink);
+    color:var(--ink);text-decoration:none;font-size:12px;font-weight:700;border-radius:8px}
+  .glink:hover{background:var(--ink);color:var(--card)}
+  .gpick{display:inline-block;margin-top:7px;padding:9px 16px;border:1.5px solid var(--live);
+    color:var(--live);font-size:12px;font-weight:700;cursor:pointer;border-radius:8px}
+  .gpick:hover{background:var(--live);color:var(--card)}
+  .unzip{border-top:1px solid var(--rule);padding-top:12px;margin-top:4px;font-size:12px;color:var(--graphite)}
+  .unzip summary{cursor:pointer;font-size:12px;color:var(--ink);font-weight:700;padding:4px 0}
+  .unzip p{line-height:1.75;margin:8px 0}
+  .unzip ul{margin:8px 0 8px 18px;line-height:1.8}
+  .unzip b{color:var(--ink)}
+  .gclose{display:flex;justify-content:flex-end;margin-top:18px}
+  .gclose .run{width:auto;border-radius:8px;margin:0}
+  .sheet h2{font-size:14px;font-weight:800;letter-spacing:.06em;margin-bottom:10px}
+  .sheet .run{width:100%;margin-top:16px;text-align:center;border-radius:8px}
+  .sw{display:flex;align-items:flex-start;gap:11px;cursor:pointer;padding:9px 0}
+  .sw input{width:20px;height:20px;margin-top:2px;flex-shrink:0;accent-color:var(--live)}
+  .sw span{font-size:13px;line-height:1.5}
+  .sw small{display:block;font-size:11px;color:var(--graphite);margin-top:2px}
+  .danger{border-top:1px solid var(--rule);margin-top:14px;padding-top:14px}
+  .danger p{font-size:12px;line-height:1.6;margin-bottom:10px}
+  .danger small{display:block;color:var(--graphite);font-size:11px;margin-top:3px}
+  .wipe{width:100%;border-radius:8px;padding:10px;border:1px solid var(--danger);
+        color:var(--danger);background:transparent;font-size:12px;cursor:pointer}
+  .wipe:hover{background:var(--danger);color:var(--card)}
+
+  .alert{background:rgba(248,249,247,.97);backdrop-filter:blur(12px);border-radius:16px;
+         width:100%;max-width:290px;overflow:hidden;text-align:center;
+         box-shadow:0 20px 50px rgba(22,32,43,.32)}
+  .alert h3{font-size:15px;font-weight:700;padding:20px 20px 6px}
+  .alert p{font-size:12.5px;color:var(--graphite);line-height:1.6;padding:0 20px 18px}
+  .alert-actions{display:flex;border-top:1px solid var(--rule)}
+  .alert-actions button{flex:1;padding:13px 8px;border:none;background:transparent;
+                        font-size:14px;color:var(--ink);cursor:pointer}
+  .alert-actions button + button{border-left:1px solid var(--rule)}
+  .alert-actions button:hover{background:rgba(22,32,43,.06)}
+  .alert-actions .destructive{color:var(--danger);font-weight:700}
+
+  .page{position:fixed;inset:0;z-index:35;background:var(--sheet);display:flex;flex-direction:column}
+  .phead{padding:14px 16px;border-bottom:1.5px solid var(--ink);display:flex;
+         align-items:center;justify-content:space-between;gap:12px;flex-shrink:0}
+  .phead h2{font-size:14px;font-weight:800;letter-spacing:.06em}
+  .pbody{flex:1;overflow-y:auto;padding:16px}
+  .erow{display:flex;gap:6px;flex-wrap:wrap}
+  .ebtn{font-size:11px;padding:8px 12px;border:1px solid var(--rule);background:transparent;
+        color:var(--ink);cursor:pointer}
+  .ebtn:hover{border-color:var(--ink)}
+  .ebtn.strong{border-color:var(--ink);font-size:12px;padding:8px 16px}
+  .ehint{font-size:11px;color:var(--graphite);margin:10px 0 8px;line-height:1.7}
+  .elist{list-style:none;border:1px solid var(--rule);background:var(--card)}
+  .eitem{display:flex;align-items:center;gap:6px;padding:6px 8px;
+         border-bottom:1px solid var(--rule);font-size:12px}
+  .eitem:last-child{border-bottom:none}
+  .eitem[aria-current="true"]{background:var(--sheet);font-weight:700}
+  .eitem .n{font-family:var(--mono);font-size:11px;color:var(--graphite);width:22px;flex-shrink:0}
+  .eitem .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
+  .eitem .tag{font-size:10px;color:var(--graphite);flex-shrink:0}
+  .mini{width:26px;height:26px;flex-shrink:0;border:1px solid var(--rule);background:transparent;
+        color:var(--ink);cursor:pointer;font-size:11px;line-height:1;padding:0}
+  .mini:hover{border-color:var(--ink)}
+  .mini:disabled{color:var(--rule);cursor:default}
+  .mini.del:hover{border-color:var(--danger);color:var(--danger)}
+
+  .player{position:sticky;bottom:0;background:var(--card);border-top:1.5px solid var(--ink);
+          padding:8px 14px 10px;padding-bottom:calc(10px + env(safe-area-inset-bottom));flex-shrink:0}
+  .pline{display:flex;align-items:center;gap:10px}
+  .pline + .pline{margin-top:8px}
+  .time{font-family:var(--mono);font-size:11px;color:var(--graphite);flex-shrink:0;min-width:34px}
+  .time.right{text-align:right}
+  .seek{flex:1;-webkit-appearance:none;appearance:none;height:3px;background:var(--rule);cursor:pointer}
+  .seek::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;background:var(--ink);border-radius:50%}
+  .seek::-moz-range-thumb{width:15px;height:15px;background:var(--ink);border:none;border-radius:50%}
+  .transport{justify-content:center;gap:6px}
+  .tb{width:42px;height:40px;border:1.5px solid var(--rule);background:transparent;color:var(--ink);
+      cursor:pointer;display:grid;place-items:center;flex-shrink:0}
+  .tb:hover{border-color:var(--ink)}
+  .tb:active{background:var(--ink);color:var(--card)}
+  .tb:disabled{border-color:var(--rule);color:var(--rule);cursor:default;background:transparent}
+  .tb.main{width:54px;border-color:var(--ink);border-width:2px}
+  .hint{font-size:10px;color:var(--graphite);text-align:center;margin-top:6px}
+  .fatal{background:var(--danger);color:#fff;padding:10px 14px;font-size:12px;line-height:1.6}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="fatal" id="fatal" hidden></div>
+
+<header>
+  <h1>聞き方ノート</h1>
+  <div class="hright">
+    <select class="rate" id="rate" aria-label="再生速度" title="再生速度">
+        <option value="0.5">×0.5</option><option value="0.6">×0.6</option>
+        <option value="0.75">×0.75</option><option value="1" selected>×1.0</option>
+        <option value="1.25">×1.25</option><option value="1.5">×1.5</option>
+      <option value="1.75">×1.75</option><option value="2">×2.0</option>
+    </select>
+    <button class="hbtn" id="getBtn" aria-label="データの入手" title="データの入手">
+      <span class="ic">⤓</span><span class="lb">データの入手</span></button>
+    <button class="hbtn" id="gear" aria-label="設定" title="設定" aria-expanded="false">
+      <span class="ic">⚙</span><span class="lb">設定</span></button>
+  </div>
+</header>
+
+<main>
+  <section class="intro" id="intro">
+    <p>手元の音声ファイルを読み込むと、そのまま再生できます。文字に起こせば、一文ずつタップして聞き直せます。</p>
+    <label class="pick" for="file">音声ファイルを選ぶ
+      <small>まとめて選べます。ファイル名の数字順に並びます</small></label>
+    <input type="file" id="file" multiple accept="audio/*,.mp3,.m4a,.wav,.aac,.ogg,.flac">
+    <div class="notice" id="limits" hidden></div>
+    <div class="notice">音声は端末の外に出ません。文字起こしもこの画面の中で行います。
+      文字に起こすときだけ、初回に音声認識モデルを受け取ります。</div>
+  </section>
+
+  <section class="index" id="index" hidden>
+    <h2>トラック<span class="sp"></span>
+      <button id="forget" class="tiny" hidden>保存を消す</button>
+      <button id="editBtn" class="tiny">編集</button>
+    </h2>
+    <div class="strip" id="strip"></div>
+  </section>
+
+  <section class="stage" id="stage" hidden>
+    <div class="status" id="status"></div>
+
+    <div class="offer" id="offer">
+      <p>そのまま再生できます。<b>文字に起こす</b>と、一文ずつタップして聞き直せるようになります。</p>
+      <button class="run" id="run">文字に起こす</button>
+    </div>
+
+    <div class="offer ask" id="ask" hidden>
+      <p>音声認識モデルがまだこの端末にありません。<b>約80MBを一度だけ受け取ります</b>。
+         以降は取得せずに使えます。通信量が気になる場合はWi‑Fiでどうぞ。</p>
+      <button class="run" id="askYes">受け取って続ける</button>
+      <button class="run ghost" id="askNo">やめる</button>
+    </div>
+
+    <div class="script" id="script"></div>
+
+    <section class="panel" id="shadow" hidden>
+      <h2>シャドーイング</h2>
+      <p class="lead">お手本を聞きながら、少し遅れて同じように声に出します。録音すると、どこが言えていたかを照らし合わせます。声も端末の外には出ません。</p>
+      <div class="scope" id="scope">
+        <label><input type="radio" name="scope" value="all" checked> 全文</label>
+        <label><input type="radio" name="scope" value="one"> 1文だけ
+          <select id="scopeSent" disabled></select></label>
+      </div>
+      <div class="row">
+        <button class="btn" id="rec">録音する</button>
+        <button class="btn" id="playRec" disabled>録音を聞く</button>
+      </div>
+      <div class="recinfo" id="recinfo"></div>
+      <div id="result"></div>
+    </section>
+
+    <div class="legend" id="legend" hidden>
+      <div id="approxNote" hidden style="margin-bottom:8px">
+        このトラックは語ごとの時刻が取れなかったため、<b>再生位置がおおよそ</b>になります。</div>
+      <div style="margin-bottom:6px">文をタップするとその一文だけ再生します。<b>⟳</b> で繰り返します。</div>
+      <div><span class="chip d"></span><b>聞き取りが不安定</b>　AIも迷った語です。文を聞いて確かめてください。</div>
+      <div><span class="chip p"></span><b>主語が変わる語</b>　I'll / you'll / he'll などは取り違えても気づきにくいので、いつも付箋を立てています。</div>
+    </div>
+
+    <div class="runlog" id="runlog" hidden></div>
+  </section>
+</main>
+
+<div class="player" id="player">
+  <div class="pline">
+    <span class="time" id="time">0:00</span>
+    <input type="range" class="seek" id="seek" min="0" max="1000" value="0" aria-label="再生位置" disabled>
+    <span class="time right" id="dur">0:00</span>
+  </div>
+  <div class="pline transport">
+    <button class="tb" id="toStart" aria-label="頭出し。続けて押すと前のトラック" disabled>
+      <svg viewBox="0 0 20 16" width="19" height="15" aria-hidden="true">
+        <rect x="2" y="2" width="2.4" height="12" fill="currentColor"/>
+        <path d="M18 2 L6.5 8 L18 14 Z" fill="currentColor"/></svg></button>
+    <button class="tb" id="back3" aria-label="3秒戻す" disabled>
+      <svg viewBox="0 0 24 16" width="23" height="15" aria-hidden="true">
+        <path d="M11 2 L2 8 L11 14 Z" fill="currentColor"/>
+        <text x="13" y="12" font-size="9" font-weight="700" fill="currentColor" font-family="monospace">3</text></svg></button>
+    <button class="tb main" id="pp" aria-label="再生" disabled>
+      <svg width="15" height="17" viewBox="0 0 16 18" aria-hidden="true">
+        <path id="ppIcon" d="M2 1 L14 9 L2 17 Z" fill="currentColor"/></svg></button>
+    <button class="tb" id="fwd3" aria-label="3秒進める" disabled>
+      <svg viewBox="0 0 24 16" width="23" height="15" aria-hidden="true">
+        <text x="2" y="12" font-size="9" font-weight="700" fill="currentColor" font-family="monospace">3</text>
+        <path d="M13 2 L22 8 L13 14 Z" fill="currentColor"/></svg></button>
+    <button class="tb" id="nextTrk" aria-label="次のトラック" disabled>
+      <svg viewBox="0 0 20 16" width="19" height="15" aria-hidden="true">
+        <path d="M2 2 L13.5 8 L2 14 Z" fill="currentColor"/>
+        <rect x="15.6" y="2" width="2.4" height="12" fill="currentColor"/></svg></button>
+  </div>
+  <p class="hint" id="hint">音声ファイルを読み込むと再生できます</p>
+</div>
+
+<div class="overlay" id="getPanel" hidden>
+  <div class="sheet wide" role="dialog" aria-modal="true" aria-labelledby="getTitle">
+    <h2 id="getTitle">データの入手</h2>
+    <p class="glead">練習に使う音声は、自分で用意してこの端末に読み込みます。
+      全商英語検定なら、協会の公式サイトに過去の問題と音声が公開されています。</p>
+
+    <ol class="steps">
+      <li><b>公式サイトを開く</b>
+        <a class="glink" href="https://zensho.or.jp/examination/pastexams/english/" target="_blank" rel="noopener">
+          全商協会　英語検定の過去問 ↗</a>
+        <small>新しいタブで開きます</small></li>
+      <li><b>受けたい回と級を選んで、音声のzipを保存する</b>
+        <small>「聞き方テスト」の音声がzipにまとまっています</small></li>
+      <li><b>ここに戻って、そのzipを選ぶ</b>
+        <label class="gpick" for="zipFile">zipを選ぶ</label>
+        <input type="file" id="zipFile" accept=".zip,application/zip">
+        <small id="zipInfo">zipのままで大丈夫です。中の音声だけを取り出します</small></li>
+    </ol>
+
+    <details class="unzip">
+      <summary>zipがうまく読めなかったときは</summary>
+      <p>先に自分で展開してから、中の音声ファイルをまとめて選んでください。</p>
+      <ul>
+        <li><b>iPhone・iPad</b>　ファイルアプリでzipを長押し →「展開」。できたフォルダを開いて、右上の「選択」から全部選びます。</li>
+        <li><b>Windows</b>　zipを右クリック →「すべて展開」。</li>
+        <li><b>Mac</b>　zipをダブルクリック。</li>
+      </ul>
+      <p>展開したら、この画面を閉じて「音声ファイルを選ぶ」からまとめて読み込めます。</p>
+    </details>
+
+    <div class="gclose"><button class="run" id="getClose">閉じる</button></div>
+  </div>
+</div>
+
+<div class="overlay" id="confirm" hidden>
+  <div class="alert" role="alertdialog" aria-modal="true" aria-labelledby="cfTitle">
+    <h3 id="cfTitle"></h3><p id="cfBody"></p>
+    <div class="alert-actions">
+      <button id="cfCancel">キャンセル</button>
+      <button id="cfOk" class="destructive">削除</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="settings" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="setTitle">
+    <h2 id="setTitle">設定</h2>
+    <label class="sw"><input type="checkbox" id="autoNext" checked>
+      <span><b>続けて再生する</b><small>トラックが終わったら次へ進みます</small></span></label>
+    <label class="sw"><input type="checkbox" id="noSleep" checked>
+      <span><b>再生中は画面を消さない</b><small>聞きながら本文を見続けられます</small></span></label>
+    <label class="sw"><input type="checkbox" id="useGpu">
+      <span><b>GPUを使う</b><small>速くなることがありますが、端末によっては画面が落ちます。うまくいかないときは切ってください</small></span></label>
+    <div class="danger">
+      <p><b>この端末に残しているもの</b><small id="dataInfo">確認しています…</small></p>
+      <button class="wipe" id="wipe">文字起こしとモデルを全部消す</button>
+    </div>
+    <button class="run" id="setClose">閉じる</button>
+  </div>
+</div>
+
+<div class="page" id="editorPage" hidden>
+  <header class="phead">
+    <h2>トラックの編集</h2>
+    <button class="ebtn strong" id="editDone">完了</button>
+  </header>
+  <div class="pbody">
+    <div class="erow">
+      <label class="ebtn" for="addFile">音声を追加</label>
+      <input type="file" id="addFile" multiple accept="audio/*,.mp3,.m4a,.wav,.aac,.ogg,.flac">
+      <button class="ebtn" data-sort="name">名前順</button>
+      <button class="ebtn" data-sort="nameDesc">名前の逆順</button>
+      <button class="ebtn" data-sort="added">追加した順</button>
+    </div>
+    <p class="ehint">並べ替えたあと ▲▼ で手直しできます。文字起こしはファイルごとに覚えているので、順番を変えても消えません。</p>
+    <ul class="elist" id="elist"></ul>
+  </div>
+</div>
+
+<audio id="audio" preload="metadata"></audio>
+<script type="module">
+const $ = id => document.getElementById(id);
+const esc = t => String(t).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const fmt = t => `${Math.floor(t/60)}:${String(Math.floor(t%60)).padStart(2,'0')}`;
+
+const AUDIO_RE = /\.(mp3|m4a|wav|aac|ogg|flac|mp4|webm)$/i;
+const CJK = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff]/;
+// 受け取るモデルはこれ1つだけ。語ごとの時刻が取れない音声では、
+// 同じモデルのまま区間ごとに切り替える。追加で取りに行かない。
+const MODEL = 'onnx-community/whisper-base_timestamped';
+const MODEL_OK = 'kknote:modelReady';
+// 主語が変わる語。検証の結果、確信度でも複数モデルの比較でも捕まえられなかった。
+const PRONOUNS = new Set(["i'll","you'll","he'll","she'll","we'll","they'll","it'll",
+  "i'd","you'd","he'd","she'd","we'd","they'd","i've","you've","we've","they've",
+  "i'm","you're","he's","she's","we're","they're"]);
+
+const audio = $('audio');
+const state = { files: [], current: -1, results: new Map(), seq: new Map(), nextSeq: 0, worker: null };
+let mode = null, inlineAsr = null;
+let region = null, looping = -1, currentSent = -1, autoplayNext = false, wakeLock = null;
+
+const idOf = f => `${f.name}\u0000${f.size}`;
+const resultOf = i => (state.files[i] ? state.results.get(idOf(state.files[i])) : undefined);
+
+// ---------- この端末で使えるもの ----------
+const canStore = (() => { try { localStorage.setItem('kknote:probe','1');
+  localStorage.removeItem('kknote:probe'); return true; } catch { return false; } })();
+const canMic = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+const inFrame = window.self !== window.top;
+
+const store = {
+  key: f => `kknote:v1:${f.name}:${f.size}`,
+  get(f){ try { const r = localStorage.getItem(this.key(f)); return r ? JSON.parse(r) : null; } catch { return null; } },
+  set(f, d){ try { localStorage.setItem(this.key(f), JSON.stringify(d)); return true; } catch { return false; } },
+  clear(){ try { const ks=[]; for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);
+    if(k&&k.startsWith('kknote:v1:'))ks.push(k);} ks.forEach(k=>localStorage.removeItem(k)); return true; } catch { return false; } },
+};
+
+// 端末のメモリ不足で落ちるとページごと再読み込みされ、
+// 設定だけが残って何度も落ちる。始める前に印を置き、
+// 無事に終わったら消す。残っていたら前回落ちたということ。
+const RISK = 'kknote:risk';
+function riskStart(what){ try { localStorage.setItem(RISK, what); } catch {} }
+function riskEnd(){ try { localStorage.removeItem(RISK); } catch {} }
+function riskCheck(){
+  let last = null;
+  try { last = localStorage.getItem(RISK); } catch {}
+  if (!last) return;
+  riskEnd();
+  if (last === 'gpu') {
+    $('useGpu').checked = false;
+    try { localStorage.setItem(PREF_GPU, '0'); } catch {}
+    showNote('前回、GPUを使った処理の途中で画面が止まりました。この端末では負担が大きいようなので、GPUを使わない設定に戻しました。');
+  } else if (last === 'zip') {
+    showNote('前回、zipを開く途中で画面が止まりました。ファイルが大きすぎたようです。'
+      + '「データの入手」の中の案内にそって、先に自分で展開してから読み込んでください。');
+  }
+}
+function showNote(msg){
+  $('limits').innerHTML = esc(msg);
+  $('limits').hidden = false;
+}
+
+function setStatus(text, pct){
+  $('status').innerHTML = pct == null ? esc(text)
+    : `<span>${esc(text)}</span><span class="bar"><i style="width:${pct}%"></i></span>`;
+}
+
+// iPhone のような中央の確認
+function ask({ title, body, ok = '削除' }){
+  return new Promise(resolve => {
+    $('cfTitle').textContent = title; $('cfBody').textContent = body; $('cfOk').textContent = ok;
+    $('confirm').hidden = false;
+    const close = v => { $('confirm').hidden = true;
+      $('cfOk').removeEventListener('click', yes); $('cfCancel').removeEventListener('click', no);
+      $('confirm').removeEventListener('click', bg); resolve(v); };
+    const yes = () => close(true), no = () => close(false);
+    const bg = e => { if (e.target === $('confirm')) close(false); };
+    $('cfOk').addEventListener('click', yes); $('cfCancel').addEventListener('click', no);
+    $('confirm').addEventListener('click', bg);
+  });
+}
+
+// ---------- ファイルの出し入れ ----------
+function addFiles(list, { replace = false } = {}){
+  const incoming = [...list].filter(f => AUDIO_RE.test(f.name));
+  if (!incoming.length) { setStatus('音声ファイルが見つかりませんでした。'); return; }
+  if (replace) { state.files = []; state.seq.clear(); state.nextSeq = 0; state.current = -1; }
+  const known = new Set(state.files.map(idOf));
+  for (const f of incoming) {
+    if (known.has(idOf(f))) continue;
+    state.seq.set(idOf(f), state.nextSeq++);
+    state.files.push(f); known.add(idOf(f));
+    const saved = store.get(f);
+    if (saved) state.results.set(idOf(f), saved);
+  }
+  sortFiles('name');
+  $('intro').hidden = true; $('index').hidden = false; $('stage').hidden = false;
+  drawStrip(); drawEditor();
+  if (state.current < 0) select(0); else updateTransport();
+}
+
+function sortFiles(how){
+  const cmp = {
+    name: (a,b) => a.name.localeCompare(b.name, undefined, {numeric:true, sensitivity:'base'}),
+    nameDesc: (a,b) => b.name.localeCompare(a.name, undefined, {numeric:true, sensitivity:'base'}),
+    added: (a,b) => (state.seq.get(idOf(a)) ?? 0) - (state.seq.get(idOf(b)) ?? 0),
+  }[how];
+  if (!cmp) return;
+  const cur = state.files[state.current];
+  state.files.sort(cmp);
+  if (cur) state.current = state.files.indexOf(cur);
+}
+
+function drawStrip(){
+  $('forget').hidden = state.results.size === 0;
+  $('strip').innerHTML = '';
+  state.files.forEach((f, i) => {
+    const r = state.results.get(idOf(f));
+    const b = document.createElement('button');
+    b.className = 'trk';
+    b.textContent = (f.name.match(/\d+/) ?? [String(i + 1)])[0];
+    b.title = f.name;
+    b.dataset.state = r ? (r.ja ? 'ja' : 'done') : 'new';
+    b.setAttribute('aria-current', String(i === state.current));
+    b.addEventListener('click', () => select(i));
+    $('strip').appendChild(b);
+  });
+}
+
+function select(i){
+  if (i < 0 || i >= state.files.length) return;
+  const keepAuto = autoplayNext;
+  state.current = i;
+  const f = state.files[i];
+  audio.pause(); freePlay(); autoplayNext = keepAuto;
+  if (audio.src) URL.revokeObjectURL(audio.src);
+  audio.src = URL.createObjectURL(f);
+  audio.playbackRate = parseFloat($('rate').value);
+  audio.load(); setIcon(false);
+  $('seek').value = 0; $('time').textContent = '0:00'; $('dur').textContent = '0:00';
+  drawStrip(); drawEditor(); updateTransport();
+  const done = resultOf(i);
+  $('ask').hidden = true;
+  if (done) { $('offer').hidden = true; render(done); }
+  else {
+    $('offer').hidden = false; $('script').innerHTML = '';
+    $('legend').hidden = true; $('runlog').hidden = true; $('shadow').hidden = true;
+    $('run').disabled = false; $('run').textContent = '文字に起こす';
+    setStatus(f.name);
+  }
+}
+
+function goTrack(step){ select(state.current + step); }
+
+function move(i, step){
+  const j = i + step;
+  if (j < 0 || j >= state.files.length) return;
+  [state.files[i], state.files[j]] = [state.files[j], state.files[i]];
+  if (state.current === i) state.current = j; else if (state.current === j) state.current = i;
+  drawStrip(); drawEditor(); updateTransport();
+}
+
+async function removeTrack(i){
+  const ok = await ask({ title:'トラックを外しますか？',
+    body:`「${state.files[i].name}」を一覧から外します。ファイル自体は消えません。`, ok:'外す' });
+  if (!ok) return;
+  const wasCurrent = state.current === i;
+  state.files.splice(i, 1);
+  if (!state.files.length) {
+    state.current = -1; audio.pause(); audio.removeAttribute('src'); audio.load();
+    $('index').hidden = true; $('stage').hidden = true; $('intro').hidden = false;
+    $('editorPage').hidden = true; updateTransport(); return;
+  }
+  if (wasCurrent) select(Math.min(i, state.files.length - 1));
+  else { if (state.current > i) state.current--; drawStrip(); drawEditor(); updateTransport(); }
+}
+
+function mini(label, fn, disabled, extra){
+  const b = document.createElement('button');
+  b.className = 'mini' + (extra ? ' ' + extra : '');
+  b.textContent = label; b.disabled = !!disabled;
+  b.addEventListener('click', fn);
+  return b;
+}
+
+function drawEditor(){
+  const ul = $('elist'); ul.innerHTML = '';
+  state.files.forEach((f, i) => {
+    const r = state.results.get(idOf(f));
+    const li = document.createElement('li');
+    li.className = 'eitem';
+    li.setAttribute('aria-current', String(i === state.current));
+    li.innerHTML = `<span class="n">${i+1}</span><span class="nm">${esc(f.name)}</span>`
+      + `<span class="tag">${r ? (r.ja ? '案内' : '起こし済') : ''}</span>`;
+    li.querySelector('.nm').addEventListener('click', () => { select(i); $('editorPage').hidden = true; });
+    li.append(mini('▲', () => move(i,-1), i === 0),
+              mini('▼', () => move(i, 1), i === state.files.length - 1),
+              mini('✕', () => removeTrack(i), false, 'del'));
+    ul.appendChild(li);
+  });
+}
+
+// ---------- 音声を 16kHz モノラルへ ----------
+async function decodeTo16k(blob){
+  const AC = window.AudioContext || window.webkitAudioContext;
+  const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+  const ctx = new AC();
+  let decoded;
+  try { decoded = await ctx.decodeAudioData(await blob.arrayBuffer()); }
+  finally { ctx.close(); }
+  const off = new OAC(1, Math.max(1, Math.ceil(decoded.duration * 16000)), 16000);
+  const src = off.createBufferSource();
+  src.buffer = decoded; src.connect(off.destination); src.start();
+  const out = await off.startRendering();
+  return { pcm: out.getChannelData(0), duration: decoded.duration };
+}
+
+// 同じ言い回しが繰り返されたら暴走の合図
+function looping3(text){
+  const w = String(text).toLowerCase().split(/\s+/).filter(Boolean);
+  if (w.length < 12) return false;
+  const seen = new Map(); let max = 0;
+  for (let i = 0; i + 3 <= w.length; i++) {
+    const g = w.slice(i, i+3).join(' ');
+    const n = (seen.get(g) || 0) + 1; seen.set(g, n);
+    if (n > max) max = n;
+  }
+  return max / (w.length - 2) > 0.15;
+}
+
+const WORKER_SRC = `
+import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1';
+env.allowLocalModels = false;
+const MW = '${MODEL}';
+let asr = null, asrId = null, useGpu = false;
+const prog = new Map();
+
+function loops(t){
+  const w = String(t).toLowerCase().split(/\\s+/).filter(Boolean);
+  if (w.length < 12) return false;
+  const m = new Map(); let mx = 0;
+  for (let i = 0; i + 3 <= w.length; i++) {
+    const g = w.slice(i, i+3).join(' ');
+    const n = (m.get(g)||0)+1; m.set(g,n); if (n>mx) mx=n;
+  }
+  return mx/(w.length-2) > 0.15;
+}
+
+async function load(id){
+  if (asr && asrId === id) return asr;
+  prog.clear();
+  asr = await pipeline('automatic-speech-recognition', id, {
+    device: useGpu ? 'webgpu' : 'wasm',
+    dtype: useGpu ? { encoder_model:'fp32', decoder_model_merged:'q4' } : 'q8',
+    progress_callback: p => {
+      if (p.status === 'progress' && p.total) {
+        prog.set(p.file, { l: p.loaded, t: p.total });
+        let a = 0, b = 0; for (const v of prog.values()) { a += v.l; b += v.t; }
+        if (b) self.postMessage({ type:'load', pct: Math.min(99, Math.floor(a/b*100)) });
+      }
+    },
+  });
+  asrId = id;
+  return asr;
+}
+
+self.onmessage = async (e) => {
+  const { pcm, duration, gpu } = e.data;
+  if (useGpu !== !!gpu) { asr = null; asrId = null; useGpu = !!gpu; }
+  const base = { language:'en', task:'transcribe', chunk_length_s:30, stride_length_s:5 };
+  try {
+    try {
+      self.postMessage({ type:'probe' });
+      const pm = await load(MW);
+      const head = pcm.length > 16000*18 ? pcm.slice(0, 16000*18) : pcm;
+      const pr = await pm(head, { task:'transcribe', return_timestamps:false });
+      if (/[\\u3040-\\u30ff\\u3400-\\u4dbf\\u4e00-\\u9fff]/.test(pr.text || '')) {
+        self.postMessage({ type:'done', grain:'ja', chunks:[], text: pr.text||'', duration });
+        return;
+      }
+    } catch (x) {}
+    const m = await load(MW);
+    try {
+      self.postMessage({ type:'work' });
+      const out = await m(pcm, { ...base, return_timestamps:'word' });
+      if (loops(out.text||'')) throw new Error('繰り返しを検出');
+      self.postMessage({ type:'done', grain:'word', chunks: out.chunks ?? [], text: out.text ?? '', duration });
+      return;
+    } catch (x) { self.postMessage({ type:'coarse' }); }
+    const m2 = m;
+    self.postMessage({ type:'work' });
+    const o2 = await m2(pcm, { ...base, no_repeat_ngram_size:6, return_timestamps:true });
+    self.postMessage({ type:'done', grain:'segment', chunks: o2.chunks ?? [], text: o2.text ?? '', duration });
+  } catch (err) {
+    self.postMessage({ type:'error', message: String(err && err.message || err) });
+  }
+};
+`;
+
+function runInWorker(pcm, duration, onProgress){
+  return new Promise((resolve, reject) => {
+    let w;
+    try {
+      if (!state.worker) {
+        const url = URL.createObjectURL(new Blob([WORKER_SRC], { type:'text/javascript' }));
+        state.worker = new Worker(url, { type:'module' });
+      }
+      w = state.worker;
+    } catch (err) { reject(new Error('worker-unavailable:' + err.message)); return; }
+
+    let started = false;
+    const guard = setTimeout(() => { if (!started) reject(new Error('worker-unavailable:応答がありません')); }, 15000);
+    w.onmessage = ev => {
+      started = true; clearTimeout(guard);
+      const m = ev.data;
+      if (m.type === 'done') resolve(m);
+      else if (m.type === 'error') reject(new Error(m.message));
+      else onProgress(m);
+    };
+    w.onerror = err => { clearTimeout(guard); state.worker = null;
+      reject(new Error('worker-unavailable:' + (err.message || 'ワーカーを読み込めません'))); };
+    try { w.postMessage({ pcm, duration, gpu: $('useGpu').checked }); }
+    catch (err) { clearTimeout(guard); reject(new Error('worker-unavailable:' + err.message)); }
+  });
+}
+
+async function runInline(pcm, duration, onProgress){
+  const { pipeline, env } = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1');
+  env.allowLocalModels = false;
+  const gpu = $('useGpu').checked;
+  const base = { language:'en', task:'transcribe', chunk_length_s:30, stride_length_s:5 };
+  const iprog = new Map();
+  const load = async id => {
+    if (inlineAsr && inlineAsr.id === id && inlineAsr.gpu === gpu) return inlineAsr.fn;
+    iprog.clear();
+    const fn = await pipeline('automatic-speech-recognition', id, {
+      device: gpu ? 'webgpu' : 'wasm',
+      dtype: gpu ? { encoder_model:'fp32', decoder_model_merged:'q4' } : 'q8',
+      progress_callback: p => {
+        if (p.status === 'progress' && p.total) {
+          iprog.set(p.file, { l: p.loaded, t: p.total });
+          let a = 0, b = 0; for (const v of iprog.values()) { a += v.l; b += v.t; }
+          if (b) onProgress({ type:'load', pct: Math.min(99, Math.floor(a/b*100)) });
+        }
+      },
+    });
+    inlineAsr = { id, fn, gpu };
+    return fn;
+  };
+
+  try {
+    onProgress({ type:'probe' });
+    const pm = await load(MODEL);
+    const head = pcm.length > 16000*18 ? pcm.slice(0, 16000*18) : pcm;
+    const pr = await pm(head, { task:'transcribe', return_timestamps:false });
+    if (CJK.test(pr.text || '')) return { grain:'ja', chunks: [], text: pr.text || '', duration };
+  } catch (x) {}
+
+  const m = await load(MODEL);
+  try {
+    onProgress({ type:'work' });
+    await new Promise(r => setTimeout(r, 50));
+    const out = await m(pcm, { ...base, return_timestamps:'word' });
+    if (looping3(out.text || '')) throw new Error('繰り返しを検出');
+    return { grain:'word', chunks: out.chunks ?? [], text: out.text ?? '', duration };
+  } catch (x) { onProgress({ type:'coarse' }); }
+
+  const m2 = m;
+  onProgress({ type:'work' });
+  await new Promise(r => setTimeout(r, 50));
+  const o2 = await m2(pcm, { ...base, no_repeat_ngram_size:6, return_timestamps:true });
+  return { grain:'segment', chunks: o2.chunks ?? [], text: o2.text ?? '', duration };
+}
+
+async function transcribe(pcm, duration, onProgress){
+  const fresh = () => new Float32Array(pcm);
+  if (mode !== 'inline') {
+    try { const r = await runInWorker(fresh(), duration, onProgress); mode = 'worker'; return r; }
+    catch (err) {
+      if (!String(err.message).startsWith('worker-unavailable:')) throw err;
+      mode = 'inline'; onProgress({ type:'fallback' });
+      await new Promise(r => setTimeout(r, 300));
+    }
+  }
+  return runInline(fresh(), duration, onProgress);
+}
+
+// ---------- モデルが手元にあるか ----------
+async function modelReady(){
+  try { if (localStorage.getItem(MODEL_OK) === '1') return true; } catch {}
+  try {
+    if (!('caches' in window)) return false;
+    for (const name of await caches.keys()) {
+      const keys = await (await caches.open(name)).keys();
+      if (keys.some(r => /whisper/.test(r.url))) return true;
+    }
+  } catch {}
+  return false;
+}
+
+function askDownload(){
+  return new Promise(resolve => {
+    $('offer').hidden = true; $('ask').hidden = false;
+    const done = ok => { $('ask').hidden = true;
+      $('askYes').removeEventListener('click', yes); $('askNo').removeEventListener('click', no); resolve(ok); };
+    const yes = () => done(true);
+    const no = () => { $('offer').hidden = false; done(false); };
+    $('askYes').addEventListener('click', yes); $('askNo').addEventListener('click', no);
+  });
+}
+
+// 区間ごとの時刻しか取れないときは、語の長さの比で割り振る
+function spreadOverWords(chunks){
+  const out = [];
+  for (const c of chunks) {
+    const a = c.timestamp?.[0] ?? 0, b = c.timestamp?.[1] ?? a;
+    const ws = String(c.text || '').trim().split(/\s+/).filter(Boolean);
+    if (!ws.length) continue;
+    const chars = ws.reduce((n, w) => n + w.length, 0) || 1;
+    let t = a;
+    for (const w of ws) { const d = Math.max(0, b - a) * (w.length / chars);
+      out.push({ text: w, start: t, end: t + d }); t += d; }
+  }
+  return out;
+}
+
+// ---------- 文字起こしの実行 ----------
+$('run').addEventListener('click', async () => {
+  const i = state.current, file = state.files[i];
+  if (!file) return;
+  $('run').disabled = true;
+
+  if (!(await modelReady())) {
+    const ok = await askDownload();
+    if (!ok) { $('run').disabled = false; setStatus('文字起こしをやめました。再生はそのまま使えます。'); return; }
+  }
+
+  const strip = $('strip').children[i];
+  if (strip) strip.dataset.state = 'busy';
+  const t0 = performance.now();
+
+  const onProgress = m => {
+    if (m.type === 'load') setStatus(`音声認識モデルを受け取っています　${m.pct}%`, 10 + m.pct * 0.6);
+    else if (m.type === 'probe') setStatus('どの言語かを確かめています', 12);
+    else if (m.type === 'coarse') setStatus('語ごとの時刻が取れないので、区間ごとに切り替えます', 74);
+    else if (m.type === 'fallback') setStatus('別の方法に切り替えます', 30);
+    else if (m.type === 'work') setStatus(mode === 'inline'
+      ? '文字に起こしています。終わるまで画面の操作ができません' : '文字に起こしています', 72);
+  };
+
+  try {
+    setStatus('音声を読み込んでいます', 5);
+    const decoded = await decodeTo16k(file);
+    if ($('useGpu').checked) riskStart('gpu');
+    const result = await transcribe(decoded.pcm, decoded.duration, onProgress);
+    riskEnd();
+    try { localStorage.setItem(MODEL_OK, '1'); } catch {}
+
+    let data;
+    if (result.grain === 'ja') {
+      data = { words: [], ja: true, approx: false, duration: result.duration, name: file.name };
+    } else {
+      const approx = result.grain !== 'word';
+      const words = approx ? spreadOverWords(result.chunks || [])
+        : (result.chunks || []).map(c => ({ text: (c.text||'').trim(),
+            start: c.timestamp?.[0] ?? 0, end: c.timestamp?.[1] ?? 0 })).filter(x => x.text);
+      if (!words.length) throw new Error('この音声からは語を取り出せませんでした');
+      data = { words, ja: false, approx, duration: result.duration, name: file.name,
+        log: { where: mode === 'inline' ? 'この画面' : '別スレッド',
+               grain: approx ? 'おおよその位置' : '語ごとの正確な位置',
+               sec: (performance.now() - t0) / 1000 } };
+    }
+    state.results.set(idOf(file), data);
+    if (!store.set(file, data)) data.unsaved = true;
+    drawStrip(); drawEditor();
+    $('offer').hidden = true;
+    render(data);
+  } catch (err) {
+    riskEnd();
+    setStatus(`文字起こしができませんでした。${err.message}`);
+    $('run').disabled = false; $('run').textContent = 'もう一度試す';
+    if (strip) strip.dataset.state = 'new';
+    console.error(err);
+  }
+});
+
+// ---------- 表示 ----------
+const clean = w => w.toLowerCase().replace(/[^a-z']/g, '');
+const isPin = w => PRONOUNS.has(clean(w.text));
+const isDoubt = w => (w.end - w.start) > 0 && (w.end - w.start) < 0.06;
+
+// 句読点で文に区切る。試験の音源は一文が短いので、
+// これが「聞き直したい単位」とほぼ一致する。
+function sentencesOf(words){
+  const out = []; let from = 0;
+  words.forEach((w, i) => {
+    if (/[.!?]["')\]]?$/.test(w.text) || i === words.length - 1) {
+      out.push({ from, to: i, start: words[from].start, end: w.end });
+      from = i + 1;
+    }
+  });
+  return out.filter(s => s.to >= s.from);
+}
+
+function render(data){
+  resetShadow(data);
+  $('runlog').hidden = true;
+  if (data.ja) {
+    $('script').innerHTML = '<p style="font-size:13px;color:var(--graphite);line-height:1.9">'
+      + 'これは試験の進め方を説明する日本語の案内です。英語の練習には使いません。'
+      + '上のトラック目次から英語のトラックを選んでください。</p>';
+    $('legend').hidden = true;
+    setStatus(`${data.name}　日本語の案内トラックです`);
+    return;
+  }
+
+  const sents = sentencesOf(data.words);
+  data.sents = sents;
+  const marked = data.words.filter(w => isPin(w) || (!data.approx && isDoubt(w))).length;
+  setStatus(`${data.name}　${sents.length}文　${data.words.length}語　付箋 ${marked}`
+    + (data.approx ? '　※再生位置はおおよそです' : ''));
+
+  $('script').innerHTML = '';
+  sents.forEach((sn, si) => {
+    const row = document.createElement('div');
+    row.className = 'sent'; row.dataset.si = String(si);
+    row.setAttribute('aria-current', 'false');
+    row.tabIndex = 0;
+
+    const no = document.createElement('span');
+    no.className = 'no'; no.textContent = String(si + 1);
+
+    const txt = document.createElement('span');
+    txt.className = 'txt';
+    for (let k = sn.from; k <= sn.to; k++) {
+      const w = data.words[k];
+      const pin = isPin(w), doubt = !data.approx && isDoubt(w);
+      const el = document.createElement('span');
+      el.className = 'w' + (pin ? ' pin' : doubt ? ' doubt' : '');
+      el.textContent = w.text;
+      if (pin || doubt) el.setAttribute('aria-label',
+        `${w.text}　${pin ? '主語が変わる語です' : '聞き取りが不安定です'}`);
+      txt.appendChild(el); txt.append(' ');
+    }
+
+    const loop = document.createElement('button');
+    loop.className = 'loop'; loop.textContent = '⟳';
+    loop.title = 'この文を繰り返す'; loop.setAttribute('aria-label', 'この文を繰り返す');
+    loop.addEventListener('click', ev => {
+      ev.stopPropagation();
+      const on = looping !== si;
+      document.querySelectorAll('.sent .loop.on').forEach(x => x.classList.remove('on'));
+      looping = on ? si : -1;
+      if (on) { loop.classList.add('on'); playSentence(si); }
+    });
+
+    row.append(no, txt, loop);
+    row.addEventListener('click', () => playSentence(si));
+    row.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); playSentence(si); }
+    });
+    $('script').appendChild(row);
+  });
+
+  $('legend').hidden = false;
+  $('approxNote').hidden = !data.approx;
+  buildShadowChoices(sents.length);
+
+  if (data.unsaved) { $('runlog').textContent = 'この環境では結果を保存できません。閉じると消えます。'; $('runlog').hidden = false; }
+  else if (data.log) {
+    const rtf = data.duration ? (data.log.sec / data.duration).toFixed(2) : '—';
+    $('runlog').innerHTML = `処理の記録　場所 <b>${esc(data.log.where)}</b>　／　時刻 <b>${esc(data.log.grain)}</b>`
+      + `　／　${data.duration.toFixed(1)}秒を <b>${data.log.sec.toFixed(1)}秒</b>（実時間比 ${rtf}×）`;
+    $('runlog').hidden = false;
+  }
+}
+
+// ---------- 再生 ----------
+function clearPlaying(){
+  document.querySelectorAll('.sent[aria-current="true"]').forEach(x => x.setAttribute('aria-current','false'));
+}
+function freePlay(){
+  region = null; looping = -1; currentSent = -1;
+  document.querySelectorAll('.sent .loop.on').forEach(x => x.classList.remove('on'));
+  clearPlaying();
+}
+function playRange(r){
+  region = { start: r.start, end: r.end, armed: false };
+  try { audio.currentTime = r.start; } catch (e) {}
+  audio.play().catch(err => setStatus(`再生できませんでした：${err.message}`));
+}
+function playSentence(si){
+  const data = resultOf(state.current);
+  if (!data || !data.sents || !data.sents[si]) return;
+  const sn = data.sents[si];
+  if (looping !== si) {
+    looping = -1;
+    document.querySelectorAll('.sent .loop.on').forEach(x => x.classList.remove('on'));
+  }
+  currentSent = si;
+  clearPlaying();
+  const row = $('script').querySelector(`.sent[data-si="${si}"]`);
+  if (row) row.setAttribute('aria-current','true');
+  playRange({ start: Math.max(0, sn.start - 0.12), end: sn.end + 0.18 });
+}
+function nudge(sec){
+  freePlay();
+  audio.currentTime = Math.min(Math.max(0, audio.currentTime + sec), audio.duration || 0);
+}
+
+audio.addEventListener('timeupdate', () => {
+  const d = audio.duration || 1;
+  $('seek').value = String(Math.round(audio.currentTime / d * 1000));
+  $('time').textContent = fmt(audio.currentTime);
+  if (!region) return;
+  if (!region.armed) {
+    if (audio.currentTime >= region.start - 0.08 && audio.currentTime < region.end) region.armed = true;
+    return;
+  }
+  if (audio.currentTime >= region.end) {
+    if (looping >= 0 && currentSent === looping) {
+      region.armed = false;
+      audio.currentTime = region.start;
+      return;
+    }
+    audio.pause(); region = null; clearPlaying();
+  }
+});
+audio.addEventListener('seeked', () => {
+  if (region && audio.currentTime >= region.start - 0.08) region.armed = true;
+});
+audio.addEventListener('loadedmetadata', () => {
+  $('dur').textContent = fmt(audio.duration || 0);
+  setMediaSession();
+});
+audio.addEventListener('play', () => setIcon(true));
+audio.addEventListener('pause', () => setIcon(false));
+audio.addEventListener('emptied', () => setIcon(false));
+audio.addEventListener('canplay', () => {
+  if (autoplayNext) { autoplayNext = false; audio.play().catch(() => {}); }
+});
+audio.addEventListener('ended', () => {
+  setIcon(false); region = null; clearPlaying();
+  if ($('autoNext').checked && state.current < state.files.length - 1) {
+    autoplayNext = true; select(state.current + 1);
+  }
+});
+
+$('pp').addEventListener('click', () => {
+  freePlay();
+  if (audio.paused) audio.play().catch(() => {}); else audio.pause();
+});
+$('back3').addEventListener('click', () => nudge(-3));
+$('fwd3').addEventListener('click', () => nudge(3));
+$('seek').addEventListener('input', () => {
+  freePlay();
+  audio.currentTime = (audio.duration || 0) * (parseInt($('seek').value, 10) / 1000);
+});
+$('rate').addEventListener('change', () => { audio.playbackRate = parseFloat($('rate').value); });
+$('nextTrk').addEventListener('click', () => goTrack(1));
+
+let lastStart = 0;
+$('toStart').addEventListener('click', () => {
+  const now = Date.now();
+  const atStart = audio.currentTime <= 3, quick = now - lastStart < 1400;
+  lastStart = now;
+  if ((atStart || quick) && state.current > 0) { goTrack(-1); return; }
+  freePlay(); audio.currentTime = 0;
+});
+
+document.addEventListener('keydown', e => {
+  if (/^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)) return;
+  if (e.key === 'Escape') {
+    if (!$('confirm').hidden) return;
+    if (!$('settings').hidden) { closeSettings(); return; }
+    if (!$('getPanel').hidden) { closeGet(); return; }
+    if (!$('editorPage').hidden) { $('editorPage').hidden = true; return; }
+  }
+  if ($('pp').disabled) return;
+  if (e.key === ' ') { e.preventDefault(); $('pp').click(); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); e.shiftKey ? goTrack(-1) : nudge(-3); }
+  else if (e.key === 'ArrowRight') { e.preventDefault(); e.shiftKey ? goTrack(1) : nudge(3); }
+});
+
+function updateTransport(){
+  const on = state.current >= 0 && state.files.length > 0;
+  ['pp','back3','fwd3','toStart','seek'].forEach(id => { $(id).disabled = !on; });
+  $('nextTrk').disabled = !on || state.current >= state.files.length - 1;
+  $('hint').textContent = on
+    ? 'スペースで再生／停止　←→で3秒　⏮を続けて押すと前のトラック'
+    : '音声ファイルを読み込むと再生できます';
+}
+
+function setIcon(playing){
+  $('ppIcon').setAttribute('d', playing ? 'M2 1 H6 V17 H2 Z M10 1 H14 V17 H10 Z' : 'M2 1 L14 9 L2 17 Z');
+  $('pp').setAttribute('aria-label', playing ? '一時停止' : '再生');
+  if ('mediaSession' in navigator) navigator.mediaSession.playbackState = playing ? 'playing' : 'paused';
+  keepAwake(playing);
+}
+
+// ---- ロック画面やイヤホンからの操作 ----
+function setMediaSession(){
+  if (!('mediaSession' in navigator)) return;
+  const f = state.files[state.current];
+  if (!f) return;
+  try {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: f.name.replace(/\.[^.]+$/, ''), artist: '聞き方ノート',
+      album: `${state.current + 1} / ${state.files.length}`,
+    });
+  } catch {}
+  const set = (k, fn) => { try { navigator.mediaSession.setActionHandler(k, fn); } catch {} };
+  set('play', () => { freePlay(); audio.play().catch(() => {}); });
+  set('pause', () => audio.pause());
+  set('previoustrack', () => goTrack(-1));
+  set('nexttrack', () => goTrack(1));
+  set('seekbackward', () => nudge(-3));
+  set('seekforward', () => nudge(3));
+  set('seekto', d => { if (d && d.seekTime != null) { freePlay(); audio.currentTime = d.seekTime; } });
+}
+
+// ---- 再生中は画面を消さない ----
+async function keepAwake(on){
+  try {
+    if (on && $('noSleep').checked && 'wakeLock' in navigator) {
+      if (!wakeLock) { wakeLock = await navigator.wakeLock.request('screen');
+        wakeLock.addEventListener('release', () => { wakeLock = null; }); }
+    } else if (wakeLock) { await wakeLock.release(); wakeLock = null; }
+  } catch {}
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && !audio.paused) keepAwake(true);
+});
+
+// ---------- シャドーイング ----------
+let recorder = null, recChunks = [], recBlob = null, recUrl = null;
+const recAudio = new Audio();
+
+function resetShadow(data){
+  $('shadow').hidden = !data || !!data.ja;
+  $('result').innerHTML = ''; $('recinfo').textContent = '';
+  $('playRec').disabled = true;
+  $('rec').classList.remove('on'); $('rec').textContent = '録音する';
+  $('rec').disabled = !canMic;
+  if (!canMic) $('recinfo').textContent = 'この画面ではマイクを使えないため、録音は試せません。';
+  recBlob = null;
+  if (recUrl) { URL.revokeObjectURL(recUrl); recUrl = null; }
+}
+
+function buildShadowChoices(n){
+  const sel = $('scopeSent'); sel.innerHTML = '';
+  const data = resultOf(state.current);
+  for (let i = 0; i < n; i++) {
+    const sn = data?.sents?.[i];
+    const head = sn ? data.words.slice(sn.from, Math.min(sn.to + 1, sn.from + 6)).map(w => w.text).join(' ') : '';
+    const o = document.createElement('option');
+    o.value = String(i);
+    o.textContent = `${i + 1}. ${head}${sn && sn.to - sn.from >= 6 ? '…' : ''}`;
+    sel.appendChild(o);
+  }
+}
+
+$('scope').addEventListener('change', () => {
+  const one = document.querySelector('input[name=scope]:checked').value === 'one';
+  $('scopeSent').disabled = !one;
+  if (one && currentSent >= 0) $('scopeSent').value = String(currentSent);
+});
+
+function shadowTarget(){
+  const data = resultOf(state.current);
+  if (!data) return [];
+  const one = document.querySelector('input[name=scope]:checked').value === 'one';
+  if (!one) return data.words.map(w => w.text);
+  const sn = data.sents?.[parseInt($('scopeSent').value || '0', 10)];
+  return sn ? data.words.slice(sn.from, sn.to + 1).map(w => w.text) : [];
+}
+
+$('rec').addEventListener('click', async () => {
+  if (recorder && recorder.state === 'recording') { recorder.stop(); return; }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    recChunks = [];
+    recorder = new MediaRecorder(stream);
+    recorder.ondataavailable = e => { if (e.data.size) recChunks.push(e.data); };
+    recorder.onstop = async () => {
+      stream.getTracks().forEach(t => t.stop());
+      recBlob = new Blob(recChunks, { type: recorder.mimeType || 'audio/webm' });
+      if (recUrl) URL.revokeObjectURL(recUrl);
+      recUrl = URL.createObjectURL(recBlob);
+      recAudio.src = recUrl;
+      $('playRec').disabled = false;
+      $('rec').classList.remove('on'); $('rec').textContent = 'もう一度録音する';
+      await compareRecording();
+    };
+    recorder.start();
+    $('rec').classList.add('on'); $('rec').textContent = '録音を止める';
+    $('recinfo').textContent = 'お手本を思い出しながら声に出してください。止めると照らし合わせます。';
+  } catch (err) {
+    $('recinfo').textContent = `マイクを使えませんでした：${err.message}`;
+  }
+});
+
+$('playRec').addEventListener('click', () => {
+  audio.pause(); recAudio.currentTime = 0; recAudio.play().catch(() => {});
+});
+
+async function compareRecording(){
+  if (!recBlob) return;
+  $('rec').disabled = true;
+  $('recinfo').textContent = '自分の声を文字に起こしています…';
+  try {
+    const decoded = await decodeTo16k(recBlob);
+    if (decoded.duration < 0.6) throw new Error('録音が短すぎます');
+    const out = await transcribe(decoded.pcm, decoded.duration,
+      m => { if (m.type === 'load') $('recinfo').textContent = `モデルを受け取っています ${m.pct}%`; });
+    const target = shadowTarget();
+    if (!target.length) throw new Error('練習する範囲を選んでください');
+    const said = String(out.text || '').trim().split(/\s+/).filter(Boolean);
+    renderComparison(target, said);
+    $('recinfo').textContent = `${decoded.duration.toFixed(1)}秒を録音しました。`;
+  } catch (err) {
+    $('recinfo').textContent = `照らし合わせられませんでした：${err.message}`;
+  } finally { $('rec').disabled = false; }
+}
+
+function alignWords(a, b){
+  const A = a.length, B = b.length;
+  const d = Array.from({length:A+1}, (_,i) => Array.from({length:B+1}, (_,j) => i===0?j : j===0?i : 0));
+  for (let i=1;i<=A;i++) for (let j=1;j<=B;j++)
+    d[i][j] = a[i-1]===b[j-1] ? d[i-1][j-1] : 1+Math.min(d[i-1][j-1], d[i-1][j], d[i][j-1]);
+  let i=A, j=B; const ops=[];
+  while (i>0 || j>0) {
+    if (i>0 && j>0 && a[i-1]===b[j-1]) { ops.push(['eq',i-1,j-1]); i--; j--; }
+    else if (i>0 && j>0 && d[i][j]===d[i-1][j-1]+1) { ops.push(['sub',i-1,j-1]); i--; j--; }
+    else if (i>0 && d[i][j]===d[i-1][j]+1) { ops.push(['miss',i-1,-1]); i--; }
+    else { ops.push(['extra',-1,j-1]); j--; }
+  }
+  return ops.reverse();
+}
+const cmpKey = w => w.toLowerCase().replace(/[^a-z']/g,'').replace(/'/g,'');
+
+function renderComparison(ref, said){
+  const ops = alignWords(ref.map(cmpKey), said.map(cmpKey));
+  let eq = 0;
+  const html = ops.map(([k, ri, si]) => {
+    if (k === 'eq') { eq++; return `<span>${esc(ref[ri])}</span>`; }
+    if (k === 'sub') return `<span class="d-sub">${esc(ref[ri])}<i>（${esc(said[si])}）</i></span>`;
+    if (k === 'miss') return `<span class="d-miss">${esc(ref[ri])}</span>`;
+    return `<span class="d-extra">${esc(said[si])}</span>`;
+  }).join(' ');
+  const rate = ref.length ? Math.round(eq / ref.length * 100) : 0;
+  const wrong = ops.filter(o => o[0] === 'sub').length;
+  const missed = ops.filter(o => o[0] === 'miss').length;
+  $('result').innerHTML =
+    `<div class="score"><b>${rate}%</b><span>${ref.length}語のうち ${eq}語 が一致　／　言い違い ${wrong}　／　抜け ${missed}</span></div>`
+    + `<div class="diff">${html}</div>`
+    + `<div class="legend" style="border-top:1px solid var(--rule)">`
+    + `<div><span class="chip d"></span><b>言い違い</b>　括弧の中が、聞こえたあなたの発音です</div>`
+    + `<div><span class="chip" style="border-bottom:2px dotted var(--danger)"></span><b>抜け</b>　声が届かなかった語です</div>`
+    + `<p style="margin-top:8px">文字起こしを通しているので、正しく言えていても違う語として出ることがあります。`
+    + `気になる文は上でタップして、お手本と聞き比べてください。</p></div>`;
+}
+
+// ---------- 設定 ----------
+const PREF_NEXT='kknote:autoNext', PREF_GPU='kknote:useGpu', PREF_SLEEP='kknote:noSleep';
+function openSettings(){ $('settings').hidden=false; $('gear').setAttribute('aria-expanded','true'); describeStored(); }
+function closeSettings(){ $('settings').hidden=true; $('gear').setAttribute('aria-expanded','false'); }
+$('gear').addEventListener('click', () => $('settings').hidden ? openSettings() : closeSettings());
+$('setClose').addEventListener('click', closeSettings);
+$('settings').addEventListener('click', e => { if (e.target === $('settings')) closeSettings(); });
+
+$('autoNext').addEventListener('change', () => { try { localStorage.setItem(PREF_NEXT, $('autoNext').checked?'1':'0'); } catch {} });
+$('noSleep').addEventListener('change', () => {
+  try { localStorage.setItem(PREF_SLEEP, $('noSleep').checked?'1':'0'); } catch {}
+  keepAwake(!audio.paused);
+});
+$('useGpu').addEventListener('change', () => {
+  try { localStorage.setItem(PREF_GPU, $('useGpu').checked?'1':'0'); } catch {}
+  if (state.worker) { state.worker.terminate(); state.worker = null; }
+  inlineAsr = null; mode = null;
+  setStatus($('useGpu').checked ? 'GPUを使う設定にしました。次の文字起こしから切り替わります。' : 'GPUを使わない設定にしました。');
+});
+
+async function describeStored(){
+  let n = 0;
+  try { for (let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(k&&k.startsWith('kknote:v1:'))n++; } } catch {}
+  let hasModel = false;
+  try {
+    if ('caches' in window) for (const name of await caches.keys()) {
+      const keys = await (await caches.open(name)).keys();
+      if (keys.some(r => /whisper/.test(r.url))) { hasModel = true; break; }
+    }
+  } catch {}
+  $('dataInfo').textContent = `文字起こし ${n} 件　／　音声認識モデル ${hasModel ? 'あり（約80MB）' : 'なし'}`;
+}
+
+$('wipe').addEventListener('click', async () => {
+  const ok = await ask({ title:'本当に削除しますか？',
+    body:'この端末に保存した文字起こしと、音声認識モデルを消します。取り消せません。' });
+  if (!ok) return;
+  store.clear();
+  try { localStorage.removeItem(MODEL_OK); } catch {}
+  try {
+    if ('caches' in window) for (const name of await caches.keys()) {
+      const keys = await (await caches.open(name)).keys();
+      if (keys.some(r => /whisper|huggingface|transformers/.test(r.url))) await caches.delete(name);
+    }
+  } catch {}
+  if (state.worker) { state.worker.terminate(); state.worker = null; }
+  inlineAsr = null; mode = null; state.results.clear();
+  drawStrip(); drawEditor();
+  if (state.current >= 0) select(state.current);
+  describeStored();
+  setStatus('この端末に残していたものを全部消しました。');
+});
+
+$('forget').addEventListener('click', async () => {
+  const ok = await ask({ title:'保存を削除しますか？',
+    body:'この端末に保存した文字起こしを消します。音声ファイルはそのままです。' });
+  if (!ok) return;
+  const done = store.clear();
+  state.results.clear();
+  drawStrip(); drawEditor();
+  if (state.current >= 0) select(state.current);
+  setStatus(done ? '保存していた文字起こしを消しました。' : 'この環境では保存を扱えません。');
+});
+
+// ---------- データの入手 ----------
+function openGet(){ $('getPanel').hidden = false; }
+function closeGet(){ $('getPanel').hidden = true; }
+$('getBtn').addEventListener('click', openGet);
+$('getClose').addEventListener('click', closeGet);
+$('getPanel').addEventListener('click', e => { if (e.target === $('getPanel')) closeGet(); });
+
+// zip をこの画面の中で開く。中の音声だけを取り出して読み込む。
+const ZIP_WARN = 22 * 1024 * 1024;   // これを超えると端末によっては開けない
+
+$('zipFile').addEventListener('change', async e => {
+  const zip = e.target.files[0];
+  e.target.value = '';
+  if (!zip) return;
+  const info = $('zipInfo');
+
+  if (zip.size > ZIP_WARN) {
+    const go = await ask({
+      title: 'zipが大きいです',
+      body: `${(zip.size/1048576).toFixed(0)}MB あります。端末によっては開く途中で止まります。`
+          + '先に自分で展開したほうが確実です。それでも試しますか。',
+      ok: '試す',
+    });
+    if (!go) { const d = document.querySelector('.unzip'); if (d) d.open = true; return; }
+  }
+
+  info.textContent = 'zipを開いています…';
+  riskStart('zip');
+  try {
+    const out = await extractZip(zip, n => { info.textContent = `取り出しています… ${n}件`; });
+    riskEnd();
+    if (!out.length) { info.textContent = 'このzipの中に音声ファイルが見つかりませんでした。'; return; }
+    addFiles(out, { replace: true });
+    info.textContent = `${out.length}件の音声を読み込みました。`;
+    closeGet();
+  } catch (err) {
+    riskEnd();
+    info.textContent = 'このzipは開けませんでした。下の案内にそって、先に展開してから読み込んでください。';
+    const d = document.querySelector('.unzip');
+    if (d) d.open = true;
+    console.error(err);
+  }
+});
+
+// zip を丸ごと広げるとメモリが足りなくなるので、
+// 1ファイルずつ取り出しては手放していく。
+async function extractZip(zip, onCount){
+  const { Unzip, AsyncUnzipInflate } = await import('https://cdn.jsdelivr.net/npm/fflate@0.8.2/esm/browser.js');
+  const bytes = new Uint8Array(await zip.arrayBuffer());
+
+  return await new Promise((resolve, reject) => {
+    const files = [];
+    let pending = 0, pushed = false, failed = false;
+
+    const finish = () => {
+      if (pushed && pending === 0 && !failed) {
+        files.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric:true, sensitivity:'base' }));
+        resolve(files);
+      }
+    };
+
+    const uz = new Unzip();
+    uz.register(AsyncUnzipInflate);
+    uz.onfile = f => {
+      const base = f.name.split('/').pop();
+      if (f.name.endsWith('/') || f.name.includes('__MACOSX') ||
+          base.startsWith('.') || !AUDIO_RE.test(base)) return;
+      pending++;
+      let parts = [];
+      f.ondata = (err, chunk, final) => {
+        if (err) { failed = true; reject(err); return; }
+        if (chunk && chunk.length) parts.push(chunk);
+        if (final) {
+          // ここで Blob にしてしまえば、生のデータは手放せる
+          files.push(new File([new Blob(parts, { type:'audio/mpeg' })], base, { type:'audio/mpeg' }));
+          parts = null;
+          pending--;
+          if (onCount) onCount(files.length);
+          finish();
+        }
+      };
+      f.start();
+    };
+
+    try {
+      const STEP = 1 << 20;   // 1MBずつ流し込む
+      for (let i = 0; i < bytes.length; i += STEP) {
+        const end = Math.min(i + STEP, bytes.length);
+        uz.push(bytes.subarray(i, end), end >= bytes.length);
+      }
+      pushed = true;
+      finish();
+    } catch (err) { failed = true; reject(err); }
+  });
+}
+
+// ---------- 編集 ----------
+$('editBtn').addEventListener('click', () => { drawEditor(); $('editorPage').hidden = false; });
+$('editDone').addEventListener('click', () => { $('editorPage').hidden = true; });
+document.querySelectorAll('[data-sort]').forEach(b => b.addEventListener('click', () => {
+  sortFiles(b.dataset.sort); drawStrip(); drawEditor(); updateTransport();
+}));
+
+// ---------- 起動 ----------
+$('file').addEventListener('change', e => { addFiles(e.target.files, { replace:true }); e.target.value=''; });
+$('addFile').addEventListener('change', e => { addFiles(e.target.files); e.target.value=''; });
+
+try {
+  if (localStorage.getItem(PREF_NEXT) === '0') $('autoNext').checked = false;
+  if (localStorage.getItem(PREF_SLEEP) === '0') $('noSleep').checked = false;
+  if (localStorage.getItem(PREF_GPU) === '1') $('useGpu').checked = true;
+} catch {}
+
+(function limits(){
+  const missing = [];
+  if (!canStore) missing.push('文字起こしの保存');
+  if (!canMic) missing.push('録音とシャドーイング');
+  if (!missing.length) return;
+  $('limits').innerHTML = `この画面では <b>${missing.join('・')}</b> が使えません。`
+    + (inFrame ? 'アプリの中に埋め込まれた表示のためです。ファイルを保存してブラウザで直接開くか、公開したページから開くと使えます。'
+               : 'ブラウザの設定で許可されていないようです。');
+  $('limits').hidden = false;
+})();
+
+updateTransport();
+riskCheck();
+
+window.addEventListener('error', e => {
+  $('fatal').textContent = `動作に問題が起きました：${e.message}　（開発者ツールのコンソールに詳細があります）`;
+  $('fatal').hidden = false;
+});
+</script>
+</body>
+</html>

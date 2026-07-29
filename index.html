@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>英語を、自分の耳で確かめる</title>
+<style>
+  :root{
+    --ink:#16202B; --sheet:#E3E9E5; --card:#F3F6F3; --rule:#AEBDB7;
+    --graphite:#56655F; --live:#1D6B58;
+    --ja:"Hiragino Sans","Noto Sans JP","Yu Gothic",system-ui,sans-serif;
+    --en:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  body{background:var(--sheet);color:var(--ink);font-family:var(--ja);
+       font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px}
+
+  header{border-bottom:1.5px solid var(--ink);padding:14px 0}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .logo{font-size:15px;font-weight:800;letter-spacing:.06em}
+
+  .hero{padding:56px 0 44px;border-bottom:1px solid var(--rule)}
+  .hero h1{font-size:29px;line-height:1.45;font-weight:800;letter-spacing:.01em;margin-bottom:18px}
+  .hero h1 em{font-style:normal;border-bottom:4px solid var(--live);padding-bottom:1px}
+  .hero p{font-size:14px;color:var(--graphite);max-width:32em}
+  .hero .sig{font-family:var(--en);font-size:15px;color:var(--graphite);
+             margin-top:22px;padding-left:14px;border-left:2px solid var(--rule)}
+
+  .cards{padding:34px 0 10px;display:grid;gap:14px}
+  .card{display:block;background:var(--card);border:1px solid var(--rule);
+        padding:20px;color:inherit;text-decoration:none;transition:border-color .15s}
+  .card:hover{border-color:var(--ink)}
+  .card .n{font-family:var(--mono);font-size:11px;color:var(--graphite);letter-spacing:.14em}
+  .card h2{font-size:17px;font-weight:800;margin:6px 0 8px}
+  .card p{font-size:13px;color:var(--graphite);line-height:1.75}
+  .card .go{display:inline-block;margin-top:12px;font-size:12px;font-weight:700;color:var(--live)}
+  .card.soon{opacity:.62;pointer-events:none}
+  .card.soon .go{color:var(--graphite)}
+
+  .facts{padding:34px 0;border-top:1px solid var(--rule);margin-top:30px}
+  .facts h3{font-size:11px;letter-spacing:.18em;color:var(--graphite);margin-bottom:14px}
+  .facts dl{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:13px}
+  .facts dt{color:var(--graphite)}
+  .facts dd{font-variant-numeric:tabular-nums}
+  .facts dd b{font-family:var(--mono);font-size:15px}
+
+  footer{border-top:1.5px solid var(--ink);padding:20px 0 40px;margin-top:20px;
+         font-size:11.5px;color:var(--graphite);line-height:1.9}
+  a{color:var(--live)}
+  @media (max-width:520px){ .hero h1{font-size:24px} .hero{padding:40px 0 32px} }
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <span class="logo">Englishstudy</span>
+  <span style="font-size:11px;color:var(--graphite)">端末の中だけで動きます</span>
+</div></header>
+
+<div class="wrap">
+
+  <section class="hero">
+    <h1>聞き取れなかった場所を、<br><em>自分の耳で</em>確かめる。</h1>
+    <p>答えを教える道具ではありません。どこが聞き取れていなかったのかを見つけて、
+       その一文にすぐ戻れるようにするための場所です。</p>
+    <p class="sig">I don't think AI train drivers can drive safely.</p>
+  </section>
+
+  <section class="cards">
+    <a class="card" href="./listening/">
+      <span class="n">01</span>
+      <h2>リスニング</h2>
+      <p>手元の音声を読み込むと、文字に起こして一文ずつ聞き直せます。
+         聞き取りが不安定な語には付箋が立ちます。録音して、どこが言えていたかを照らし合わせることもできます。</p>
+      <span class="go">はじめる →</span>
+    </a>
+
+    <div class="card soon">
+      <span class="n">02</span>
+      <h2>問題演習</h2>
+      <p>準備中。過去問をもとにした練習を用意する予定です。
+         公開には試験問題の利用許諾が必要なため、手続きが済んでからになります。</p>
+      <span class="go">準備中</span>
+    </div>
+  </section>
+
+  <section class="facts">
+    <h3>この道具について</h3>
+    <dl>
+      <dt>文字起こしの精度</dt><dd><b>単語誤り率 4.1%</b>（全商英検1級・実測）</dd>
+      <dt>処理の速さ</dt><dd><b>実時間比 0.17×</b>（29分の音声を約5分）</dd>
+      <dt>通信</dt><dd>音声認識モデルを一度受け取るだけ（約80MB）</dd>
+      <dt>音声の扱い</dt><dd>端末の外に出しません。サイトは音声を保存しません</dd>
+    </dl>
+  </section>
+
+</div>
+
+<footer><div class="wrap">
+  <p>音声は各自で公式サイトから入手してください。このサイトは試験音源を配布していません。</p>
+  <p>設計と検証の記録は <a href="./docs/DECISIONS.md">docs/DECISIONS.md</a> にあります。</p>
+</div></footer>
+
+</body>
+</html>

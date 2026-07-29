@@ -1,0 +1,24 @@
+# 音声ファイルは絶対に入れない（著作権）
+*.mp3
+*.m4a
+*.wav
+*.aac
+*.ogg
+*.flac
+*.zip
+
+# 検証に使った参照スクリプト（手元だけで使う）
+tools/refs*.txt
+tools/*.csv
+tools/report*.html
+
+# OS とエディタ
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# 一時ファイル
+node_modules/
+*.log
