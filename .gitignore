@@ -1,4 +1,4 @@
-# 音声ファイルは絶対に入れない（著作権）
+# 手元の私物音声は既定で弾く（誤って上げないため）
 *.mp3
 *.m4a
 *.wav
@@ -6,6 +6,22 @@
 *.ogg
 *.flac
 *.zip
+
+# ===== 試験問題データ =====
+# 大学入試センターの利用許諾を得た（2026-07-29／興國高校・橋口）。
+# 演習に使う分は公開する。ただし音声だけは上の *.mp3 で弾かれるので、
+# 使う1本だけを明示的に通す。
+!practice/data/r8-listening/audio/r8-listening.mp3
+
+# 古い重複・作りかけのゴミは公開しない（この環境では消せないため gitignore で除外）
+practice/data/answers.json
+**/answers2.json
+practice/data/exam.json
+practice/data/audio/
+practice/data/pages/
+practice/data/r8-reading-answers.json
+practice/data/r8-listening/audio/listening.mp3
+practice/data/r8-listening/audio/x
 
 # 検証に使った参照スクリプト（手元だけで使う）
 tools/refs*.txt

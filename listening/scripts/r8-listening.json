@@ -1,0 +1,689 @@
+{
+ "id": "r8-listening",
+ "source": "令和8年度 大学入学共通テスト 英語（リスニング）スクリプト",
+ "holder": "独立行政法人 大学入試センター",
+ "blocks": [
+  {
+   "start": 50.0,
+   "end": 72.23,
+   "qs": [
+    1
+   ],
+   "label": "問1",
+   "lines": [
+    {
+     "who": "W",
+     "text": "Fred loves dancing, so he never hesitates to perform for his classmates."
+    }
+   ]
+  },
+  {
+   "start": 78.4,
+   "end": 97.1,
+   "qs": [
+    2
+   ],
+   "label": "問2",
+   "lines": [
+    {
+     "who": "W",
+     "text": "My son is sick. I’m afraid that I can’t come into work today."
+    }
+   ]
+  },
+  {
+   "start": 103.31,
+   "end": 124.14,
+   "qs": [
+    3
+   ],
+   "label": "問3",
+   "lines": [
+    {
+     "who": "W",
+     "text": "I’ll never forget the time when David first tried skating. He was so scared."
+    }
+   ]
+  },
+  {
+   "start": 130.31,
+   "end": 150.67,
+   "qs": [
+    4
+   ],
+   "label": "問4",
+   "lines": [
+    {
+     "who": "W",
+     "text": "There must be a solution. Shall we take a break now and talk more afterward?"
+    }
+   ]
+  },
+  {
+   "start": 180.0,
+   "end": 200.89,
+   "qs": [
+    5
+   ],
+   "label": "問5",
+   "lines": [
+    {
+     "who": "W",
+     "text": "Look. The man sitting on the bench next to the statue is wearing a nice hat."
+    }
+   ]
+  },
+  {
+   "start": 205.11,
+   "end": 225.52,
+   "qs": [
+    6
+   ],
+   "label": "問6",
+   "lines": [
+    {
+     "who": "W",
+     "text": "I can’t find my ruler. Oh, you have an extra. Can I borrow it?"
+    }
+   ]
+  },
+  {
+   "start": 229.7,
+   "end": 249.67,
+   "qs": [
+    7
+   ],
+   "label": "問7",
+   "lines": [
+    {
+     "who": "W",
+     "text": "Crossing here isn’t safe. There’s no signal. Let’s use the bridge."
+    }
+   ]
+  },
+  {
+   "start": 253.8,
+   "end": 273.28,
+   "qs": [
+    8
+   ],
+   "label": "問8",
+   "lines": [
+    {
+     "who": "W",
+     "text": "The turtle is now leaving the beach after laying and burying her eggs."
+    }
+   ]
+  },
+  {
+   "start": 307.0,
+   "end": 350.27,
+   "qs": [
+    9
+   ],
+   "label": "問9",
+   "lines": [
+    {
+     "who": "M",
+     "text": "Look at all those solar panels."
+    },
+    {
+     "who": "W",
+     "text": "Yeah, I remember rabbits and flowers being there."
+    },
+    {
+     "who": "M",
+     "text": "There are sheep there now."
+    },
+    {
+     "who": "W",
+     "text": "And they’re staying out of the sun."
+    },
+    {
+     "who": "Question",
+     "text": "What does the area look like now?"
+    }
+   ]
+  },
+  {
+   "start": 354.4,
+   "end": 397.08,
+   "qs": [
+    10
+   ],
+   "label": "問10",
+   "lines": [
+    {
+     "who": "W",
+     "text": "I’ve been working on my golf form."
+    },
+    {
+     "who": "M",
+     "text": "In this poor weather?"
+    },
+    {
+     "who": "W",
+     "text": "Yes, I exercise indoors using virtual reality."
+    },
+    {
+     "who": "M",
+     "text": "You’ll improve your swing that way."
+    },
+    {
+     "who": "Question",
+     "text": "How does the woman practice golf?"
+    }
+   ]
+  },
+  {
+   "start": 401.31,
+   "end": 449.66,
+   "qs": [
+    11
+   ],
+   "label": "問11",
+   "lines": [
+    {
+     "who": "W",
+     "text": "Seeds start spreading after this stage."
+    },
+    {
+     "who": "M",
+     "text": "It’s interesting that they can survive underground for years."
+    },
+    {
+     "who": "W",
+     "text": "But my focus is the stage where the plants bloom."
+    },
+    {
+     "who": "M",
+     "text": "Mine is before that, when roots and leaves develop."
+    },
+    {
+     "who": "Question",
+     "text": "Which stage is the woman interested in?"
+    }
+   ]
+  },
+  {
+   "start": 486.0,
+   "end": 508.96,
+   "qs": [
+    12
+   ],
+   "label": "問12",
+   "lines": [
+    {
+     "who": "W",
+     "text": "How do you choose what to read?"
+    },
+    {
+     "who": "M",
+     "text": "Easy! I check online reviews, then look at books in the library."
+    },
+    {
+     "who": "W",
+     "text": "Aren’t there too many reviews to read?"
+    },
+    {
+     "who": "M",
+     "text": "Sometimes. That’s why it helps to know what you’re interested in."
+    },
+    {
+     "who": "W",
+     "text": "I see. I’ll think about that before going to the bookstore."
+    }
+   ]
+  },
+  {
+   "start": 517.11,
+   "end": 538.89,
+   "qs": [
+    13
+   ],
+   "label": "問13",
+   "lines": [
+    {
+     "who": "M",
+     "text": "What are you planning for this spring holiday?"
+    },
+    {
+     "who": "W",
+     "text": "I’m hoping to travel abroad this year."
+    },
+    {
+     "who": "M",
+     "text": "Oh? Not me. I’ll go somewhere closer to home."
+    },
+    {
+     "who": "W",
+     "text": "Really? You don’t want to see something new and exciting?"
+    },
+    {
+     "who": "M",
+     "text": "There’s so much I still haven’t seen around here. That’s exciting enough for me."
+    }
+   ]
+  },
+  {
+   "start": 547.11,
+   "end": 569.89,
+   "qs": [
+    14
+   ],
+   "label": "問14",
+   "lines": [
+    {
+     "who": "W",
+     "text": "I’d like to apply for membership."
+    },
+    {
+     "who": "M",
+     "text": "OK. You’ll need to submit this form."
+    },
+    {
+     "who": "W",
+     "text": "Oh, do I need a picture? I don’t have one."
+    },
+    {
+     "who": "M",
+     "text": "You can use that machine. Remember to attach your photo to the form."
+    },
+    {
+     "who": "W",
+     "text": "Thanks. Can I get my card today?"
+    },
+    {
+     "who": "M",
+     "text": "Yes. You won’t have to wait too long."
+    }
+   ]
+  },
+  {
+   "start": 578.11,
+   "end": 601.65,
+   "qs": [
+    15
+   ],
+   "label": "問15",
+   "lines": [
+    {
+     "who": "W",
+     "text": "I’m afraid we can’t confirm your reservation."
+    },
+    {
+     "who": "M",
+     "text": "That can’t be true. I’m sure I made one."
+    },
+    {
+     "who": "W",
+     "text": "How did you make it?"
+    },
+    {
+     "who": "M",
+     "text": "On the internet. Look! I printed out the confirmation."
+    },
+    {
+     "who": "W",
+     "text": "You appear to have made a reservation with the hotel across the street."
+    },
+    {
+     "who": "M",
+     "text": "Oh, so I did. I’m sorry."
+    }
+   ]
+  },
+  {
+   "start": 609.91,
+   "end": 632.02,
+   "qs": [
+    16
+   ],
+   "label": "問16",
+   "lines": [
+    {
+     "who": "M",
+     "text": "I found this bicycle key at the entrance to your shop. Your customer must have dropped it."
+    },
+    {
+     "who": "W",
+     "text": "Really? We’ve just opened. How about taking it to the police box?"
+    },
+    {
+     "who": "M",
+     "text": "But it’s on the other side of the station."
+    },
+    {
+     "who": "W",
+     "text": "Yes?"
+    },
+    {
+     "who": "M",
+     "text": "I’d be late for work. Can’t I leave it with you?"
+    }
+   ]
+  },
+  {
+   "start": 640.21,
+   "end": 664.58,
+   "qs": [
+    17
+   ],
+   "label": "問17",
+   "lines": [
+    {
+     "who": "M",
+     "text": "What time can we have dinner?"
+    },
+    {
+     "who": "W",
+     "text": "Maybe around 7:00?"
+    },
+    {
+     "who": "M",
+     "text": "I thought it’d be an hour earlier than that."
+    },
+    {
+     "who": "W",
+     "text": "Well, I have an appointment from 5:30 to 6:00 today."
+    },
+    {
+     "who": "M",
+     "text": "So can you come here right after you’re finished?"
+    },
+    {
+     "who": "W",
+     "text": "Sure. It’ll take 30 minutes to get there."
+    },
+    {
+     "who": "M",
+     "text": "Great. Let’s have dinner when you arrive."
+    }
+   ]
+  },
+  {
+   "start": 716.96,
+   "end": 750.4,
+   "qs": [
+    18,
+    19,
+    20,
+    21
+   ],
+   "label": "問18〜21",
+   "lines": [
+    {
+     "who": "",
+     "text": "To get to Nishizawa High School from here, you first take a city bus to the city center and change to a Yamatetsu bus. On the city bus, you get on at the back."
+    },
+    {
+     "who": "",
+     "text": "When you get off at the front, you pay. At the city center, just ignore the line of people and look for the Yamatetsu terminal."
+    },
+    {
+     "who": "",
+     "text": "With the Yamatetsu bus, you pay at the front as you board. Then you exit from the back door when you reach the Nishizawa High School stop."
+    }
+   ]
+  },
+  {
+   "start": 799.06,
+   "end": 848.29,
+   "qs": [
+    22,
+    23,
+    24,
+    25
+   ],
+   "label": "問22〜25",
+   "lines": [
+    {
+     "who": "",
+     "text": "Welcome to Day 1 of the Annual Career Fair. Today, we have some special guests."
+    },
+    {
+     "who": "",
+     "text": "If you imagine yourself teaching, visit Table A, where experienced teachers are ready for questions. At Table B, witness the future as nurses and engineers demonstrate using robots for patient care."
+    },
+    {
+     "who": "",
+     "text": "At Table C, talk with travel agents and hotel staff about their day-to-day operations. Stop by Table D for interactive activities with artists."
+    },
+    {
+     "who": "",
+     "text": "For internships, Table C is still accepting applications while Table D has no options this year."
+    }
+   ]
+  },
+  {
+   "start": 911.76,
+   "end": 985.0,
+   "qs": [
+    26
+   ],
+   "label": "問26",
+   "lines": [
+    {
+     "who": "①",
+     "text": "I often go to the East Library. You can find almost any book you might need for studying. All the people doing their homework make me feel extra motivated. It’s also comfortable for longer study sessions. Just remember there’s no eating, drinking, or talking."
+    },
+    {
+     "who": "②",
+     "text": "I love the Global Computer Lab. Special software is available on every computer. Plus, it’s no problem discussing things with friends there. I usually go during the lunch period. Otherwise, it’s used for seminars and classes. Let’s go together next time."
+    },
+    {
+     "who": "③",
+     "text": "I study in the Millennium Common Area. I just plug in my PC and phone, and study there as long as I want. People talk a lot, which is nice because that keeps me awake while I’m studying. If it doesn’t, there’s always the coffee machine."
+    },
+    {
+     "who": "④",
+     "text": "I like the M3 Student Lounge. It’s perfect for working on long essays. You can really concentrate because it’s a quiet place and people leave to chat. Thanks to the charging stations, you can stay connected all day with no worries. Check it out sometime."
+    }
+   ]
+  },
+  {
+   "start": 1107.77,
+   "end": 1248.09,
+   "qs": [
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "label": "問27〜31",
+   "lines": [
+    {
+     "who": "",
+     "text": "What if there was a way to raise saltwater fish in countries with no access to oceans or seas? Japanese researchers are experimenting with a new type of water in Mongolia and other countries."
+    },
+    {
+     "who": "",
+     "text": "It is made by adding selected minerals found in seawater to fresh water. The result is a mixture that is lower in salt and mineral content than seawater."
+    },
+    {
+     "who": "",
+     "text": "Before we dive in deeper, let’s review what we know about fish farming. Fish farming is an important part of global efforts to fight food shortages."
+    },
+    {
+     "who": "",
+     "text": "While freshwater fish farming is common in Southeast Asia, saltwater fish farming has grown rapidly over the past 30 years. Saltwater fish farming, which produces fish such as salmon and tuna, generates great financial rewards in the international market."
+    },
+    {
+     "who": "",
+     "text": "That’s where the advantages of using this new water come in. In landlocked countries like Mongolia, which have no access to an ocean, raising saltwater fish on inland farms could become a valuable source of income and nutrition for local populations."
+    },
+    {
+     "who": "",
+     "text": "In fact, even wealthier landlocked countries that already eat a lot of seafood might consume more if fish were raised locally. Fish raised in this new water grow faster and get fewer deadly diseases than those in the wild."
+    },
+    {
+     "who": "",
+     "text": "These factors contribute to commercial success. Furthermore, this new type of water has other benefits."
+    },
+    {
+     "who": "",
+     "text": "Because of the way it’s made, that same water can be used to grow salt-tolerant plants like tomatoes, instead of being wasted after the fish have been raised. This saves water in areas where water is scarce."
+    },
+    {
+     "who": "",
+     "text": "More research is needed, but early results show that this special type of water may be the wave of the future."
+    }
+   ]
+  },
+  {
+   "start": 1304.0,
+   "end": 1323.0,
+   "qs": [
+    32
+   ],
+   "label": "問32",
+   "lines": [
+    {
+     "who": "Student A",
+     "text": "Scientists have invented new minerals that allow freshwater fish to live in seawater."
+    },
+    {
+     "who": "Student B",
+     "text": "The uses of the new type of water aren’t limited to fish farming."
+    }
+   ]
+  },
+  {
+   "start": 1335.0,
+   "end": 1369.12,
+   "qs": [
+    33
+   ],
+   "label": "問33",
+   "lines": [
+    {
+     "who": "May",
+     "text": "Which do you think has the stronger influence on fish consumption, GDP or geography?"
+    },
+    {
+     "who": "Joe",
+     "text": "Good question. Switzerland and Luxembourg have no direct ocean access, but this graph shows the consumption of fish and seafood there is comparatively high. Like Japan, they are both higher-GDP countries."
+    },
+    {
+     "who": "May",
+     "text": "Interesting. Madagascar and Haiti are island countries, but there, consumption is relatively low."
+    },
+    {
+     "who": "Joe",
+     "text": "Well, they are both lower-GDP countries, like Mongolia."
+    }
+   ]
+  },
+  {
+   "start": 1453.91,
+   "end": 1532.5,
+   "qs": [
+    34,
+    35
+   ],
+   "label": "問34〜35",
+   "lines": [
+    {
+     "who": "Derek",
+     "text": "Look, Jessica. There are various class styles we can choose from for our French course."
+    },
+    {
+     "who": "Jessica",
+     "text": "Oh? What are they?"
+    },
+    {
+     "who": "Derek",
+     "text": "There are face-to-face, online, and hybrid classes. The hybrid class meets in the classroom every other week, and the other weeks are the same as the online class."
+    },
+    {
+     "who": "Jessica",
+     "text": "Do they meet online in real time?"
+    },
+    {
+     "who": "Derek",
+     "text": "No. There are on-demand videos to watch and passages to read, and you can chat with AI. You can do the assignments any time before the deadline. I’m going to take the online class because it’s more convenient."
+    },
+    {
+     "who": "Jessica",
+     "text": "Well, I’m going to take the face-to-face class because I want to develop communication skills and make friends."
+    },
+    {
+     "who": "Derek",
+     "text": "Actually, the AI chat can provide fun conversation practice for communication skills. Plus, online learning provides a lot of helpful review and additional training."
+    },
+    {
+     "who": "Jessica",
+     "text": "Wow. I didn’t realize that. I think I will take advantage of those extra benefits."
+    },
+    {
+     "who": "Derek",
+     "text": "So we’ll be in the same class after all?"
+    },
+    {
+     "who": "Jessica",
+     "text": "No, I still want to show up to the classroom to meet my friends as well."
+    }
+   ]
+  },
+  {
+   "start": 1594.87,
+   "end": 1683.72,
+   "qs": [
+    36,
+    37
+   ],
+   "label": "問36〜37",
+   "lines": [
+    {
+     "who": "Martin",
+     "text": "Yesterday, I was using my earphones on the train, and someone complained that they could hear my music. Has that ever happened to you, Tetsuya?"
+    },
+    {
+     "who": "Tetsuya",
+     "text": "No. Maybe it’s because I use headphones."
+    },
+    {
+     "who": "Martin",
+     "text": "Hmm, maybe I should get headphones too. What do you use, Vicky?"
+    },
+    {
+     "who": "Vicky",
+     "text": "I use earphones, but I just play my music quietly. It doesn’t seem to bother others on the train."
+    },
+    {
+     "who": "Tetsuya",
+     "text": "You just need to be more careful on the train, Martin."
+    },
+    {
+     "who": "Vicky",
+     "text": "Actually, you should be careful everywhere."
+    },
+    {
+     "who": "Martin",
+     "text": "Why?"
+    },
+    {
+     "who": "Vicky",
+     "text": "Because you might not hear vehicles approaching if you play your music too loudly while walking outside. I heard that over 30 people in this area were nearly hit by cars while listening to loud music on their earphones."
+    },
+    {
+     "who": "Martin",
+     "text": "I didn’t know that. It seems like there are problems I wasn’t aware of. I think I need to adjust my volume rather than change devices."
+    },
+    {
+     "who": "Tetsuya",
+     "text": "Right, it’s not a device problem. I wear headphones but can still hear outside sounds just fine. That’s safe enough, isn’t it, Vicky?"
+    },
+    {
+     "who": "Vicky",
+     "text": "If your volume is low enough that you can hear outside sounds, you probably don’t need to lower it any further."
+    },
+    {
+     "who": "Tetsuya",
+     "text": "That’s a relief. If I had to do that, I wouldn’t be able to hear my music at all."
+    }
+   ]
+  }
+ ]
+}

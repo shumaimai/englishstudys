@@ -1,0 +1,961 @@
+{
+ "id": "r8-reading",
+ "kind": "reading",
+ "title": "令和8年度 大学入学共通テスト 英語（リーディング）",
+ "source": "独立行政法人 大学入試センター",
+ "pageDir": "pages/",
+ "sections": [
+  {
+   "id": "第1問",
+   "label": "第1問",
+   "points": 6,
+   "qs": [
+    1,
+    2,
+    3
+   ],
+   "pages": [
+    1,
+    2
+   ]
+  },
+  {
+   "id": "第2問",
+   "label": "第2問",
+   "points": 12,
+   "qs": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "pages": [
+    3,
+    4,
+    5
+   ]
+  },
+  {
+   "id": "第3問",
+   "label": "第3問",
+   "points": 9,
+   "qs": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+   ],
+   "pages": [
+    6,
+    7
+   ]
+  },
+  {
+   "id": "第4問",
+   "label": "第4問",
+   "points": 12,
+   "qs": [
+    14,
+    15,
+    16,
+    17
+   ],
+   "pages": [
+    8,
+    9,
+    10
+   ]
+  },
+  {
+   "id": "第5問",
+   "label": "第5問",
+   "points": 16,
+   "qs": [
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+   ],
+   "pages": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "第6問",
+   "label": "第6問",
+   "points": 12,
+   "qs": [
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "pages": [
+    16,
+    17,
+    18,
+    19,
+    20
+   ]
+  },
+  {
+   "id": "第7問",
+   "label": "第7問",
+   "points": 16,
+   "qs": [
+    32,
+    33,
+    34,
+    35,
+    36,
+    37
+   ],
+   "pages": [
+    21,
+    22,
+    23,
+    24,
+    25
+   ]
+  },
+  {
+   "id": "第8問",
+   "label": "第8問",
+   "points": 17,
+   "qs": [
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44
+   ],
+   "pages": [
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ]
+  }
+ ],
+ "allOrNothing": [
+  [
+   9,
+   10,
+   11,
+   12
+  ],
+  [
+   22,
+   23
+  ],
+  [
+   24,
+   25
+  ],
+  [
+   26,
+   27,
+   28,
+   29
+  ],
+  [
+   33,
+   34
+  ],
+  [
+   40,
+   41,
+   42
+  ]
+ ],
+ "questions": [
+  {
+   "no": 1,
+   "pages": [
+    1,
+    2
+   ],
+   "n": 4,
+   "stem": "Which two people are worried about the safety of the dancers?",
+   "choices": [
+    "Jessie and Val",
+    "Pat and Jessie",
+    "Pat and Val",
+    "Val and the instructor"
+   ]
+  },
+  {
+   "no": 2,
+   "pages": [
+    1,
+    2
+   ],
+   "n": 4,
+   "stem": "According to Val’s suggestion, how would the costumes look during the second half of the performance?"
+  },
+  {
+   "no": 3,
+   "pages": [
+    1,
+    2
+   ],
+   "n": 4,
+   "stem": "According to the text messages, which of the following will your team",
+   "choices": [
+    "Buy the dance clothes",
+    "Consult with the instructor",
+    "Decide on the program",
+    "Rehearse the dance routine"
+   ]
+  },
+  {
+   "no": 4,
+   "pages": [
+    3,
+    4,
+    5
+   ],
+   "n": 4,
+   "stem": "Which option best describes the administration’s opinion?",
+   "choices": [
+    "The findings are reliable because enough residents responded.",
+    "The results of the survey are being reported in the year 2026.",
+    "The students should make more effort to have a healthier lifestyle.",
+    "The survey is conducted annually to improve student services."
+   ]
+  },
+  {
+   "no": 5,
+   "pages": [
+    3,
+    4,
+    5
+   ],
+   "n": 4,
+   "stem": "Which is true according to the administration’s report?",
+   "choices": [
+    "Most respondents said food at campus accommodation was not tasty.",
+    "Most respondents were dissatisfied with campus accommodation.",
+    "The percentage of respondents saying the food was healthy declined.",
+    "The percentage of respondents who felt security was good decreased."
+   ]
+  },
+  {
+   "no": 6,
+   "pages": [
+    3,
+    4,
+    5
+   ],
+   "n": 4,
+   "stem": "Which option best reflects Naoki’s comment?",
+   "choices": [
+    "He believed most Japanese students avoid choosing a homestay.",
+    "He disliked the option of using deliveries from local restaurants.",
+    "He doubted the strength of the relationship with friends he had made.",
+    "He was satisfied with his decision to stay in campus accommodation."
+   ]
+  },
+  {
+   "no": 7,
+   "pages": [
+    3,
+    4,
+    5
+   ],
+   "n": 4,
+   "stem": "Based on Helga’s comment, what can be said about campus",
+   "choices": [
+    "It provides comfortable common areas for residents.",
+    "Noise there might interfere with your studies.",
+    "Servings of food in the dining hall are too small.",
+    "The security there is a strong point for residents."
+   ]
+  },
+  {
+   "no": 8,
+   "pages": [
+    6,
+    7
+   ],
+   "n": 4,
+   "stem": "The author joined the workshop because ___.",
+   "choices": [
+    "a classmate encouraged him to",
+    "a family member suggested it",
+    "his father signed him up",
+    "his friend got good grades"
+   ]
+  },
+  {
+   "no": 9,
+   "pages": [
+    6,
+    7
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order they appeared in the story. ___ → ___ → ___ → ___",
+   "choices": [
+    "The author learned a valuable lesson.",
+    "The author was aware of an annoying noise.",
+    "The insect flew away from the author.",
+    "The instructor caught the bug in her hand.",
+    "The instructor released the insect."
+   ]
+  },
+  {
+   "no": 10,
+   "pages": [
+    6,
+    7
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order they appeared in the story. ___ → ___ → ___ → ___",
+   "choices": [
+    "The author learned a valuable lesson.",
+    "The author was aware of an annoying noise.",
+    "The insect flew away from the author.",
+    "The instructor caught the bug in her hand.",
+    "The instructor released the insect."
+   ]
+  },
+  {
+   "no": 11,
+   "pages": [
+    6,
+    7
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order they appeared in the story. ___ → ___ → ___ → ___",
+   "choices": [
+    "The author learned a valuable lesson.",
+    "The author was aware of an annoying noise.",
+    "The insect flew away from the author.",
+    "The instructor caught the bug in her hand.",
+    "The instructor released the insect."
+   ]
+  },
+  {
+   "no": 12,
+   "pages": [
+    6,
+    7
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order they appeared in the story. ___ → ___ → ___ → ___",
+   "choices": [
+    "The author learned a valuable lesson.",
+    "The author was aware of an annoying noise.",
+    "The insect flew away from the author.",
+    "The instructor caught the bug in her hand.",
+    "The instructor released the insect."
+   ]
+  },
+  {
+   "no": 13,
+   "pages": [
+    6,
+    7
+   ],
+   "n": 4,
+   "stem": "From the instructor, the author most likely understood the importance of",
+   "choices": [
+    "attractive",
+    "cruel",
+    "strict",
+    "tender"
+   ]
+  },
+  {
+   "no": 14,
+   "pages": [
+    8,
+    9,
+    10
+   ],
+   "n": 4,
+   "stem": "Based on Comment , choose the best phrase to add after the underlined",
+   "choices": [
+    "to advertise a new school website",
+    "to discover the best artists in the school",
+    "to promote eco-friendly actions among students",
+    "to recruit more English Club members"
+   ]
+  },
+  {
+   "no": 15,
+   "pages": [
+    8,
+    9,
+    10
+   ],
+   "n": 4,
+   "stem": "Based on Comment , choose the best place to add the sentence below.",
+   "choices": [
+    "< Ａ >",
+    "< Ｂ >",
+    "< Ｃ >",
+    "< Ｄ >"
+   ]
+  },
+  {
+   "no": 16,
+   "pages": [
+    8,
+    9,
+    10
+   ],
+   "n": 4,
+   "stem": "Based on Comment , choose the best sentence to replace the underlined",
+   "choices": [
+    "This activity will help students to appreciate various ways of reusing old",
+    "This activity will influence more students to ask the fashion industry to",
+    "This activity will lead to the growth of the market for fast fashion over",
+    "This activity will provide students with opportunities for improving their"
+   ]
+  },
+  {
+   "no": 17,
+   "pages": [
+    8,
+    9,
+    10
+   ],
+   "n": 4,
+   "stem": "Based on Comment , choose the best phrase to replace the underlined",
+   "choices": [
+    "become creative artists who focus on",
+    "cooperate with other high schools on",
+    "get ourselves more involved in",
+    "learn how to collect more garbage for"
+   ]
+  },
+  {
+   "no": 18,
+   "pages": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "n": 4,
+   "stem": "What is the main purpose of the library book fair?",
+   "choices": [
+    "To display picture books by Readburgh authors",
+    "To encourage international students to use the library",
+    "To familiarise children with stories from around the world",
+    "To promote foreign book collections in preschools"
+   ]
+  },
+  {
+   "no": 19,
+   "pages": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "n": 4,
+   "stem": "Which is true about the library event?",
+   "choices": [
+    "Books will be on show in the children’s area.",
+    "Reading sessions will be held daily.",
+    "The book fair will run for one month.",
+    "Volunteers will be given a thank-you gift."
+   ]
+  },
+  {
+   "no": 20,
+   "pages": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "n": 6,
+   "stem": "Which combination best describes the four books you recommended?",
+   "choices": [
+    "Ａ and Ｂ",
+    "Ａ and Ｃ",
+    "Ａ and Ｄ",
+    "Ｂ and Ｃ",
+    "Ｂ and Ｄ",
+    "Ｃ and Ｄ"
+   ]
+  },
+  {
+   "no": 21,
+   "pages": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "n": 4,
+   "stem": "Which of your book recommendations will not be included in the fair?",
+   "choices": [
+    "Green Demon Blue Demon",
+    "Paint! Paint! Paint!",
+    "Panda Adventures",
+    "The Cloud Prince"
+   ]
+  },
+  {
+   "no": 22,
+   "pages": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "n": 6,
+   "stem": "In the email, what are the two things that the library would like you to do?",
+   "choices": [
+    "Ask your friends to volunteer",
+    "Buy a new picture book",
+    "Participate in ‘Story Time’",
+    "Resubmit your online form",
+    "Suggest another book title",
+    "Translate one of the books"
+   ]
+  },
+  {
+   "no": 23,
+   "pages": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "n": 6,
+   "stem": "In the email, what are the two things that the library would like you to do?",
+   "choices": [
+    "Ask your friends to volunteer",
+    "Buy a new picture book",
+    "Participate in ‘Story Time’",
+    "Resubmit your online form",
+    "Suggest another book title",
+    "Translate one of the books"
+   ]
+  },
+  {
+   "no": 24,
+   "pages": [
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "n": 5,
+   "stem": "Choose the best options for ___ and ___. (The order does not",
+   "choices": [
+    "appeared unfriendly and sometimes seemed rude",
+    "gifted two tuna-filled onigiri to Mitsuki on tournament day",
+    "kept the shop open although he had few customers",
+    "practiced kendo when he was in his youth",
+    "ran his business with his son in a disorganized way"
+   ]
+  },
+  {
+   "no": 25,
+   "pages": [
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "n": 5,
+   "stem": "Choose the best options for ___ and ___. (The order does not",
+   "choices": [
+    "appeared unfriendly and sometimes seemed rude",
+    "gifted two tuna-filled onigiri to Mitsuki on tournament day",
+    "kept the shop open although he had few customers",
+    "practiced kendo when he was in his youth",
+    "ran his business with his son in a disorganized way"
+   ]
+  },
+  {
+   "no": 26,
+   "pages": [
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order",
+   "choices": [
+    "Mitsuki did well at her match on the tournament day.",
+    "Mitsuki wrote a message to the son of the old man.",
+    "The old man found Mitsuki’s shinai left outside of his shop.",
+    "The old man secretly gave Mitsuki an extra onigiri.",
+    "The salmon-filled onigiri reminded Mitsuki of her youth."
+   ]
+  },
+  {
+   "no": 27,
+   "pages": [
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order",
+   "choices": [
+    "Mitsuki did well at her match on the tournament day.",
+    "Mitsuki wrote a message to the son of the old man.",
+    "The old man found Mitsuki’s shinai left outside of his shop.",
+    "The old man secretly gave Mitsuki an extra onigiri.",
+    "The salmon-filled onigiri reminded Mitsuki of her youth."
+   ]
+  },
+  {
+   "no": 28,
+   "pages": [
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order",
+   "choices": [
+    "Mitsuki did well at her match on the tournament day.",
+    "Mitsuki wrote a message to the son of the old man.",
+    "The old man found Mitsuki’s shinai left outside of his shop.",
+    "The old man secretly gave Mitsuki an extra onigiri.",
+    "The salmon-filled onigiri reminded Mitsuki of her youth."
+   ]
+  },
+  {
+   "no": 29,
+   "pages": [
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order",
+   "choices": [
+    "Mitsuki did well at her match on the tournament day.",
+    "Mitsuki wrote a message to the son of the old man.",
+    "The old man found Mitsuki’s shinai left outside of his shop.",
+    "The old man secretly gave Mitsuki an extra onigiri.",
+    "The salmon-filled onigiri reminded Mitsuki of her youth."
+   ]
+  },
+  {
+   "no": 30,
+   "pages": [
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "n": 4,
+   "stem": "Choose the best option for ___.",
+   "choices": [
+    "began a weekly routine of making onigiri for the team",
+    "built a friendship with Mitsuki by exchanging notes",
+    "chatted with Mitsuki whenever she visited his shop",
+    "showed kindness not with words but with his actions"
+   ]
+  },
+  {
+   "no": 31,
+   "pages": [
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "n": 4,
+   "stem": "Choose the best option for ___.",
+   "choices": [
+    "kendo career ended because of the advice of the old man",
+    "memories about onigiri influenced her later in life",
+    "performance at the kendo tournament led to a team victory",
+    "presentation went well because she ate a tuna-filled onigiri"
+   ]
+  },
+  {
+   "no": 32,
+   "pages": [
+    21,
+    22,
+    23,
+    24,
+    25
+   ],
+   "n": 4,
+   "stem": "Choose the best option for ___.",
+   "choices": [
+    "in about half of the time we are daydreaming",
+    "in the nightmares we experience during sleep",
+    "when our focus is away from the ongoing activity",
+    "while we are concentrating on the present task"
+   ]
+  },
+  {
+   "no": 33,
+   "pages": [
+    21,
+    22,
+    23,
+    24,
+    25
+   ],
+   "n": 5,
+   "stem": "Choose the best options for ___ and ___. (The order does not",
+   "choices": [
+    "affects our mental health",
+    "decreases errors at work",
+    "enhances our memory",
+    "gives us novel ideas",
+    "improves our driving skill"
+   ]
+  },
+  {
+   "no": 34,
+   "pages": [
+    21,
+    22,
+    23,
+    24,
+    25
+   ],
+   "n": 5,
+   "stem": "Choose the best options for ___ and ___. (The order does not",
+   "choices": [
+    "affects our mental health",
+    "decreases errors at work",
+    "enhances our memory",
+    "gives us novel ideas",
+    "improves our driving skill"
+   ]
+  },
+  {
+   "no": 35,
+   "pages": [
+    21,
+    22,
+    23,
+    24,
+    25
+   ],
+   "n": 4,
+   "stem": "Choose the best option for ___.",
+   "choices": [
+    "Complicated problems enter our consciousness.",
+    "Our brains organize information in new ways.",
+    "Our moods are altered from negative to positive.",
+    "The mind moves from an active to a passive state."
+   ]
+  },
+  {
+   "no": 36,
+   "pages": [
+    21,
+    22,
+    23,
+    24,
+    25
+   ],
+   "n": 4,
+   "stem": "Choose the best option for ___.",
+   "choices": [
+    "The brain has multiple areas working while the mind is wandering.",
+    "The brain’s DMN is only activated when we perform high-effort tasks.",
+    "The entire brain is inactive when we are working on low-effort tasks.",
+    "The state of the brain remains passive during mind-wandering."
+   ]
+  },
+  {
+   "no": 37,
+   "pages": [
+    21,
+    22,
+    23,
+    24,
+    25
+   ],
+   "n": 6,
+   "stem": "In the discussion session about lifestyles, some students’ habits and",
+   "choices": [
+    "Ami and Barry",
+    "Ami and Chihiro",
+    "Ami and Dean",
+    "Barry and Chihiro",
+    "Barry and Dean",
+    "Chihiro and Dean"
+   ]
+  },
+  {
+   "no": 38,
+   "pages": [
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "n": 4,
+   "stem": "Which of the following best summarizes Akane’s opinion?",
+   "choices": [
+    "Athletic ability cannot be developed using advanced technology.",
+    "Olympic games will be less exciting with the latest equipment.",
+    "Technology can benefit the physical health of elite athletes.",
+    "The cost of sports might be a barrier for people’s participation."
+   ]
+  },
+  {
+   "no": 39,
+   "pages": [
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "n": 4,
+   "stem": "Both Fiona and Michael mention that ___.",
+   "choices": [
+    "advanced technology can give unfair advantages to some athletes",
+    "equipment should be considered a part of an athlete’s performance",
+    "the spirit of sport is based on hard work and physical ability",
+    "water sports should require training without technology"
+   ]
+  },
+  {
+   "no": 40,
+   "pages": [
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "n": 5,
+   "stem": "With the above opinions in mind, you have taken a position on sports and",
+   "choices": [
+    "Akane",
+    "Fiona",
+    "Jack",
+    "Michael",
+    "Tamara"
+   ]
+  },
+  {
+   "no": 41,
+   "pages": [
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "n": 5,
+   "stem": "With the above opinions in mind, you have taken a position on sports and",
+   "choices": [
+    "Akane",
+    "Fiona",
+    "Jack",
+    "Michael",
+    "Tamara"
+   ]
+  },
+  {
+   "no": 42,
+   "pages": [
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "n": 4,
+   "stem": "With the above opinions in mind, you have taken a position on sports and",
+   "choices": [
+    "advancements in technology promote the evolution of sports",
+    "athletes play a role in the enhancement of sports equipment",
+    "technology contributes to the breaking of sporting records",
+    "technology helps improve the experience of playing sports"
+   ]
+  },
+  {
+   "no": 43,
+   "pages": [
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "n": 4,
+   "stem": "Based on Source A, which of the following is the most appropriate for",
+   "choices": [
+    "New technology will make a sport more accessible and thus motivate",
+    "New technology with regulation improves the sporting experience while",
+    "The introduction of new technology can enhance the integrity of a sport",
+    "The regulation of new technology may lower the integrity of a sport by"
+   ]
+  },
+  {
+   "no": 44,
+   "pages": [
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "n": 4,
+   "stem": "Based on Source B, which of the following best supports REASON ___ in the",
+   "choices": [
+    "Advanced technology in shoes may encourage more students to run",
+    "In addition to preventing injury, the running shoes are pleasant to wear.",
+    "More than half of the runners in each group felt the burden on their",
+    "The effectiveness of the new shoe was most evident for recreational"
+   ]
+  }
+ ]
+}

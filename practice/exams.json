@@ -1,0 +1,11 @@
+{
+ "note": "ここに載せた回が、演習の入口に並ぶ。",
+ "exams": [
+  { "id": "r8-listening", "dir": "data/r8-listening/", "kind": "listening",
+    "label": "リスニング", "title": "令和8年度 共通テスト 英語（リスニング）",
+    "note": "全37問・100点。音声を聞いて答えます" },
+  { "id": "r8-reading", "dir": "data/r8-reading/", "kind": "reading",
+    "label": "リーディング", "title": "令和8年度 共通テスト 英語（リーディング）",
+    "note": "全44問・100点。問題冊子を読んで答えます" }
+ ]
+}

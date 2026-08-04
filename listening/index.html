@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>聞き方ノート</title>
+<title>リスニングプレイヤー</title>
 <style>
   :root{
     --ink:#16202B; --sheet:#E3E9E5; --card:#F3F6F3; --rule:#AEBDB7;
@@ -50,6 +50,52 @@
     .hbtn{padding:0 11px}
   }
   .gear[aria-expanded="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+  a.hbtn{text-decoration:none}
+  /* 左上は常にサイトの入口へ。塗って目立たせ、文字は常に出す。 */
+  h1{flex:1;text-align:center}
+  .hbtn.home{border-color:var(--ink);font-weight:700;flex-shrink:0}
+  .hbtn.home:hover{background:var(--ink);color:var(--card)}
+  .hbtn.home .lb2{font-size:12px}
+  @media (max-width:380px){ .hbtn.home .lb2{display:none} }
+
+  /* 用意してある音源の一覧 */
+  .shelf{border:1px solid var(--rule);background:var(--card);margin-top:12px}
+  .shelf h3{font-size:10px;letter-spacing:.16em;color:var(--graphite);font-weight:600;
+            padding:10px 13px 6px}
+  .shelf ul{list-style:none}
+  .shelf li{border-top:1px solid var(--rule)}
+  .grab{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:transparent;
+        border:none;padding:12px 13px;cursor:pointer;color:var(--ink)}
+  .grab:hover{background:var(--sheet)}
+  .grab .t{flex:1;min-width:0}
+  .grab .t b{display:block;font-size:13px;font-weight:700;line-height:1.5}
+  .grab .t small{display:block;font-size:11px;color:var(--graphite);margin-top:2px}
+  .grab .sz{font-family:var(--mono);font-size:11px;color:var(--graphite);flex-shrink:0}
+  .grab:disabled{cursor:default;color:var(--graphite)}
+  .shelf .foot{font-size:11px;color:var(--graphite);line-height:1.7;padding:10px 13px;
+               border-top:1px solid var(--rule)}
+
+  /* 章（設問の頭出し） */
+  .marks{border-bottom:1px solid var(--rule);background:var(--card);padding:8px 0 10px;flex-shrink:0}
+  .marks h2{font-size:10px;letter-spacing:.18em;color:var(--graphite);font-weight:600;padding:0 16px 7px}
+  .mstrip{display:flex;gap:6px;overflow-x:auto;padding:0 16px 3px}
+  .mk{flex:0 0 auto;border:1px solid var(--rule);background:transparent;color:var(--graphite);
+      font-size:11px;padding:6px 10px;cursor:pointer;white-space:nowrap}
+  .mk:hover{border-color:var(--ink);color:var(--ink)}
+  .mk[aria-current="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+
+  /* 台本（文字起こしではなく、公式のスクリプト） */
+  .sheetpanel{margin-top:6px}
+  .sheetpanel .bar2{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .sheetpanel h2{font-size:13px;font-weight:800;letter-spacing:.06em}
+  .sheetpanel .who{font-family:var(--mono);font-size:11px;color:var(--graphite);
+                   flex-shrink:0;width:62px;padding-top:4px;text-align:right}
+  .sline{display:flex;gap:10px;padding:9px 8px;border:1px solid transparent;
+         border-bottom-color:var(--rule);cursor:pointer;align-items:flex-start}
+  .sline:hover{background:var(--card)}
+  .sline .st{flex:1;font-family:var(--en);font-size:17px;line-height:1.9}
+  .sline[aria-current="true"]{background:var(--card);border-color:var(--ink)}
+  .srcnote{font-size:11px;color:var(--graphite);line-height:1.7;margin-top:10px}
 
   main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 
@@ -58,6 +104,7 @@
   .pick{display:block;width:100%;padding:18px;text-align:center;border:1.5px dashed var(--rule);
         background:var(--card);font-weight:700;color:var(--ink);cursor:pointer}
   .pick:hover{border-color:var(--live);border-style:solid}
+  .intro .shelf + .pick{margin-top:14px}
   .pick small{display:block;font-weight:400;font-size:11px;color:var(--graphite);margin-top:5px}
   input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
   .notice{background:var(--card);border-left:3px solid var(--graphite);padding:11px 13px;
@@ -77,6 +124,7 @@
   .trk[data-state="done"]{border-color:var(--ink);color:var(--ink);font-weight:700}
   .trk[data-state="ja"]{border-style:dotted;color:var(--rule)}
   .trk[data-state="busy"]{border-color:var(--live);color:var(--live)}
+  .trk[data-state="part"]{border-color:var(--live);border-style:dashed;color:var(--live)}
   .trk[aria-current="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
 
   .stage{padding:14px 16px 22px}
@@ -251,7 +299,9 @@
 <div class="fatal" id="fatal" hidden></div>
 
 <header>
-  <h1>聞き方ノート</h1>
+  <a class="hbtn home" id="homeLink" href="../" aria-label="最初の画面へもどる" title="最初の画面">
+    <span class="ic">←</span><span class="lb2">最初の画面</span></a>
+  <h1>リスニングプレイヤー</h1>
   <div class="hright">
     <select class="rate" id="rate" aria-label="再生速度" title="再生速度">
         <option value="0.5">×0.5</option><option value="0.6">×0.6</option>
@@ -268,13 +318,28 @@
 
 <main>
   <section class="intro" id="intro">
-    <p>手元の音声ファイルを読み込むと、そのまま再生できます。文字に起こせば、一文ずつタップして聞き直せます。</p>
-    <label class="pick" for="file">音声ファイルを選ぶ
+    <p>共通テストの過去問の音声を再生できます。また、手元の音声ファイルを入れて、
+       音楽再生プレイヤーのように巻き戻すことができます。</p>
+
+    <div class="shelf" id="shelf" hidden>
+      <h3>共通テストの音源</h3>
+      <ul id="shelfList"></ul>
+      <p class="foot">押すと取ってきて、そのまま再生できます。一度取れば端末に残ります。台本つき。<br>
+        出典：独立行政法人 大学入試センター（利用許諾を得て掲載）。区切り表示など学習用に再構成しています。</p>
+    </div>
+
+    <label class="pick" for="file">手元の音声ファイルを選ぶ
       <small>まとめて選べます。ファイル名の数字順に並びます</small></label>
     <input type="file" id="file" multiple accept="audio/*,.mp3,.m4a,.wav,.aac,.ogg,.flac">
+
     <div class="notice" id="limits" hidden></div>
-    <div class="notice">音声は端末の外に出ません。文字起こしもこの画面の中で行います。
-      文字に起こすときだけ、初回に音声認識モデルを受け取ります。</div>
+    <div class="notice">音声は端末の外に出ません。手元のファイルは、文字に起こせば一文ずつ聞き直せます
+      （そのときだけ、初回に音声認識モデルを受け取ります）。</div>
+  </section>
+
+  <section class="marks" id="marks" hidden>
+    <h2>設問の頭出し</h2>
+    <div class="mstrip" id="mstrip"></div>
   </section>
 
   <section class="index" id="index" hidden>
@@ -293,6 +358,11 @@
       <button class="run" id="run">文字に起こす</button>
     </div>
 
+    <div class="offer" id="working" hidden>
+      <p>できたところから下に出ていきます。<b>途中で止めても、そこまでは残ります。</b></p>
+      <button class="run ghost" id="stopRun">中止する</button>
+    </div>
+
     <div class="offer ask" id="ask" hidden>
       <p>音声認識モデルがまだこの端末にありません。<b>約80MBを一度だけ受け取ります</b>。
          以降は取得せずに使えます。通信量が気になる場合はWi‑Fiでどうぞ。</p>
@@ -301,6 +371,19 @@
     </div>
 
     <div class="script" id="script"></div>
+
+    <section class="panel sheetpanel" id="sheetPanel" hidden>
+      <h2 id="sheetTitle">台本</h2>
+      <p class="lead" id="sheetLead">いま流れているところの台本です。行をタップすると、その部分から聞き直せます。</p>
+      <div class="bar2">
+        <button class="run" id="sheetPlay">この部分を聞く</button>
+        <button class="run" id="sheetRec">声に出して録る</button>
+      </div>
+      <div class="recinfo" id="sheetInfo"></div>
+      <div id="sheetLines"></div>
+      <div id="sheetResult"></div>
+      <p class="srcnote" id="sheetSrc"></p>
+    </section>
 
     <section class="panel" id="shadow" hidden>
       <h2>シャドーイング</h2>
@@ -365,6 +448,12 @@
     <h2 id="getTitle">データの入手</h2>
     <p class="glead">練習に使う音声は、自分で用意してこの端末に読み込みます。
       全商英語検定なら、協会の公式サイトに過去の問題と音声が公開されています。</p>
+
+    <div class="shelf" style="margin:0 0 18px" id="getShelfBox" hidden>
+      <h3>用意してある音源</h3>
+      <ul id="getShelf"></ul>
+      <p class="foot">押すと取ってきて、そのまま再生できます。</p>
+    </div>
 
     <ol class="steps">
       <li><b>公式サイトを開く</b>
@@ -457,12 +546,22 @@ const PRONOUNS = new Set(["i'll","you'll","he'll","she'll","we'll","they'll","it
   "i'm","you're","he's","she's","we're","they're"]);
 
 const audio = $('audio');
-const state = { files: [], current: -1, results: new Map(), seq: new Map(), nextSeq: 0, worker: null };
+const state = { files: [], current: -1, results: new Map(), seq: new Map(), nextSeq: 0,
+                worker: null, cancel: false, running: false, runningId: null,
+                marks: new Map(),     // ファイル → 設問の頭出しの目印
+                scripts: new Map() }; // ファイル → 公式の台本
 let mode = null, inlineAsr = null;
 let region = null, looping = -1, currentSent = -1, autoplayNext = false, wakeLock = null;
+// 台本まわり。freePlay から触るので、ここで先に用意しておく。
+let sheetBlock = -1;
 
 const idOf = f => `${f.name}\u0000${f.size}`;
 const resultOf = i => (state.files[i] ? state.results.get(idOf(state.files[i])) : undefined);
+
+// 「文字に起こす」の案内文。途中まで起こしてあるときは差し替えるので、元の文を控えておく。
+// 使うのは select の中。select より先に定義しておかないと、開いた瞬間に止まる。
+const OFFER_HTML = $('offer').querySelector('p').innerHTML;
+const PART_HTML = '途中まで文字に起こしてあります。<b>続きから</b>再開できます。';
 
 // ---------- この端末で使えるもの ----------
 const canStore = (() => { try { localStorage.setItem('kknote:probe','1');
@@ -473,7 +572,9 @@ const inFrame = window.self !== window.top;
 const store = {
   key: f => `kknote:v1:${f.name}:${f.size}`,
   get(f){ try { const r = localStorage.getItem(this.key(f)); return r ? JSON.parse(r) : null; } catch { return null; } },
-  set(f, d){ try { localStorage.setItem(this.key(f), JSON.stringify(d)); return true; } catch { return false; } },
+  // sents と drawn は画面を描くたびに作り直すもの。保存すると場所を食うだけなので外す。
+  set(f, d){ try { const { sents, drawn, unsaved, ...keep } = d;
+    localStorage.setItem(this.key(f), JSON.stringify(keep)); return true; } catch { return false; } },
   clear(){ try { const ks=[]; for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);
     if(k&&k.startsWith('kknote:v1:'))ks.push(k);} ks.forEach(k=>localStorage.removeItem(k)); return true; } catch { return false; } },
 };
@@ -563,7 +664,7 @@ function drawStrip(){
     b.className = 'trk';
     b.textContent = (f.name.match(/\d+/) ?? [String(i + 1)])[0];
     b.title = f.name;
-    b.dataset.state = r ? (r.ja ? 'ja' : 'done') : 'new';
+    b.dataset.state = r ? (r.ja ? 'ja' : r.partial ? 'part' : 'done') : 'new';
     b.setAttribute('aria-current', String(i === state.current));
     b.addEventListener('click', () => select(i));
     $('strip').appendChild(b);
@@ -581,11 +682,36 @@ function select(i){
   audio.playbackRate = parseFloat($('rate').value);
   audio.load(); setIcon(false);
   $('seek').value = 0; $('time').textContent = '0:00'; $('dur').textContent = '0:00';
-  drawStrip(); drawEditor(); updateTransport();
+  drawStrip(); drawEditor(); updateTransport(); drawMarks();
+  sheetBlock = -1; drawSheet(true);
   const done = resultOf(i);
-  $('ask').hidden = true;
-  if (done) { $('offer').hidden = true; render(done); }
-  else {
+  const busy = state.running && state.runningId === idOf(f);
+  $('ask').hidden = true; $('working').hidden = true;
+
+  // 台本のある音源では、文字起こしは持ち出さない。
+  // AIに起こさせる必要がない（公式のものが手元にある）し、
+  // 起こしたものを並べると、どちらが正しいのか分からなくなる。
+  if (state.scripts.get(idOf(f))) {
+    $('offer').hidden = true; $('script').innerHTML = '';
+    $('legend').hidden = true; $('runlog').hidden = true; $('shadow').hidden = true;
+    setStatus(`${f.name}　台本があります`);
+    return;
+  }
+
+  if (done && !done.partial) { $('offer').hidden = true; render(done); }
+  else if (done && busy) {
+    // まだ処理中のトラックに戻ってきた。ここまでの分を描き直して、続きを待つ。
+    beginRender(done); drawNewSentences(done);
+    $('offer').hidden = true; $('working').hidden = false;
+    setStatus(`${f.name}　文字に起こしています`);
+  }
+  else if (done) {
+    render(done);
+    $('offer').querySelector('p').innerHTML = PART_HTML;
+    $('offer').hidden = false;
+    $('run').disabled = false; $('run').textContent = '続きから起こす';
+  } else {
+    $('offer').querySelector('p').innerHTML = OFFER_HTML;
     $('offer').hidden = false; $('script').innerHTML = '';
     $('legend').hidden = true; $('runlog').hidden = true; $('shadow').hidden = true;
     $('run').disabled = false; $('run').textContent = '文字に起こす';
@@ -634,7 +760,7 @@ function drawEditor(){
     li.className = 'eitem';
     li.setAttribute('aria-current', String(i === state.current));
     li.innerHTML = `<span class="n">${i+1}</span><span class="nm">${esc(f.name)}</span>`
-      + `<span class="tag">${r ? (r.ja ? '案内' : '起こし済') : ''}</span>`;
+      + `<span class="tag">${r ? (r.ja ? '案内' : r.partial ? '途中' : '起こし済') : ''}</span>`;
     li.querySelector('.nm').addEventListener('click', () => { select(i); $('editorPage').hidden = true; });
     li.append(mini('▲', () => move(i,-1), i === 0),
               mini('▼', () => move(i, 1), i === state.files.length - 1),
@@ -658,6 +784,91 @@ async function decodeTo16k(blob){
   return { pcm: out.getChannelData(0), duration: decoded.duration };
 }
 
+// ---------- 長い音声を区間に分ける ----------
+// 狙いは2つ。
+//   1. 処理できたところから順に画面へ出せるようにする
+//   2. 語の途中で切らない（切ると、その語は両側で潰れる）
+// だから区切りは必ず「静かなところ」を探して置く。
+// 短い音声は分けない。全商の音源は一問ずつ分かれていて元から短いので、
+// これまでどおり一度で処理される。
+const SR = 16000;
+const BLOCK_TARGET = 45;   // 秒。この辺りで区切りたい
+const BLOCK_SEARCH = 12;   // 秒。前後これだけの範囲で静かなところを探す
+const BLOCK_MIN    = 90;   // 秒。これ以下なら分けない
+const FRAME = 320;         // 20ミリ秒ぶんの標本数
+const QUIET_RUN = 8;       // 160ミリ秒。これだけ静かなら「切れ目」とみなす
+
+// 20ミリ秒ごとの音の大きさ
+function frameRms(pcm){
+  const n = Math.floor(pcm.length / FRAME);
+  const out = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    let s = 0;
+    const a = i * FRAME, b = a + FRAME;
+    for (let j = a; j < b; j++) s += pcm[j] * pcm[j];
+    out[i] = Math.sqrt(s / FRAME);
+  }
+  return out;
+}
+
+// a〜b の中で、want に一番近い切れ目を返す。
+// 切れ目が見つからなければ、せめて一番静かなところを返す。
+function quietestFrame(rms, thr, a, b, want){
+  let best = -1, near = Infinity;
+  let i = a;
+  while (i < b) {
+    if (rms[i] < thr) {
+      let j = i;
+      while (j < b && rms[j] < thr) j++;
+      if (j - i >= QUIET_RUN) {
+        const mid = (i + j) >> 1, d = Math.abs(mid - want);
+        if (d < near) { near = d; best = mid; }
+      }
+      i = j;
+    } else i++;
+  }
+  if (best >= 0) return best;
+  let min = Infinity, at = want;
+  for (let k = a; k + QUIET_RUN < b; k++) {
+    let s = 0;
+    for (let m = k; m < k + QUIET_RUN; m++) s += rms[m];
+    if (s < min) { min = s; at = k + (QUIET_RUN >> 1); }
+  }
+  return at;
+}
+
+// 標本の位置で [開始, 終了] の配列を返す
+function blockRanges(pcm){
+  if (pcm.length <= BLOCK_MIN * SR) return [[0, pcm.length]];
+
+  const rms = frameRms(pcm);
+  // 静かさの基準は、その音声じたいから決める。
+  // 録音のノイズの量は音源ごとに違うので、固定値では当てにならない。
+  //
+  // ただし下位から数えるだけでは足りない。休止が短い音源だと
+  // 下位でも声が入ってしまい、基準が声の高さまで上がって
+  // 「どこも静か」になり、声の真ん中で切ってしまう。
+  // そこで真ん中の高さ（＝おおむね声）の4分の1を上限として被せる。
+  const sorted = Float32Array.from(rms).sort();
+  const floor = sorted[Math.floor(sorted.length * 0.05)] || 0;
+  const mid = sorted[Math.floor(sorted.length * 0.5)] || 0;
+  const thr = Math.min(floor * 3 + 1e-4, mid * 0.25);
+
+  const out = [];
+  let from = 0;
+  while (pcm.length - from > (BLOCK_TARGET + BLOCK_SEARCH) * SR) {
+    const want = from + BLOCK_TARGET * SR;
+    const lo = Math.max(from + (BLOCK_TARGET - BLOCK_SEARCH) * SR, from + 10 * SR);
+    const hi = Math.min(want + BLOCK_SEARCH * SR, pcm.length);
+    const cut = quietestFrame(rms, thr, (lo / FRAME) | 0, (hi / FRAME) | 0, (want / FRAME) | 0) * FRAME;
+    if (cut <= from) break;          // 念のため。進まなくなったら分けるのをやめる
+    out.push([from, cut]);
+    from = cut;
+  }
+  out.push([from, pcm.length]);
+  return out;
+}
+
 // 同じ言い回しが繰り返されたら暴走の合図
 function looping3(text){
   const w = String(text).toLowerCase().split(/\s+/).filter(Boolean);
@@ -675,7 +886,7 @@ const WORKER_SRC = `
 import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1';
 env.allowLocalModels = false;
 const MW = '${MODEL}';
-let asr = null, asrId = null, useGpu = false;
+let asr = null, asrId = null, useGpu = false, cancelled = false, busy = false;
 const prog = new Map();
 
 function loops(t){
@@ -708,39 +919,58 @@ async function load(id){
 }
 
 self.onmessage = async (e) => {
-  const { pcm, duration, gpu } = e.data;
+  const d = e.data;
+  // 中止は処理中に届く。区間の切れ目で見る。
+  if (d && d.cmd === 'cancel') { cancelled = true; return; }
+  if (busy) return;
+  busy = true; cancelled = false;
+
+  const { pcm, duration, gpu, blocks, from } = d;
   if (useGpu !== !!gpu) { asr = null; asrId = null; useGpu = !!gpu; }
   const base = { language:'en', task:'transcribe', chunk_length_s:30, stride_length_s:5 };
   try {
-    try {
-      self.postMessage({ type:'probe' });
-      const pm = await load(MW);
-      const head = pcm.length > 16000*18 ? pcm.slice(0, 16000*18) : pcm;
-      const pr = await pm(head, { task:'transcribe', return_timestamps:false });
-      if (/[\\u3040-\\u30ff\\u3400-\\u4dbf\\u4e00-\\u9fff]/.test(pr.text || '')) {
-        self.postMessage({ type:'done', grain:'ja', chunks:[], text: pr.text||'', duration });
-        return;
-      }
-    } catch (x) {}
+    // 言語の見きわめは冒頭だけ。続きから再開するときは省く。
+    if (!from) {
+      try {
+        self.postMessage({ type:'probe' });
+        const pm = await load(MW);
+        const head = pcm.length > 16000*18 ? pcm.slice(0, 16000*18) : pcm;
+        const pr = await pm(head, { task:'transcribe', return_timestamps:false });
+        if (/[\\u3040-\\u30ff\\u3400-\\u4dbf\\u4e00-\\u9fff]/.test(pr.text || '')) {
+          self.postMessage({ type:'done', ja:true, text: pr.text||'', duration });
+          return;
+        }
+      } catch (x) {}
+    }
     const m = await load(MW);
-    try {
-      self.postMessage({ type:'work' });
-      const out = await m(pcm, { ...base, return_timestamps:'word' });
-      if (loops(out.text||'')) throw new Error('繰り返しを検出');
-      self.postMessage({ type:'done', grain:'word', chunks: out.chunks ?? [], text: out.text ?? '', duration });
-      return;
-    } catch (x) { self.postMessage({ type:'coarse' }); }
-    const m2 = m;
-    self.postMessage({ type:'work' });
-    const o2 = await m2(pcm, { ...base, no_repeat_ngram_size:6, return_timestamps:true });
-    self.postMessage({ type:'done', grain:'segment', chunks: o2.chunks ?? [], text: o2.text ?? '', duration });
+    for (let i = from || 0; i < blocks.length; i++) {
+      if (cancelled) { self.postMessage({ type:'done', duration, stoppedAt:i }); return; }
+      const seg = pcm.slice(blocks[i][0], blocks[i][1]);
+      const offset = blocks[i][0] / 16000;
+      self.postMessage({ type:'work', index:i });
+      let grain = 'word', chunks = [], text = '';
+      try {
+        const out = await m(seg, { ...base, return_timestamps:'word' });
+        if (loops(out.text||'')) throw new Error('繰り返しを検出');
+        chunks = out.chunks ?? []; text = out.text ?? '';
+      } catch (x) {
+        // この区間だけ粗い時刻に落とす。ほかの区間は巻き添えにしない。
+        try {
+          self.postMessage({ type:'coarse', index:i });
+          const o2 = await m(seg, { ...base, no_repeat_ngram_size:6, return_timestamps:true });
+          grain = 'segment'; chunks = o2.chunks ?? []; text = o2.text ?? '';
+        } catch (y) { grain = 'fail'; }
+      }
+      self.postMessage({ type:'block', index:i, grain, chunks, text, offset });
+    }
+    self.postMessage({ type:'done', duration });
   } catch (err) {
     self.postMessage({ type:'error', message: String(err && err.message || err) });
-  }
+  } finally { busy = false; }
 };
 `;
 
-function runInWorker(pcm, duration, onProgress){
+function runInWorker(pcm, duration, blocks, from, onProgress){
   return new Promise((resolve, reject) => {
     let w;
     try {
@@ -762,12 +992,12 @@ function runInWorker(pcm, duration, onProgress){
     };
     w.onerror = err => { clearTimeout(guard); state.worker = null;
       reject(new Error('worker-unavailable:' + (err.message || 'ワーカーを読み込めません'))); };
-    try { w.postMessage({ pcm, duration, gpu: $('useGpu').checked }); }
+    try { w.postMessage({ pcm, duration, gpu: $('useGpu').checked, blocks, from }); }
     catch (err) { clearTimeout(guard); reject(new Error('worker-unavailable:' + err.message)); }
   });
 }
 
-async function runInline(pcm, duration, onProgress){
+async function runInline(pcm, duration, blocks, from, onProgress){
   const { pipeline, env } = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1');
   env.allowLocalModels = false;
   const gpu = $('useGpu').checked;
@@ -791,41 +1021,62 @@ async function runInline(pcm, duration, onProgress){
     return fn;
   };
 
-  try {
-    onProgress({ type:'probe' });
-    const pm = await load(MODEL);
-    const head = pcm.length > 16000*18 ? pcm.slice(0, 16000*18) : pcm;
-    const pr = await pm(head, { task:'transcribe', return_timestamps:false });
-    if (CJK.test(pr.text || '')) return { grain:'ja', chunks: [], text: pr.text || '', duration };
-  } catch (x) {}
+  if (!from) {
+    try {
+      onProgress({ type:'probe' });
+      const pm = await load(MODEL);
+      const head = pcm.length > 16000*18 ? pcm.slice(0, 16000*18) : pcm;
+      const pr = await pm(head, { task:'transcribe', return_timestamps:false });
+      if (CJK.test(pr.text || '')) return { ja:true, text: pr.text || '', duration };
+    } catch (x) {}
+  }
 
   const m = await load(MODEL);
-  try {
-    onProgress({ type:'work' });
-    await new Promise(r => setTimeout(r, 50));
-    const out = await m(pcm, { ...base, return_timestamps:'word' });
-    if (looping3(out.text || '')) throw new Error('繰り返しを検出');
-    return { grain:'word', chunks: out.chunks ?? [], text: out.text ?? '', duration };
-  } catch (x) { onProgress({ type:'coarse' }); }
-
-  const m2 = m;
-  onProgress({ type:'work' });
-  await new Promise(r => setTimeout(r, 50));
-  const o2 = await m2(pcm, { ...base, no_repeat_ngram_size:6, return_timestamps:true });
-  return { grain:'segment', chunks: o2.chunks ?? [], text: o2.text ?? '', duration };
+  for (let i = from || 0; i < blocks.length; i++) {
+    if (state.cancel) return { duration, stoppedAt:i };
+    const seg = pcm.slice(blocks[i][0], blocks[i][1]);
+    const offset = blocks[i][0] / SR;
+    onProgress({ type:'work', index:i });
+    await new Promise(r => setTimeout(r, 50));   // 画面を一度描かせる
+    let grain = 'word', chunks = [], text = '';
+    try {
+      const out = await m(seg, { ...base, return_timestamps:'word' });
+      if (looping3(out.text || '')) throw new Error('繰り返しを検出');
+      chunks = out.chunks ?? []; text = out.text ?? '';
+    } catch (x) {
+      try {
+        onProgress({ type:'coarse', index:i });
+        const o2 = await m(seg, { ...base, no_repeat_ngram_size:6, return_timestamps:true });
+        grain = 'segment'; chunks = o2.chunks ?? []; text = o2.text ?? '';
+      } catch (y) { grain = 'fail'; }
+    }
+    onProgress({ type:'block', index:i, grain, chunks, text, offset });
+    await new Promise(r => setTimeout(r, 0));
+  }
+  return { duration };
 }
 
-async function transcribe(pcm, duration, onProgress){
+async function transcribe(pcm, duration, blocks, from, onProgress){
   const fresh = () => new Float32Array(pcm);
   if (mode !== 'inline') {
-    try { const r = await runInWorker(fresh(), duration, onProgress); mode = 'worker'; return r; }
+    try { const r = await runInWorker(fresh(), duration, blocks, from, onProgress); mode = 'worker'; return r; }
     catch (err) {
       if (!String(err.message).startsWith('worker-unavailable:')) throw err;
       mode = 'inline'; onProgress({ type:'fallback' });
       await new Promise(r => setTimeout(r, 300));
     }
   }
-  return runInline(fresh(), duration, onProgress);
+  return runInline(fresh(), duration, blocks, from, onProgress);
+}
+
+// 一度に起こしてまとめて返す。録音の照合のように、短くて逐次表示が要らないとき用。
+async function transcribeAll(pcm, duration, onProgress){
+  const parts = [];
+  const res = await transcribe(pcm, duration, blockRanges(pcm), 0, m => {
+    if (m.type === 'block' && m.text) parts.push(String(m.text).trim());
+    onProgress(m);
+  });
+  return { text: res.ja ? (res.text || '') : parts.join(' ') };
 }
 
 // ---------- モデルが手元にあるか ----------
@@ -868,9 +1119,40 @@ function spreadOverWords(chunks){
 }
 
 // ---------- 文字起こしの実行 ----------
+// 区間の結果を語の一覧に直す。時刻は区間の開始ぶんだけずらす。
+function wordsOfBlock(m){
+  const approx = m.grain !== 'word';
+  const raw = approx ? spreadOverWords(m.chunks || [])
+    : (m.chunks || []).map(c => ({ text: (c.text||'').trim(),
+        start: c.timestamp?.[0] ?? 0, end: c.timestamp?.[1] ?? 0 }));
+  return raw.filter(x => x.text).map(x => {
+    const w = { text: x.text, start: x.start + m.offset, end: x.end + m.offset };
+    if (approx) w.a = true;      // この語の時刻はおおよそ
+    return w;
+  });
+}
+
+function showWorking(on){
+  $('working').hidden = !on;
+  $('stopRun').disabled = false;
+  $('stopRun').textContent = '中止する';
+  if (on) $('offer').hidden = true;
+}
+
+$('stopRun').addEventListener('click', () => {
+  if (!state.running) return;
+  state.cancel = true;
+  $('stopRun').disabled = true;
+  $('stopRun').textContent = '中止しています';
+  setStatus('中止します。いま処理している区間が終わったら止まります。');
+  if (mode !== 'inline' && state.worker) {
+    try { state.worker.postMessage({ cmd:'cancel' }); } catch {}
+  }
+});
+
 $('run').addEventListener('click', async () => {
   const i = state.current, file = state.files[i];
-  if (!file) return;
+  if (!file || state.running) return;
   $('run').disabled = true;
 
   if (!(await modelReady())) {
@@ -881,49 +1163,146 @@ $('run').addEventListener('click', async () => {
   const strip = $('strip').children[i];
   if (strip) strip.dataset.state = 'busy';
   const t0 = performance.now();
+  const fid = idOf(file);
+  state.running = true; state.cancel = false; state.runningId = fid;
+
+  // 処理中に別のトラックへ移ることがある。そのあいだは画面を触らない。
+  // 結果は data に溜め続けて、戻ってきたときに select がまとめて描き直す。
+  const onScreen = () => state.current >= 0 && state.files[state.current]
+    && idOf(state.files[state.current]) === fid;
+
+  const prev = state.results.get(idOf(file));
+  const resume = prev && prev.partial && prev.words ? prev : null;
+  let data = null, blocks = [], total = 1, doneCount = 0, failed = 0;
+
+  const progressPct = () => 32 + 68 * (total ? doneCount / total : 0);
+  const workingLine = idx => {
+    const where = mode === 'inline' ? '　この間は画面の操作ができません' : '';
+    return total > 1
+      ? `文字に起こしています　${idx + 1}／${total} 区間${where}`
+      : `文字に起こしています${where}`;
+  };
 
   const onProgress = m => {
-    if (m.type === 'load') setStatus(`音声認識モデルを受け取っています　${m.pct}%`, 10 + m.pct * 0.6);
-    else if (m.type === 'probe') setStatus('どの言語かを確かめています', 12);
-    else if (m.type === 'coarse') setStatus('語ごとの時刻が取れないので、区間ごとに切り替えます', 74);
+    // 先に記録だけ済ませる。画面を見ていなくても結果は溜める。
+    if (m.type === 'block') {
+      doneCount = m.index + 1;
+      if (data) {
+        data.nextBlock = doneCount;
+        if (m.grain === 'fail') failed++;
+        else {
+          const ws = wordsOfBlock(m);
+          for (const w of ws) data.words.push(w);
+          if (ws.length && m.grain !== 'word') data.approx = true;
+        }
+      }
+    }
+    if (!onScreen()) return;
+
+    if (m.type === 'load') setStatus(`音声認識モデルを受け取っています　${m.pct}%`, 6 + m.pct * 0.24);
+    else if (m.type === 'probe') setStatus('どの言語かを確かめています', 8);
     else if (m.type === 'fallback') setStatus('別の方法に切り替えます', 30);
-    else if (m.type === 'work') setStatus(mode === 'inline'
-      ? '文字に起こしています。終わるまで画面の操作ができません' : '文字に起こしています', 72);
+    else if (m.type === 'coarse')
+      setStatus(`語ごとの時刻が取れないので、この区間だけ切り替えます（${m.index + 1}／${total}）`, progressPct());
+    else if (m.type === 'work') setStatus(workingLine(m.index || 0), progressPct());
+    else if (m.type === 'block') {
+      if (data) drawNewSentences(data);
+      setStatus(total > 1
+        ? `${doneCount}／${total} 区間まで出しました`
+        : '文字に起こしています', progressPct());
+    }
   };
 
   try {
-    setStatus('音声を読み込んでいます', 5);
+    setStatus('音声を読み込んでいます', 4);
     const decoded = await decodeTo16k(file);
+
+    blocks = (resume && Array.isArray(resume.blocks) && resume.blocks.length)
+      ? resume.blocks : blockRanges(decoded.pcm);
+    total = blocks.length;
+    const from = resume ? Math.min(resume.nextBlock || 0, total) : 0;
+
+    data = resume || { words: [], ja: false, approx: false, name: file.name };
+    data.duration = decoded.duration;
+    data.blocks = blocks;
+    if (!resume) { data.words = []; data.nextBlock = 0; }
+    // 終わるまでは「途中」扱いにしておく。処理中に別のトラックへ移っても、
+    // 目次と編集画面がそのとおりに見える。
+    data.partial = true;
+    doneCount = from;
+    state.results.set(idOf(file), data);
+
+    if (onScreen()) {
+      beginRender(data);
+      drawNewSentences(data);   // 再開のときは、すでにある分をここで出す
+      showWorking(true);
+    }
+
     if ($('useGpu').checked) riskStart('gpu');
-    const result = await transcribe(decoded.pcm, decoded.duration, onProgress);
+    const result = await transcribe(decoded.pcm, decoded.duration, blocks, from, onProgress);
     riskEnd();
     try { localStorage.setItem(MODEL_OK, '1'); } catch {}
 
-    let data;
-    if (result.grain === 'ja') {
-      data = { words: [], ja: true, approx: false, duration: result.duration, name: file.name };
-    } else {
-      const approx = result.grain !== 'word';
-      const words = approx ? spreadOverWords(result.chunks || [])
-        : (result.chunks || []).map(c => ({ text: (c.text||'').trim(),
-            start: c.timestamp?.[0] ?? 0, end: c.timestamp?.[1] ?? 0 })).filter(x => x.text);
-      if (!words.length) throw new Error('この音声からは語を取り出せませんでした');
-      data = { words, ja: false, approx, duration: result.duration, name: file.name,
-        log: { where: mode === 'inline' ? 'この画面' : '別スレッド',
-               grain: approx ? 'おおよその位置' : '語ごとの正確な位置',
-               sec: (performance.now() - t0) / 1000 } };
+    if (result.ja) {
+      data = { words: [], ja: true, approx: false, duration: decoded.duration, name: file.name };
+      state.results.set(idOf(file), data);
+      if (!store.set(file, data)) data.unsaved = true;
+      drawStrip(); drawEditor();
+      if (onScreen()) { showWorking(false); $('offer').hidden = true; render(data); }
+      return;
     }
-    state.results.set(idOf(file), data);
+
+    const stopped = result.stoppedAt != null;
+    if (stopped) data.nextBlock = result.stoppedAt;
+    if (stopped || doneCount < total || failed) data.partial = true;
+    else { delete data.partial; delete data.blocks; delete data.nextBlock; }   // 再開に要るのは途中のときだけ
+    if (!data.words.length && !data.partial) throw new Error('この音声からは語を取り出せませんでした');
+
+    data.log = { where: mode === 'inline' ? 'この画面' : '別スレッド',
+                 grain: data.approx ? 'おおよその位置' : '語ごとの正確な位置',
+                 sec: (performance.now() - t0) / 1000 };
     if (!store.set(file, data)) data.unsaved = true;
+
     drawStrip(); drawEditor();
-    $('offer').hidden = true;
-    render(data);
+    if (!onScreen()) return;
+
+    showWorking(false);
+    finishRender(data);
+
+    if (data.partial) {
+      $('offer').querySelector('p').innerHTML = failed
+        ? `${total} 区間のうち ${failed} 区間はうまく起こせませんでした。<b>もう一度</b>試せます。`
+        : PART_HTML;
+      $('offer').hidden = false;
+      $('run').disabled = false; $('run').textContent = '続きから起こす';
+    } else {
+      $('offer').hidden = true;
+    }
   } catch (err) {
     riskEnd();
-    setStatus(`文字起こしができませんでした。${err.message}`);
-    $('run').disabled = false; $('run').textContent = 'もう一度試す';
-    if (strip) strip.dataset.state = 'new';
+    // 途中まで出ているものは捨てない
+    const kept = data && data.words && data.words.length;
+    if (kept) { data.partial = true; if (!store.set(file, data)) data.unsaved = true; }
+    drawStrip(); drawEditor();
+    if (onScreen()) {
+      showWorking(false);
+      if (kept) {
+        finishRender(data);
+        setStatus(`途中で止まりました（${err.message}）。ここまでは残してあります。`);
+        $('offer').querySelector('p').innerHTML = PART_HTML;
+        $('offer').hidden = false;
+        $('run').textContent = '続きから起こす';
+      } else {
+        setStatus(`文字起こしができませんでした。${err.message}`);
+        $('run').textContent = 'もう一度試す';
+        if (strip) strip.dataset.state = 'new';
+      }
+      $('offer').hidden = false;
+      $('run').disabled = false;
+    }
     console.error(err);
+  } finally {
+    state.running = false; state.cancel = false; state.runningId = null;
   }
 });
 
@@ -934,80 +1313,96 @@ const isDoubt = w => (w.end - w.start) > 0 && (w.end - w.start) < 0.06;
 
 // 句読点で文に区切る。試験の音源は一文が短いので、
 // これが「聞き直したい単位」とほぼ一致する。
-function sentencesOf(words){
-  const out = []; let from = 0;
-  words.forEach((w, i) => {
+// from を渡すと、そこから先だけを区切る。区間が終わるたびに追記するため。
+// 区間の切れ目は静かなところに置いてあるので、文が区間をまたぐことはほぼない。
+function sentencesOf(words, from = 0){
+  const out = []; let start = from;
+  for (let i = from; i < words.length; i++) {
+    const w = words[i];
     if (/[.!?]["')\]]?$/.test(w.text) || i === words.length - 1) {
-      out.push({ from, to: i, start: words[from].start, end: w.end });
-      from = i + 1;
+      out.push({ from: start, to: i, start: words[start].start, end: w.end });
+      start = i + 1;
     }
-  });
+  }
   return out.filter(s => s.to >= s.from);
 }
 
-function render(data){
-  resetShadow(data);
-  $('runlog').hidden = true;
-  if (data.ja) {
-    $('script').innerHTML = '<p style="font-size:13px;color:var(--graphite);line-height:1.9">'
-      + 'これは試験の進め方を説明する日本語の案内です。英語の練習には使いません。'
-      + '上のトラック目次から英語のトラックを選んでください。</p>';
-    $('legend').hidden = true;
-    setStatus(`${data.name}　日本語の案内トラックです`);
-    return;
+// 語ごとの「時刻がおおよそか」。
+// 古い保存にはこの印がないので、そのときはトラック全体の印を見る。
+const approxWord = (data, w) => w.a === true || (w.a === undefined && !!data.approx);
+
+function sentenceRow(data, sn, si){
+  const row = document.createElement('div');
+  row.className = 'sent'; row.dataset.si = String(si);
+  row.setAttribute('aria-current', 'false');
+  row.tabIndex = 0;
+
+  const no = document.createElement('span');
+  no.className = 'no'; no.textContent = String(si + 1);
+
+  const txt = document.createElement('span');
+  txt.className = 'txt';
+  for (let k = sn.from; k <= sn.to; k++) {
+    const w = data.words[k];
+    const pin = isPin(w), doubt = !approxWord(data, w) && isDoubt(w);
+    const el = document.createElement('span');
+    el.className = 'w' + (pin ? ' pin' : doubt ? ' doubt' : '');
+    el.textContent = w.text;
+    if (pin || doubt) el.setAttribute('aria-label',
+      `${w.text}　${pin ? '主語が変わる語です' : '聞き取りが不安定です'}`);
+    txt.appendChild(el); txt.append(' ');
   }
 
-  const sents = sentencesOf(data.words);
-  data.sents = sents;
-  const marked = data.words.filter(w => isPin(w) || (!data.approx && isDoubt(w))).length;
-  setStatus(`${data.name}　${sents.length}文　${data.words.length}語　付箋 ${marked}`
-    + (data.approx ? '　※再生位置はおおよそです' : ''));
-
-  $('script').innerHTML = '';
-  sents.forEach((sn, si) => {
-    const row = document.createElement('div');
-    row.className = 'sent'; row.dataset.si = String(si);
-    row.setAttribute('aria-current', 'false');
-    row.tabIndex = 0;
-
-    const no = document.createElement('span');
-    no.className = 'no'; no.textContent = String(si + 1);
-
-    const txt = document.createElement('span');
-    txt.className = 'txt';
-    for (let k = sn.from; k <= sn.to; k++) {
-      const w = data.words[k];
-      const pin = isPin(w), doubt = !data.approx && isDoubt(w);
-      const el = document.createElement('span');
-      el.className = 'w' + (pin ? ' pin' : doubt ? ' doubt' : '');
-      el.textContent = w.text;
-      if (pin || doubt) el.setAttribute('aria-label',
-        `${w.text}　${pin ? '主語が変わる語です' : '聞き取りが不安定です'}`);
-      txt.appendChild(el); txt.append(' ');
-    }
-
-    const loop = document.createElement('button');
-    loop.className = 'loop'; loop.textContent = '⟳';
-    loop.title = 'この文を繰り返す'; loop.setAttribute('aria-label', 'この文を繰り返す');
-    loop.addEventListener('click', ev => {
-      ev.stopPropagation();
-      const on = looping !== si;
-      document.querySelectorAll('.sent .loop.on').forEach(x => x.classList.remove('on'));
-      looping = on ? si : -1;
-      if (on) { loop.classList.add('on'); playSentence(si); }
-    });
-
-    row.append(no, txt, loop);
-    row.addEventListener('click', () => playSentence(si));
-    row.addEventListener('keydown', e => {
-      if (e.key === 'Enter') { e.preventDefault(); playSentence(si); }
-    });
-    $('script').appendChild(row);
+  const loop = document.createElement('button');
+  loop.className = 'loop'; loop.textContent = '⟳';
+  loop.title = 'この文を繰り返す'; loop.setAttribute('aria-label', 'この文を繰り返す');
+  loop.addEventListener('click', ev => {
+    ev.stopPropagation();
+    const on = looping !== si;
+    document.querySelectorAll('.sent .loop.on').forEach(x => x.classList.remove('on'));
+    looping = on ? si : -1;
+    if (on) { loop.classList.add('on'); playSentence(si); }
   });
 
+  row.append(no, txt, loop);
+  row.addEventListener('click', () => playSentence(si));
+  row.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); playSentence(si); }
+  });
+  return row;
+}
+
+// 画面を空にして、これから書き足す用意をする
+function beginRender(data){
+  resetShadow(null);
+  $('runlog').hidden = true;
+  $('script').innerHTML = '';
+  data.sents = [];
+  data.drawn = 0;
   $('legend').hidden = false;
   $('approxNote').hidden = !data.approx;
-  buildShadowChoices(sents.length);
+}
+
+// まだ出していない語を、文にまとめて書き足す
+function drawNewSentences(data){
+  const fresh = sentencesOf(data.words, data.drawn || 0);
+  for (const sn of fresh) {
+    const si = data.sents.length;
+    data.sents.push(sn);
+    $('script').appendChild(sentenceRow(data, sn, si));
+  }
+  data.drawn = data.words.length;
+  $('approxNote').hidden = !data.approx;
+}
+
+// 全部そろったあとの締め。保存済みの結果を開き直したときもここを通る。
+function finishRender(data){
+  const marked = data.words.filter(w => isPin(w) || (!approxWord(data, w) && isDoubt(w))).length;
+  setStatus(`${data.name}　${data.sents.length}文　${data.words.length}語　付箋 ${marked}`
+    + (data.approx ? '　※再生位置はおおよそです' : '')
+    + (data.partial ? '　※途中まで' : ''));
+  resetShadow(data);
+  buildShadowChoices(data.sents.length);
 
   if (data.unsaved) { $('runlog').textContent = 'この環境では結果を保存できません。閉じると消えます。'; $('runlog').hidden = false; }
   else if (data.log) {
@@ -1016,6 +1411,22 @@ function render(data){
       + `　／　${data.duration.toFixed(1)}秒を <b>${data.log.sec.toFixed(1)}秒</b>（実時間比 ${rtf}×）`;
     $('runlog').hidden = false;
   }
+}
+
+function render(data){
+  if (data.ja) {
+    resetShadow(data);
+    $('runlog').hidden = true;
+    $('script').innerHTML = '<p style="font-size:13px;color:var(--graphite);line-height:1.9">'
+      + 'これは試験の進め方を説明する日本語の案内です。英語の練習には使いません。'
+      + '上のトラック目次から英語のトラックを選んでください。</p>';
+    $('legend').hidden = true;
+    setStatus(`${data.name}　日本語の案内トラックです`);
+    return;
+  }
+  beginRender(data);
+  drawNewSentences(data);
+  finishRender(data);
 }
 
 // ---------- 再生 ----------
@@ -1055,6 +1466,8 @@ audio.addEventListener('timeupdate', () => {
   const d = audio.duration || 1;
   $('seek').value = String(Math.round(audio.currentTime / d * 1000));
   $('time').textContent = fmt(audio.currentTime);
+  if (!$('marks').hidden) markCurrent();
+  if (!$('sheetPanel').hidden) drawSheet();
   if (!region) return;
   if (!region.armed) {
     if (audio.currentTime >= region.start - 0.08 && audio.currentTime < region.end) region.armed = true;
@@ -1148,7 +1561,7 @@ function setMediaSession(){
   if (!f) return;
   try {
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: f.name.replace(/\.[^.]+$/, ''), artist: '聞き方ノート',
+      title: f.name.replace(/\.[^.]+$/, ''), artist: 'リスニングプレイヤー',
       album: `${state.current + 1} / ${state.files.length}`,
     });
   } catch {}
@@ -1218,8 +1631,17 @@ function shadowTarget(){
   return sn ? data.words.slice(sn.from, sn.to + 1).map(w => w.text) : [];
 }
 
-$('rec').addEventListener('click', async () => {
+// 録音の相手は2つある。
+//   ・文字起こしの結果（シャドーイングの欄）
+//   ・公式の台本（台本の欄）
+// 仕組みは同じなので、どこに書き出すかと、何を手本にするかだけ差し替える。
+const SHADOW_CTX = { btn:'rec', info:'recinfo', out:'result', ref: () => shadowTarget(),
+                     again:'もう一度録音する', first:'録音する' };
+let recCtx = SHADOW_CTX;
+
+async function startRecording(ctx){
   if (recorder && recorder.state === 'recording') { recorder.stop(); return; }
+  recCtx = ctx;
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     recChunks = [];
@@ -1232,38 +1654,41 @@ $('rec').addEventListener('click', async () => {
       recUrl = URL.createObjectURL(recBlob);
       recAudio.src = recUrl;
       $('playRec').disabled = false;
-      $('rec').classList.remove('on'); $('rec').textContent = 'もう一度録音する';
-      await compareRecording();
+      $(ctx.btn).classList.remove('on'); $(ctx.btn).textContent = ctx.again;
+      await compareRecording(ctx);
     };
     recorder.start();
-    $('rec').classList.add('on'); $('rec').textContent = '録音を止める';
-    $('recinfo').textContent = 'お手本を思い出しながら声に出してください。止めると照らし合わせます。';
+    $(ctx.btn).classList.add('on'); $(ctx.btn).textContent = '録音を止める';
+    $(ctx.info).textContent = 'お手本を思い出しながら声に出してください。止めると照らし合わせます。';
   } catch (err) {
-    $('recinfo').textContent = `マイクを使えませんでした：${err.message}`;
+    $(ctx.info).textContent = `マイクを使えませんでした：${err.message}`;
   }
-});
+}
+
+$('rec').addEventListener('click', () => startRecording(SHADOW_CTX));
 
 $('playRec').addEventListener('click', () => {
   audio.pause(); recAudio.currentTime = 0; recAudio.play().catch(() => {});
 });
 
-async function compareRecording(){
+async function compareRecording(ctx){
+  ctx = ctx || recCtx;
   if (!recBlob) return;
-  $('rec').disabled = true;
-  $('recinfo').textContent = '自分の声を文字に起こしています…';
+  $(ctx.btn).disabled = true;
+  $(ctx.info).textContent = '自分の声を文字に起こしています…';
   try {
     const decoded = await decodeTo16k(recBlob);
     if (decoded.duration < 0.6) throw new Error('録音が短すぎます');
-    const out = await transcribe(decoded.pcm, decoded.duration,
-      m => { if (m.type === 'load') $('recinfo').textContent = `モデルを受け取っています ${m.pct}%`; });
-    const target = shadowTarget();
+    const out = await transcribeAll(decoded.pcm, decoded.duration,
+      m => { if (m.type === 'load') $(ctx.info).textContent = `モデルを受け取っています ${m.pct}%`; });
+    const target = ctx.ref();
     if (!target.length) throw new Error('練習する範囲を選んでください');
     const said = String(out.text || '').trim().split(/\s+/).filter(Boolean);
-    renderComparison(target, said);
-    $('recinfo').textContent = `${decoded.duration.toFixed(1)}秒を録音しました。`;
+    renderComparison(target, said, $(ctx.out));
+    $(ctx.info).textContent = `${decoded.duration.toFixed(1)}秒を録音しました。`;
   } catch (err) {
-    $('recinfo').textContent = `照らし合わせられませんでした：${err.message}`;
-  } finally { $('rec').disabled = false; }
+    $(ctx.info).textContent = `照らし合わせられませんでした：${err.message}`;
+  } finally { $(ctx.btn).disabled = false; }
 }
 
 function alignWords(a, b){
@@ -1282,7 +1707,8 @@ function alignWords(a, b){
 }
 const cmpKey = w => w.toLowerCase().replace(/[^a-z']/g,'').replace(/'/g,'');
 
-function renderComparison(ref, said){
+function renderComparison(ref, said, into){
+  const box = into || $('result');
   const ops = alignWords(ref.map(cmpKey), said.map(cmpKey));
   let eq = 0;
   const html = ops.map(([k, ri, si]) => {
@@ -1294,7 +1720,7 @@ function renderComparison(ref, said){
   const rate = ref.length ? Math.round(eq / ref.length * 100) : 0;
   const wrong = ops.filter(o => o[0] === 'sub').length;
   const missed = ops.filter(o => o[0] === 'miss').length;
-  $('result').innerHTML =
+  box.innerHTML =
     `<div class="score"><b>${rate}%</b><span>${ref.length}語のうち ${eq}語 が一致　／　言い違い ${wrong}　／　抜け ${missed}</span></div>`
     + `<div class="diff">${html}</div>`
     + `<div class="legend" style="border-top:1px solid var(--rule)">`
@@ -1367,6 +1793,211 @@ $('forget').addEventListener('click', async () => {
   if (state.current >= 0) select(state.current);
   setStatus(done ? '保存していた文字起こしを消しました。' : 'この環境では保存を扱えません。');
 });
+
+// ---------- 用意してある音源 ----------
+// 一覧は catalog.json にある。置き場所を変えたいときは、その中の base を書き替える。
+// 取ってきたものは、手元から選んだファイルとまったく同じ扱いになる。
+let catalog = null;
+
+async function loadCatalog(){
+  try {
+    const r = await fetch('catalog.json', { cache: 'no-cache' });
+    // 一覧そのものが置かれていない＝用意した音源が無い、というだけ。黙って引っこめる。
+    if (r.status === 404) return;
+    if (!r.ok) throw new Error('一覧を読めませんでした（' + r.status + '）');
+    catalog = await r.json();
+    if (!catalog.items || !catalog.items.length) return;
+    drawShelf();
+  } catch (err) {
+    // ここで黙ると「音源が出てこない」理由が分からなくなる。必ず出す。
+    // いちばん多いのは file:// で開いた場合。ブラウザが読み込みを止める。
+    const why = location.protocol === 'file:'
+      ? 'このページをファイルとして直接開いています。'
+        + 'ブラウザの決まりで、そのときは用意してある音源を読み込めません。'
+        + '簡易サーバー（<code>python -m http.server</code>）か、公開したページから開いてください。'
+      : `用意してある音源の一覧を読み込めませんでした（${esc(err.message)}）。`;
+    $('shelfList').innerHTML = `<li style="padding:12px 13px;font-size:12px;line-height:1.75;color:var(--graphite)">${why}</li>`;
+    $('shelf').hidden = false;
+  }
+}
+
+function shelfInto(ul){
+  ul.innerHTML = '';
+  for (const it of catalog.items) {
+    const li = document.createElement('li');
+    const b = document.createElement('button');
+    b.className = 'grab';
+    b.innerHTML = `<span class="t"><b>${esc(it.title)}</b>`
+      + `<small>${esc(it.holder || '')}${it.seconds ? '　' + fmt(it.seconds) : ''}</small></span>`
+      + `<span class="sz">${it.bytes ? (it.bytes/1048576).toFixed(1) + 'MB' : ''}</span>`;
+    b.addEventListener('click', () => grab(it, b));
+    li.appendChild(b); ul.appendChild(li);
+  }
+}
+function drawShelf(){
+  shelfInto($('shelfList'));  $('shelf').hidden = false;
+  shelfInto($('getShelf'));   $('getShelfBox').hidden = false;
+}
+
+async function grab(it, btn){
+  const url = (catalog.base || '') + it.url;
+  const size = btn.querySelector('.sz');
+  const back = size ? size.textContent : '';
+  const say = t => { if (size) size.textContent = t; };
+  btn.disabled = true;
+  say('取得中');
+  try {
+    const r = await fetch(url);
+    if (!r.ok) throw new Error('取ってこられませんでした（' + r.status + '）');
+    const total = it.bytes || Number(r.headers.get('content-length')) || 0;
+    let blob;
+    if (r.body && total) {
+      // 進み具合を出したいので、少しずつ受け取る
+      const rd = r.body.getReader(); const parts = []; let got = 0;
+      for (;;) {
+        const { done, value } = await rd.read();
+        if (done) break;
+        parts.push(value); got += value.length;
+        say(Math.floor(got / total * 100) + '%');
+      }
+      blob = new Blob(parts, { type: 'audio/mpeg' });
+    } else {
+      blob = await r.blob();
+    }
+    const name = (it.id || 'audio') + '.mp3';
+    const f = new File([blob], name, { type: 'audio/mpeg' });
+    if (it.marks && it.marks.length) state.marks.set(idOf(f), it.marks);
+    // 台本があれば一緒に受け取る。文字起こしの代わりではなく、公式のものをそのまま出す。
+    if (it.script) {
+      say('台本');
+      try {
+        const sr = await fetch((catalog.base || '') + it.script);
+        if (sr.ok) state.scripts.set(idOf(f), await sr.json());
+      } catch {}
+    }
+    closeGet();
+    addFiles([f], { replace: true });
+    say(back);
+  } catch (err) {
+    say('失敗');
+    setStatus('音源を取ってこられませんでした：' + err.message);
+    setTimeout(() => say(back), 2500);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// ---------- 設問の頭出し ----------
+function drawMarks(){
+  const f = state.files[state.current];
+  const ms = f ? state.marks.get(idOf(f)) : null;
+  $('marks').hidden = !ms;
+  if (!ms) return;
+  const strip = $('mstrip'); strip.innerHTML = '';
+  ms.forEach((m, i) => {
+    const b = document.createElement('button');
+    b.className = 'mk';
+    b.textContent = m.label;
+    b.title = fmt(m.at);
+    b.addEventListener('click', () => {
+      freePlay();
+      audio.currentTime = m.at;
+      audio.play().catch(() => {});
+      markCurrent();
+    });
+    strip.appendChild(b);
+  });
+  markCurrent();
+}
+function markCurrent(){
+  const f = state.files[state.current];
+  const ms = f ? state.marks.get(idOf(f)) : null;
+  if (!ms) return;
+  let at = -1;
+  ms.forEach((m, i) => { if (audio.currentTime >= m.at - 0.3) at = i; });
+  [...$('mstrip').children].forEach((b, i) => b.setAttribute('aria-current', String(i === at)));
+}
+
+// ---------- 台本 ----------
+// これは文字起こしではない。試験の公式スクリプトをそのまま出している。
+// だから付箋も確信度も出さない。合っているものとして読める。
+// ただし行ごとの時刻までは分からないので、**位置はブロック単位**。
+// 行をタップしたときの飛び先は、行の長さの比で割った目安。
+const scriptOf = () => {
+  const f = state.files[state.current];
+  return f ? state.scripts.get(idOf(f)) : null;
+};
+function blockAt(t){
+  const s = scriptOf(); if (!s) return -1;
+  for (let i = s.blocks.length - 1; i >= 0; i--)
+    if (t >= s.blocks[i].start - 0.3) return i;
+  return -1;
+}
+function lineSpan(b, i){
+  // 行の長さの比で、ブロックの中を割り振る（おおよそ）
+  const total = b.lines.reduce((a, l) => a + l.text.length, 0) || 1;
+  let at = b.start;
+  for (let k = 0; k < i; k++) at += (b.end - b.start) * (b.lines[k].text.length / total);
+  const w = (b.end - b.start) * (b.lines[i].text.length / total);
+  return { start: at, end: at + w };
+}
+function sheetWords(){
+  const s = scriptOf();
+  if (!s || sheetBlock < 0) return [];
+  return s.blocks[sheetBlock].lines.map(l => l.text).join(' ').split(/\s+/).filter(Boolean);
+}
+
+function drawSheet(force){
+  const s = scriptOf();
+  $('sheetPanel').hidden = !s;
+  if (!s) { sheetBlock = -1; return; }
+  const i = blockAt(audio.currentTime);
+  const at = i < 0 ? 0 : i;
+  if (!force && at === sheetBlock) { markSheetLine(); return; }
+  sheetBlock = at;
+  const b = s.blocks[at];
+  $('sheetTitle').textContent = `台本　${b.label}`;
+  $('sheetSrc').textContent = `出典：${s.source}（${s.holder}）。利用許諾を得て掲載。`
+    + `この台本は学習用に区切って表示したもので、試験問題そのものではありません。`;
+  const box = $('sheetLines'); box.innerHTML = '';
+  b.lines.forEach((l, k) => {
+    const row = document.createElement('div');
+    row.className = 'sline'; row.dataset.k = String(k);
+    row.tabIndex = 0;
+    row.innerHTML = `<span class="who">${esc(l.who || '')}</span>`
+      + `<span class="st">${esc(l.text)}</span>`;
+    const jump = () => {
+      const sp = lineSpan(b, k);
+      freePlay();
+      audio.currentTime = sp.start;
+      audio.play().catch(() => {});
+    };
+    row.addEventListener('click', jump);
+    row.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); jump(); } });
+    box.appendChild(row);
+  });
+  markSheetLine();
+}
+function markSheetLine(){
+  const s = scriptOf(); if (!s || sheetBlock < 0) return;
+  const b = s.blocks[sheetBlock];
+  let at = -1;
+  b.lines.forEach((l, k) => { if (audio.currentTime >= lineSpan(b, k).start - 0.2) at = k; });
+  [...$('sheetLines').children].forEach((r, k) => r.setAttribute('aria-current', String(k === at)));
+}
+
+$('sheetPlay').addEventListener('click', () => {
+  const s = scriptOf(); if (!s || sheetBlock < 0) return;
+  const b = s.blocks[sheetBlock];
+  freePlay();
+  region = { start: b.start, end: b.end, armed: false, sheet: true };
+  audio.currentTime = b.start;
+  audio.play().catch(() => {});
+});
+// 録ったあとも見た目を変えない。文字が変わると「もう押せないのか」と見えてしまう。
+$('sheetRec').addEventListener('click', () => startRecording({
+  btn:'sheetRec', info:'sheetInfo', out:'sheetResult', ref: sheetWords,
+  again:'声に出して録る', first:'声に出して録る' }));
 
 // ---------- データの入手 ----------
 function openGet(){ $('getPanel').hidden = false; }
@@ -1494,6 +2125,7 @@ try {
 
 updateTransport();
 riskCheck();
+loadCatalog();
 
 window.addEventListener('error', e => {
   $('fatal').textContent = `動作に問題が起きました：${e.message}　（開発者ツールのコンソールに詳細があります）`;
