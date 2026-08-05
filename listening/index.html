@@ -1944,6 +1944,9 @@ function drawMarks(){
   const f = state.files[state.current];
   const ms = f ? state.marks.get(idOf(f)) : null;
   $('marks').hidden = !ms;
+  // 共通テストのような1本ものは、トラック目次（「トラック8」など）が意味を持たず
+  // 設問の頭出しと紛らわしい。頭出しがある1本ものではトラック目次を隠す。
+  $('index').hidden = !!ms && state.files.length === 1;
   if (!ms) return;
   const strip = $('mstrip'); strip.innerHTML = '';
   ms.forEach((m, i) => {

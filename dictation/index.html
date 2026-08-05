@@ -122,7 +122,7 @@
   <!-- ディクテーション -->
   <section class="wrap" id="quiz" hidden>
     <p class="crumb"><span id="crumb"></span><span class="of" id="of"></span></p>
-    <p class="hint">音声を聞いて、聞こえた英語をそのまま打ち込んでください。分からないところは飛ばして構いません。</p>
+    <p class="hint" id="qhint">音声を聞いて、聞こえた英語をそのまま打ち込んでください。分からないところは飛ばして構いません。</p>
     <textarea class="type" id="type" placeholder="ここに聞こえた英語を入力…" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
     <div class="actions">
       <button class="btn pri" id="check">答え合わせ</button>
@@ -141,6 +141,7 @@
   </div>
   <div class="prow">
     <button class="mini" id="again">もう一度</button>
+    <button class="mini" id="whole" hidden>通して聞く</button>
     <button class="mini" id="slow">ゆっくり（0.75×）</button>
   </div>
 </div>
@@ -224,15 +225,33 @@ function startSource(it, built, m){
 // 録音音源：1問＝1ブロック。区切りは実測ずみで正確なので、丸ごと聞いて丸ごと書く。
 // 長い講義・モノローグ（1問で2分超など）は書き取りに向かないので、短めの設問だけにする。
 const DICT_MAX_SEC = 55;
+// ブロックを1文ずつに小分けする。文ごとの正確な時刻は無いので、
+// ブロックの長さを文の長さの比で割り振る（おおよそ）。前後にゆとりを持たせ、
+// 「もう一度」で聞き直せるようにしておく。1文だけのブロックはそのまま（時刻は正確）。
+function splitBlock(b){
+  const lines = b.lines || [];
+  if (lines.length <= 1) {
+    return [{ label: b.label, start: b.start, end: b.end, lines, approx: false,
+              text: lines.map(l => l.text).join(' '), block: b }];
+  }
+  const dur = b.end - b.start;
+  const total = lines.reduce((a, l) => a + l.text.length, 0) || 1;
+  const out = []; let t = b.start;
+  lines.forEach((l, k) => {
+    const w = dur * (l.text.length / total);
+    const s = Math.max(b.start, t - 1.0), e = Math.min(b.end, t + w + 0.7);
+    out.push({ label: `${b.label}・${k+1}`, start: s, end: e, lines: [l], approx: true,
+               text: l.text, block: b });
+    t += w;
+  });
+  return out;
+}
+
 async function openAudio(it){
   try {
     const sc = await (await fetch(new URL((catalog.base||'') + it.script, LBASE))).json();
-    const built = (sc.blocks || [])
-      .filter(b => (b.lines||[]).length && (b.end - b.start) <= DICT_MAX_SEC)
-      .map(b => ({
-        label: b.label, start: b.start, end: b.end, lines: b.lines,
-        text: b.lines.map(l => l.text).join(' '),
-      }));
+    const blocks = (sc.blocks || []).filter(b => (b.lines||[]).length && (b.end - b.start) <= DICT_MAX_SEC);
+    const built = blocks.flatMap(splitBlock);
     if (!built.length) throw new Error('この音源には書き取り向きの設問がありません');
     audio.src = new URL((catalog.base||'') + it.url, LBASE).href; audio.load();
     startSource(it, built, 'audio');
@@ -273,6 +292,10 @@ function drawQ(){
   $('slow').classList.toggle('on', rate !== 1);
   $('slow').textContent = rate === 1 ? 'ゆっくり（0.75×）' : 'もとの速さ';
   $('pbar').parentElement.hidden = mode === 'tts';   // 読み上げでは進みバーは出さない
+  $('whole').hidden = !(mode === 'audio' && it.approx);   // 小分けした文だけ「通して聞く」を出す
+  $('qhint').textContent = (mode === 'audio' && it.approx)
+    ? '1文ずつ聞いて打ち込みます。区切りはおおよそなので、ずれたら「通して聞く」で全体を聞けます。'
+    : '音声を聞いて、聞こえた英語をそのまま打ち込んでください。分からないところは飛ばして構いません。';
   setPlay('聞く'); $('pbar').style.width = '0%';
   if (saved.typed[qi] != null) showResult();   // 答え合わせ済みなら結果を出す
 }
@@ -327,6 +350,14 @@ $('play').addEventListener('click', () => {
 $('again').addEventListener('click', () => {
   if (mode === 'tts') { speak(); return; }
   unmute(); playRegion(true);
+});
+// 小分けの区切りがずれたとき用。その設問の全体を通して聞く。
+$('whole').addEventListener('click', () => {
+  const b = items[qi].block; if (!b) return;
+  unmute(); audio.playbackRate = rate;
+  region = { start: b.start, end: b.end };
+  armSeek(b.start);
+  audio.play().then(() => setPlay('止める', true)).catch(() => unmute());
 });
 $('slow').addEventListener('click', () => { rate = rate === 1 ? 0.75 : 1;
   if (mode !== 'tts') audio.playbackRate = rate; drawQ(); });
