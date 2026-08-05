@@ -1,0 +1,908 @@
+{
+ "id": "r8t-listening",
+ "kind": "listening",
+ "title": "令和8年度 共通テスト 英語（リスニング）追・再試験",
+ "source": "独立行政法人 大学入試センター",
+ "audio": "audio/r8t-listening.mp3",
+ "pageDir": "pages/",
+ "blocks": [
+  {
+   "start": 50.0,
+   "end": 69.4,
+   "qs": [
+    1
+   ]
+  },
+  {
+   "start": 76.3,
+   "end": 94.1,
+   "qs": [
+    2
+   ]
+  },
+  {
+   "start": 101.0,
+   "end": 120.1,
+   "qs": [
+    3
+   ]
+  },
+  {
+   "start": 127.0,
+   "end": 148.0,
+   "qs": [
+    4
+   ]
+  },
+  {
+   "start": 180.0,
+   "end": 196.8,
+   "qs": [
+    5
+   ]
+  },
+  {
+   "start": 201.6,
+   "end": 219.7,
+   "qs": [
+    6
+   ]
+  },
+  {
+   "start": 224.6,
+   "end": 243.3,
+   "qs": [
+    7
+   ]
+  },
+  {
+   "start": 248.1,
+   "end": 265.9,
+   "qs": [
+    8
+   ]
+  },
+  {
+   "start": 300.9,
+   "end": 346.8,
+   "qs": [
+    9
+   ]
+  },
+  {
+   "start": 351.7,
+   "end": 399.5,
+   "qs": [
+    10
+   ]
+  },
+  {
+   "start": 404.2,
+   "end": 448.0,
+   "qs": [
+    11
+   ]
+  },
+  {
+   "start": 491.3,
+   "end": 513.3,
+   "qs": [
+    12
+   ]
+  },
+  {
+   "start": 522.2,
+   "end": 544.7,
+   "qs": [
+    13
+   ]
+  },
+  {
+   "start": 553.6,
+   "end": 574.9,
+   "qs": [
+    14
+   ]
+  },
+  {
+   "start": 583.9,
+   "end": 606.9,
+   "qs": [
+    15
+   ]
+  },
+  {
+   "start": 615.9,
+   "end": 639.6,
+   "qs": [
+    16
+   ]
+  },
+  {
+   "start": 648.5,
+   "end": 672.7,
+   "qs": [
+    17
+   ]
+  },
+  {
+   "start": 722.5,
+   "end": 759.4,
+   "qs": [
+    18,
+    19,
+    20,
+    21
+   ],
+   "guide": "五つの絵①〜⑤から、勧められた行動を表す四つを選び、行う順番に並べます。"
+  },
+  {
+   "start": 808.3,
+   "end": 848.3,
+   "qs": [
+    22,
+    23,
+    24,
+    25
+   ],
+   "guide": "表の四つの空欄に入れるものを、六つの選択肢①〜⑥から選びます。同じものを2回以上使ってもかまいません。"
+  },
+  {
+   "start": 909.5,
+   "end": 999.6,
+   "qs": [
+    26
+   ]
+  },
+  {
+   "start": 1104.8,
+   "end": 1263.8,
+   "qs": [
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "guide": "ワークシートの空欄をうめます。問28〜31は六つの選択肢①〜⑥から選び、同じものを2回以上使ってもかまいません。"
+  },
+  {
+   "start": 1320.1,
+   "end": 1344.6,
+   "qs": [
+    32
+   ],
+   "guide": "グループのメンバーの発言が、講義の内容と一致するかどうかを判断します。"
+  },
+  {
+   "start": 1357.5,
+   "end": 1381.6,
+   "qs": [
+    33
+   ],
+   "guide": "講義や会話、図表の内容から言えることを選びます。"
+  },
+  {
+   "start": 1462.1,
+   "end": 1534.2,
+   "qs": [
+    34,
+    35
+   ]
+  },
+  {
+   "start": 1594.1,
+   "end": 1689.7,
+   "qs": [
+    36,
+    37
+   ]
+  }
+ ],
+ "sections": [
+  {
+   "id": "1A",
+   "label": "第1問A",
+   "points": 16,
+   "qs": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "repeat": 2,
+   "guide": "英語を聞き、内容と最もよく合っているものを①〜④から選びます。本番では2回流れます。",
+   "note": "英語を聞き、内容と最もよく合っているものを①〜④から選びます。本番では2回流れます。",
+   "pages": [
+    1,
+    2
+   ]
+  },
+  {
+   "id": "1B",
+   "label": "第1問B",
+   "points": 12,
+   "qs": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "repeat": 2,
+   "guide": "英語を聞き、内容と最もよく合っている絵を①〜④から選びます。本番では2回流れます。",
+   "note": "英語を聞き、内容と最もよく合っている絵を①〜④から選びます。本番では2回流れます。",
+   "pages": [
+    3,
+    4,
+    5,
+    6
+   ]
+  },
+  {
+   "id": "2",
+   "label": "第2問",
+   "points": 12,
+   "qs": [
+    9,
+    10,
+    11
+   ],
+   "repeat": 2,
+   "guide": "対話とそれについての問いを聞き、答えとして最も適切なものを①〜④から選びます。本番では2回流れます。",
+   "note": "対話とそれについての問いを聞き、答えとして最も適切なものを①〜④から選びます。本番では2回流れます。",
+   "pages": [
+    7,
+    8,
+    9
+   ]
+  },
+  {
+   "id": "3",
+   "label": "第3問",
+   "points": 18,
+   "qs": [
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+   ],
+   "repeat": 1,
+   "guide": "対話を聞き、問いの答えとして最も適切なものを①〜④から選びます。本番では1回だけです。問いの英文は書かれています。",
+   "note": "対話を聞き、問いの答えとして最も適切なものを①〜④から選びます。本番では1回だけです。問いの英文は書かれています。",
+   "pages": [
+    10,
+    11
+   ]
+  },
+  {
+   "id": "4A",
+   "label": "第4問A",
+   "points": 8,
+   "qs": [
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25
+   ],
+   "repeat": 1,
+   "guide": "話を聞き、図や表の空欄をうめます。本番では1回だけです。先に問題文と図表を読む時間があります。",
+   "note": "話を聞き、図や表の空欄をうめます。本番では1回だけです。先に問題文と図表を読む時間があります。",
+   "pages": [
+    12,
+    13,
+    14
+   ]
+  },
+  {
+   "id": "4B",
+   "label": "第4問B",
+   "points": 4,
+   "qs": [
+    26
+   ],
+   "repeat": 1,
+   "guide": "四人の話を聞き、示された条件に最も合うものを①〜④から選びます。本番では1回だけです。",
+   "note": "四人の話を聞き、示された条件に最も合うものを①〜④から選びます。本番では1回だけです。",
+   "pages": [
+    14
+   ]
+  },
+  {
+   "id": "5",
+   "label": "第5問",
+   "points": 16,
+   "qs": [
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33
+   ],
+   "repeat": 1,
+   "guide": "講義を聞いてワークシートの空欄をうめ、続けて二つの問いに答えます。本番では1回だけです。",
+   "note": "講義を聞いてワークシートの空欄をうめ、続けて二つの問いに答えます。本番では1回だけです。",
+   "pages": [
+    15,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "id": "6A",
+   "label": "第6問A",
+   "points": 6,
+   "qs": [
+    34,
+    35
+   ],
+   "repeat": 1,
+   "guide": "二人の対話を聞き、それぞれの問いの答えを①〜④から選びます。本番では1回だけです。",
+   "note": "二人の対話を聞き、それぞれの問いの答えを①〜④から選びます。本番では1回だけです。",
+   "pages": [
+    20
+   ]
+  },
+  {
+   "id": "6B",
+   "label": "第6問B",
+   "points": 8,
+   "qs": [
+    36,
+    37
+   ],
+   "repeat": 1,
+   "guide": "三人の会話を聞き、それぞれの問いの答えを選びます。本番では1回だけです。",
+   "note": "三人の会話を聞き、それぞれの問いの答えを選びます。本番では1回だけです。",
+   "pages": [
+    21,
+    22
+   ]
+  }
+ ],
+ "allOrNothing": [
+  [
+   18,
+   19,
+   20,
+   21
+  ],
+  [
+   28,
+   29
+  ],
+  [
+   30,
+   31
+  ]
+ ],
+ "questions": [
+  {
+   "no": 1,
+   "block": 0,
+   "pages": [
+    1,
+    2
+   ],
+   "n": 4,
+   "choices": [
+    "The concert was canceled last week, too.",
+    "The concert was held last week only.",
+    "The concert was longer than last week’s.",
+    "The concert was shorter than last week’s."
+   ]
+  },
+  {
+   "no": 2,
+   "block": 1,
+   "pages": [
+    1,
+    2
+   ],
+   "n": 4,
+   "choices": [
+    "The speaker is choosing his glasses.",
+    "The speaker is cleaning his glasses.",
+    "The speaker is looking for his glasses.",
+    "The speaker is reading with his glasses."
+   ]
+  },
+  {
+   "no": 3,
+   "block": 2,
+   "pages": [
+    1,
+    2
+   ],
+   "n": 4
+  },
+  {
+   "no": 4,
+   "block": 3,
+   "pages": [
+    1,
+    2
+   ],
+   "n": 4
+  },
+  {
+   "no": 5,
+   "block": 4,
+   "pages": [
+    3,
+    4,
+    5,
+    6
+   ],
+   "n": 4
+  },
+  {
+   "no": 6,
+   "block": 5,
+   "pages": [
+    3,
+    4,
+    5,
+    6
+   ],
+   "n": 4
+  },
+  {
+   "no": 7,
+   "block": 6,
+   "pages": [
+    3,
+    4,
+    5,
+    6
+   ],
+   "n": 4
+  },
+  {
+   "no": 8,
+   "block": 7,
+   "pages": [
+    3,
+    4,
+    5,
+    6
+   ],
+   "n": 4
+  },
+  {
+   "no": 9,
+   "block": 8,
+   "pages": [
+    7,
+    8,
+    9
+   ],
+   "n": 4
+  },
+  {
+   "no": 10,
+   "block": 9,
+   "pages": [
+    7,
+    8,
+    9
+   ],
+   "n": 4
+  },
+  {
+   "no": 11,
+   "block": 10,
+   "pages": [
+    7,
+    8,
+    9
+   ],
+   "n": 4
+  },
+  {
+   "no": 12,
+   "block": 11,
+   "pages": [
+    10,
+    11
+   ],
+   "n": 4,
+   "choices": [
+    "Bring him something from Paris",
+    "Have him stay with their relative",
+    "Leave him at a pet hotel",
+    "Take him on their trip"
+   ]
+  },
+  {
+   "no": 13,
+   "block": 12,
+   "pages": [
+    10,
+    11
+   ],
+   "n": 4,
+   "choices": [
+    "He is accustomed to hosting visitors.",
+    "He is excited about visiting the temple.",
+    "He is tired of seeing seasonal attractions.",
+    "He is unhappy with making plans."
+   ]
+  },
+  {
+   "no": 14,
+   "block": 13,
+   "pages": [
+    10,
+    11
+   ],
+   "n": 4,
+   "choices": [
+    "She agrees to check the shops with him.",
+    "She asks him to buy a newer computer.",
+    "She confirms he won’t find a computer he likes.",
+    "She suggests where to search for an old model."
+   ]
+  },
+  {
+   "no": 15,
+   "block": 14,
+   "pages": [
+    10,
+    11
+   ],
+   "n": 4,
+   "choices": [
+    "Failing to get off the bus in time",
+    "Finding the most convenient door",
+    "Losing a bag on the bus",
+    "Sitting in the wrong seats"
+   ]
+  },
+  {
+   "no": 16,
+   "block": 15,
+   "pages": [
+    10,
+    11
+   ],
+   "n": 4,
+   "choices": [
+    "Both speakers often watch videos.",
+    "Both speakers usually read magazines.",
+    "The man dislikes listening to music.",
+    "The woman avoids reading things."
+   ]
+  },
+  {
+   "no": 17,
+   "block": 16,
+   "pages": [
+    10,
+    11
+   ],
+   "n": 4,
+   "choices": [
+    "Today",
+    "Tomorrow",
+    "The day after tomorrow",
+    "Two days after tomorrow"
+   ]
+  },
+  {
+   "no": 18,
+   "block": 17,
+   "pages": [
+    12,
+    13,
+    14
+   ],
+   "n": 5
+  },
+  {
+   "no": 19,
+   "block": 17,
+   "pages": [
+    12,
+    13,
+    14
+   ],
+   "n": 5
+  },
+  {
+   "no": 20,
+   "block": 17,
+   "pages": [
+    12,
+    13,
+    14
+   ],
+   "n": 5
+  },
+  {
+   "no": 21,
+   "block": 17,
+   "pages": [
+    12,
+    13,
+    14
+   ],
+   "n": 5
+  },
+  {
+   "no": 22,
+   "block": 18,
+   "pages": [
+    12,
+    13,
+    14
+   ],
+   "n": 6,
+   "choices": [
+    "10：30 a.m.",
+    "11：45 a.m.",
+    "2：00 p.m.",
+    "Auditorium",
+    "Gymnasium",
+    "No change"
+   ]
+  },
+  {
+   "no": 23,
+   "block": 18,
+   "pages": [
+    12,
+    13,
+    14
+   ],
+   "n": 6,
+   "choices": [
+    "10：30 a.m.",
+    "11：45 a.m.",
+    "2：00 p.m.",
+    "Auditorium",
+    "Gymnasium",
+    "No change"
+   ]
+  },
+  {
+   "no": 24,
+   "block": 18,
+   "pages": [
+    12,
+    13,
+    14
+   ],
+   "n": 6,
+   "choices": [
+    "10：30 a.m.",
+    "11：45 a.m.",
+    "2：00 p.m.",
+    "Auditorium",
+    "Gymnasium",
+    "No change"
+   ]
+  },
+  {
+   "no": 25,
+   "block": 18,
+   "pages": [
+    12,
+    13,
+    14
+   ],
+   "n": 6,
+   "choices": [
+    "10：30 a.m.",
+    "11：45 a.m.",
+    "2：00 p.m.",
+    "Auditorium",
+    "Gymnasium",
+    "No change"
+   ]
+  },
+  {
+   "no": 26,
+   "block": 19,
+   "pages": [
+    14
+   ],
+   "n": 4,
+   "choices": [
+    "Orangewood Forest",
+    "Rainbow Mountain",
+    "Singing Gardens",
+    "White Rock"
+   ]
+  },
+  {
+   "no": 27,
+   "block": 20,
+   "pages": [
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "n": 4,
+   "choices": [
+    "are among the 280 species of rodents",
+    "are unrelated to rats, mice, and beavers",
+    "have unhealthy teeth that wear down",
+    "save the seeds they collect to eat later"
+   ]
+  },
+  {
+   "no": 28,
+   "block": 20,
+   "pages": [
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "n": 6,
+   "choices": [
+    "diseased",
+    "forgotten",
+    "gathered",
+    "scattered",
+    "stolen",
+    "stored"
+   ]
+  },
+  {
+   "no": 29,
+   "block": 20,
+   "pages": [
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "n": 6,
+   "choices": [
+    "diseased",
+    "forgotten",
+    "gathered",
+    "scattered",
+    "stolen",
+    "stored"
+   ]
+  },
+  {
+   "no": 30,
+   "block": 20,
+   "pages": [
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "n": 6,
+   "choices": [
+    "diseased",
+    "forgotten",
+    "gathered",
+    "scattered",
+    "stolen",
+    "stored"
+   ]
+  },
+  {
+   "no": 31,
+   "block": 20,
+   "pages": [
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "n": 6,
+   "choices": [
+    "diseased",
+    "forgotten",
+    "gathered",
+    "scattered",
+    "stolen",
+    "stored"
+   ]
+  },
+  {
+   "no": 32,
+   "block": 21,
+   "pages": [
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "n": 4,
+   "choices": [
+    "A の発言のみ一致する",
+    "B の発言のみ一致する",
+    "どちらの発言も一致する",
+    "どちらの発言も一致しない"
+   ]
+  },
+  {
+   "no": 33,
+   "block": 22,
+   "pages": [
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "n": 4
+  },
+  {
+   "no": 34,
+   "block": 23,
+   "pages": [
+    20
+   ],
+   "n": 4,
+   "choices": [
+    "One with a design that fits their room",
+    "One with a funny cartoon character",
+    "One without any personal pictures",
+    "One without space for writing schedules"
+   ]
+  },
+  {
+   "no": 35,
+   "block": 23,
+   "pages": [
+    20
+   ],
+   "n": 4,
+   "choices": [
+    "Change their room arrangement",
+    "Draw images for the new calendar",
+    "Make plans to pick out pictures",
+    "Take photos of beautiful landscapes"
+   ]
+  },
+  {
+   "no": 36,
+   "block": 24,
+   "pages": [
+    21,
+    22
+   ],
+   "n": 4,
+   "choices": [
+    "Abby only",
+    "Eric only",
+    "Abby and Chiharu",
+    "Chiharu and Eric"
+   ]
+  },
+  {
+   "no": 37,
+   "block": 24,
+   "pages": [
+    21,
+    22
+   ],
+   "n": 4
+  }
+ ]
+}

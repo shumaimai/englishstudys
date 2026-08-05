@@ -1,0 +1,629 @@
+{
+ "id": "r8t-listening",
+ "source": "令和8年度 大学入学共通テスト 英語（リスニング）追・再試験 スクリプト",
+ "holder": "独立行政法人 大学入試センター",
+ "blocks": [
+  {
+   "start": 50.0,
+   "end": 69.4,
+   "qs": [
+    1
+   ],
+   "label": "問1",
+   "lines": [
+    {
+     "who": "M",
+     "text": "I enjoyed today’s concert. It wasn’t as long as last week’s, though."
+    }
+   ]
+  },
+  {
+   "start": 76.3,
+   "end": 94.1,
+   "qs": [
+    2
+   ],
+   "label": "問2",
+   "lines": [
+    {
+     "who": "M",
+     "text": "Do you know where my glasses are? I can’t read without them."
+    }
+   ]
+  },
+  {
+   "start": 101.0,
+   "end": 120.1,
+   "qs": [
+    3
+   ],
+   "label": "問3",
+   "lines": [
+    {
+     "who": "M",
+     "text": "It’s time to get my daughter a new pair of shoes. Hers are too tight."
+    }
+   ]
+  },
+  {
+   "start": 127.0,
+   "end": 148.0,
+   "qs": [
+    4
+   ],
+   "label": "問4",
+   "lines": [
+    {
+     "who": "M",
+     "text": "It’s disappointing we aren’t able to see more flowers this spring. It’s been really cold."
+    }
+   ]
+  },
+  {
+   "start": 180.0,
+   "end": 196.8,
+   "qs": [
+    5
+   ],
+   "label": "問5",
+   "lines": [
+    {
+     "who": "M",
+     "text": "My sister looked sleepy, so I got her to put the blanket over herself."
+    }
+   ]
+  },
+  {
+   "start": 201.6,
+   "end": 219.7,
+   "qs": [
+    6
+   ],
+   "label": "問6",
+   "lines": [
+    {
+     "who": "M",
+     "text": "What I want is a balcony and a garden, but no garage."
+    }
+   ]
+  },
+  {
+   "start": 224.6,
+   "end": 243.3,
+   "qs": [
+    7
+   ],
+   "label": "問7",
+   "lines": [
+    {
+     "who": "M",
+     "text": "Your jeans and towels weren’t dry yet, so I brought in just the shirts."
+    }
+   ]
+  },
+  {
+   "start": 248.1,
+   "end": 265.9,
+   "qs": [
+    8
+   ],
+   "label": "問8",
+   "lines": [
+    {
+     "who": "M",
+     "text": "The girl who’s about to get on her bicycle needs to fasten her strap."
+    }
+   ]
+  },
+  {
+   "start": 300.9,
+   "end": 346.8,
+   "qs": [
+    9
+   ],
+   "label": "問9",
+   "lines": [
+    {
+     "who": "M",
+     "text": "This one looked the most delicious."
+    },
+    {
+     "who": "W",
+     "text": "Oh, you didn’t get one with fruit."
+    },
+    {
+     "who": "M",
+     "text": "No. I wanted a change from last year."
+    },
+    {
+     "who": "W",
+     "text": "Great choice. And Dad said he didn’t want candles anymore."
+    },
+    {
+     "who": "Question",
+     "text": "Which cake will they serve?"
+    }
+   ]
+  },
+  {
+   "start": 351.7,
+   "end": 399.5,
+   "qs": [
+    10
+   ],
+   "label": "問10",
+   "lines": [
+    {
+     "who": "W",
+     "text": "Interested in anything on the shelf?"
+    },
+    {
+     "who": "M",
+     "text": "Not really. Wait. These are by my favorite authors."
+    },
+    {
+     "who": "W",
+     "text": "Help yourself. Bags or boxes?"
+    },
+    {
+     "who": "M",
+     "text": "These are too heavy for bags."
+    },
+    {
+     "who": "Question",
+     "text": "Which will the man end up taking?"
+    }
+   ]
+  },
+  {
+   "start": 404.2,
+   "end": 448.0,
+   "qs": [
+    11
+   ],
+   "label": "問11",
+   "lines": [
+    {
+     "who": "M",
+     "text": "I understand how water’s stored in the sky and on the ground."
+    },
+    {
+     "who": "W",
+     "text": "Do you get how it turns into clouds?"
+    },
+    {
+     "who": "M",
+     "text": "That’s fine. But I don’t get the remaining stage."
+    },
+    {
+     "who": "W",
+     "text": "OK. Let me explain."
+    },
+    {
+     "who": "Question",
+     "text": "Which stage does the student need help with?"
+    }
+   ]
+  },
+  {
+   "start": 491.3,
+   "end": 513.3,
+   "qs": [
+    12
+   ],
+   "label": "問12",
+   "lines": [
+    {
+     "who": "W",
+     "text": "It’s so exciting that your brother has invited us to Paris."
+    },
+    {
+     "who": "M",
+     "text": "Yeah. I guess we’ll take the dog to the pet hotel."
+    },
+    {
+     "who": "W",
+     "text": "You don’t want me to ask my aunt to take care of him?"
+    },
+    {
+     "who": "M",
+     "text": "No, that’s OK. But we’ll still bring her something nice from Paris."
+    },
+    {
+     "who": "W",
+     "text": "Sounds good."
+    }
+   ]
+  },
+  {
+   "start": 522.2,
+   "end": 544.7,
+   "qs": [
+    13
+   ],
+   "label": "問13",
+   "lines": [
+    {
+     "who": "M",
+     "text": "Some friends are visiting soon, so I want to do something interesting with them."
+    },
+    {
+     "who": "W",
+     "text": "What are you planning?"
+    },
+    {
+     "who": "M",
+     "text": "I usually take guests to the temple, but I’ve done that too many times."
+    },
+    {
+     "who": "W",
+     "text": "How about the amusement park?"
+    },
+    {
+     "who": "M",
+     "text": "That sounds exciting, and the attractions are different each season."
+    }
+   ]
+  },
+  {
+   "start": 553.6,
+   "end": 574.9,
+   "qs": [
+    14
+   ],
+   "label": "問14",
+   "lines": [
+    {
+     "who": "M",
+     "text": "I need a new computer, but I like last year’s model better."
+    },
+    {
+     "who": "W",
+     "text": "They probably don’t stock them anymore."
+    },
+    {
+     "who": "M",
+     "text": "Yeah, but I really like the design."
+    },
+    {
+     "who": "W",
+     "text": "Maybe you can check the internet, or some used computer shops."
+    },
+    {
+     "who": "M",
+     "text": "I’ll try that. I don’t want to give up."
+    }
+   ]
+  },
+  {
+   "start": 583.9,
+   "end": 606.9,
+   "qs": [
+    15
+   ],
+   "label": "問15",
+   "lines": [
+    {
+     "who": "W",
+     "text": "Ready to get off? We’re almost there."
+    },
+    {
+     "who": "M",
+     "text": "We still have a few minutes."
+    },
+    {
+     "who": "W",
+     "text": "Shouldn’t we move to the door now? We have all this heavy luggage."
+    },
+    {
+     "who": "M",
+     "text": "There’s no rush. We should stay seated until we arrive at our stop."
+    },
+    {
+     "who": "W",
+     "text": "But what if we miss it?"
+    },
+    {
+     "who": "M",
+     "text": "Don’t worry. We’ll be fine."
+    }
+   ]
+  },
+  {
+   "start": 615.9,
+   "end": 639.6,
+   "qs": [
+    16
+   ],
+   "label": "問16",
+   "lines": [
+    {
+     "who": "W",
+     "text": "What do you do on the train?"
+    },
+    {
+     "who": "M",
+     "text": "I usually read magazines while listening to music. How about you?"
+    },
+    {
+     "who": "W",
+     "text": "I also listen to music. But I actually prefer watching news videos."
+    },
+    {
+     "who": "M",
+     "text": "Can’t you just read the news?"
+    },
+    {
+     "who": "W",
+     "text": "Well, I could. But reading on the train makes me feel a little sick."
+    }
+   ]
+  },
+  {
+   "start": 648.5,
+   "end": 672.7,
+   "qs": [
+    17
+   ],
+   "label": "問17",
+   "lines": [
+    {
+     "who": "M",
+     "text": "I heard the sports festival might not be held tomorrow."
+    },
+    {
+     "who": "W",
+     "text": "Really? Why not?"
+    },
+    {
+     "who": "M",
+     "text": "It might rain hard tonight, and if it does, it’ll be moved to the next day."
+    },
+    {
+     "who": "W",
+     "text": "So then we’ll have classes instead, won’t we?"
+    },
+    {
+     "who": "M",
+     "text": "Yeah, that’s right."
+    },
+    {
+     "who": "W",
+     "text": "Will we find out later today?"
+    },
+    {
+     "who": "M",
+     "text": "They’ll decide by six tomorrow morning."
+    }
+   ]
+  },
+  {
+   "start": 722.5,
+   "end": 759.4,
+   "qs": [
+    18,
+    19,
+    20,
+    21
+   ],
+   "label": "問18〜21",
+   "lines": [
+    {
+     "who": "",
+     "text": "Your meeting is in the building across the street. Luckily, it’s connected to this building by a bridge upstairs so you can stay dry in this weather. So, here’s how to get to your room. First, take this visitor card and go through that gate. You will see a door leading to the stairs. Go up one floor, and use the bridge to get to your building. Then walk down one floor, and you’ll see your room with a sign at the door."
+    }
+   ]
+  },
+  {
+   "start": 808.3,
+   "end": 848.3,
+   "qs": [
+    22,
+    23,
+    24,
+    25
+   ],
+   "label": "問22〜25",
+   "lines": [
+    {
+     "who": "",
+     "text": "Attention students! Here’s a schedule update for tomorrow’s Club Exhibition Day. First, the morning chorus performance in the auditorium has been changed from 10:15 to 11:45. So the first event will be the basketball exhibition game at 10:30, now set to be held in the gymnasium. At 3 p.m., please remember to gather in the schoolyard to enjoy the group dance performance. The time for the film festival has been set for 2 p.m., and it’s in the auditorium."
+    }
+   ]
+  },
+  {
+   "start": 909.5,
+   "end": 999.6,
+   "qs": [
+    26
+   ],
+   "label": "問26",
+   "lines": [
+    {
+     "who": "",
+     "text": "① Orangewood Forest is a magical spot for kids and adults alike. The bug hunting event is a big hit, but it starts after sunset. The drive is never more than 2 hours. It’s not necessary to register your pet beforehand, but doing so makes signing in quicker. ② Rainbow Mountain is famous for welcoming pets with an open heart. But keep in mind it’s a couple of hours away by car. The popular nighttime stargazing event is already full for the year, but there’s always space in the daily photography workshop at noon. ③ Feel close to nature at Singing Gardens. Your pet will get a treat at check-in. Book the sunrise walk and start your day with the wake-up calls of birds. It’s usually less than 2 hours away, but the weekend traffic makes it much longer. ④ Discover a new world at White Rock. It might be a little far, but the wildlife makes the ride worth it. Don’t miss the guided midnight tour to learn about the local creatures. Note that the areas accepting pets are under construction until next year."
+    }
+   ]
+  },
+  {
+   "start": 1104.8,
+   "end": 1263.8,
+   "qs": [
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "label": "問27〜31",
+   "lines": [
+    {
+     "who": "",
+     "text": "To continue our unit on biodiversity in forest ecology, let’s consider how some squirrels contribute to the healthy diversity of forests through the effective spreading of seeds. Animals that hide seeds contribute to seed survival, which makes the growth of healthy new trees possible. So let’s review what we know about squirrels. Squirrels are among the most diverse mammals with around 280 species, and they share the behavior of saving seeds for later consumption. Squirrels are rodents, a group that includes rats, mice, and beavers. The teeth of rodents constantly grow and must be worn down through chewing. To ensure their survival, squirrels gather and save as much food as possible. Researchers describe two seed saving methods: storing and scattering. Storing is when squirrels bury seeds together underground for long-term storage. This action does not contribute greatly to forest development, whereas the other behavior, called scattering, does. So what is scattering? Scattering is when squirrels hide each seed separately under leaves on the ground over a wide area far from their original source. Squirrels only eat a small number of the seeds they hide. The rest of the scattered seeds may get stolen by other squirrels or competing animals while some are merely forgotten. It is these forgotten scattered seeds that contribute most to healthy diverse forests. However, in order for the scattered seeds to become trees, two additional conditions are required. First, the seeds scattered by squirrels must be distant from other rival seeds originating from the same parent tree. Second, they must also be far away from older trees that may be diseased. Under these conditions, seeds will grow successfully and this will lead to the healthy expansion of forests."
+    }
+   ]
+  },
+  {
+   "start": 1320.1,
+   "end": 1344.6,
+   "qs": [
+    32
+   ],
+   "label": "問32",
+   "lines": [
+    {
+     "who": "Student A",
+     "text": "When squirrels hide seeds too close to parent or diseased trees, it’s less likely that healthy diverse forests will develop."
+    },
+    {
+     "who": "Student B",
+     "text": "Because squirrels eat only some of the seeds they have scattered, the rest have the potential to become trees."
+    }
+   ]
+  },
+  {
+   "start": 1357.5,
+   "end": 1381.6,
+   "qs": [
+    33
+   ],
+   "label": "問33",
+   "lines": [
+    {
+     "who": "May",
+     "text": "The graph from this experimental study shows the seed-spreading rate by squirrels in forests."
+    },
+    {
+     "who": "Joe",
+     "text": "It looks like the amount of spreading varies depending on whether mice are present."
+    },
+    {
+     "who": "May",
+     "text": "That’s because when squirrels and mice are together, squirrels need to scatter and hide more seeds in case mice try to take them."
+    }
+   ]
+  },
+  {
+   "start": 1462.1,
+   "end": 1534.2,
+   "qs": [
+    34,
+    35
+   ],
+   "label": "問34〜35",
+   "lines": [
+    {
+     "who": "Peter",
+     "text": "It’s almost December, so we’ll need a new calendar for next year. Which one do you like?"
+    },
+    {
+     "who": "Stephanie",
+     "text": "Why don’t we get that one, Peter? It has a picture of a beautiful landscape."
+    },
+    {
+     "who": "Peter",
+     "text": "Hmm…, it looks nice, but the picture is so big that there isn’t much space for writing."
+    },
+    {
+     "who": "Stephanie",
+     "text": "You’re right. We’ll need to see each other’s schedules to make arrangements."
+    },
+    {
+     "who": "Peter",
+     "text": "A monthly calendar might work because they tend to have a lot more space for writing notes. How about this one?"
+    },
+    {
+     "who": "Stephanie",
+     "text": "It’s too plain. There aren’t any images at all. Look, here’s one with a humorous cartoon character."
+    },
+    {
+     "who": "Peter",
+     "text": "It does have a picture, but I want one that matches our room better. I know! Why don’t we create our own original calendar?"
+    },
+    {
+     "who": "Stephanie",
+     "text": "Yeah! We can use photos that we took this year, and they’ll remind us of all the good times we had."
+    },
+    {
+     "who": "Peter",
+     "text": "This is going to be the best calendar ever!"
+    },
+    {
+     "who": "Stephanie",
+     "text": "When do we have time to choose photos together?"
+    },
+    {
+     "who": "Peter",
+     "text": "Let’s check our schedules."
+    }
+   ]
+  },
+  {
+   "start": 1594.1,
+   "end": 1689.7,
+   "qs": [
+    36,
+    37
+   ],
+   "label": "問36〜37",
+   "lines": [
+    {
+     "who": "Abby",
+     "text": "Should we shut down our website? We don’t really need it anymore, and it takes so much time to update, right Chiharu?"
+    },
+    {
+     "who": "Chiharu",
+     "text": "We are pretty busy. What do you think, Eric?"
+    },
+    {
+     "who": "Eric",
+     "text": "Even if we stop updating it, we shouldn’t shut it down. That may contribute to broken internet syndrome."
+    },
+    {
+     "who": "Abby",
+     "text": "What’s that?"
+    },
+    {
+     "who": "Eric",
+     "text": "Even when a website closes, other sites and apps still link to it, so they become full of inactive links. Didn’t you have a problem with that recently, Chiharu?"
+    },
+    {
+     "who": "Chiharu",
+     "text": "Yeah, I did. I couldn’t get the data I needed for an assignment. A website that my teacher suggested had too many broken links. We shouldn’t cause trouble for others."
+    },
+    {
+     "who": "Abby",
+     "text": "I don’t want to add to the problem, either. Does that really happen often, Eric?"
+    },
+    {
+     "who": "Eric",
+     "text": "From what I’ve read, over half of all links on the internet don’t work."
+    },
+    {
+     "who": "Abby",
+     "text": "That’s a lot. But we’ll have to pay to keep our website active."
+    },
+    {
+     "who": "Eric",
+     "text": "How much do we pay per month, Chiharu?"
+    },
+    {
+     "who": "Chiharu",
+     "text": "6,000 yen."
+    },
+    {
+     "who": "Abby",
+     "text": "It seems like a waste. I don’t think it’s worth the cost."
+    },
+    {
+     "who": "Chiharu",
+     "text": "Abby has a point. These monthly bills are adding up, and I can’t afford it anymore."
+    },
+    {
+     "who": "Eric",
+     "text": "Come on, now. If everyone thinks like that, the problem will get much worse. I think we have a responsibility to others."
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,966 @@
+{
+ "id": "r8t-reading",
+ "kind": "reading",
+ "title": "令和8年度 共通テスト 英語（リーディング）追・再試験",
+ "source": "独立行政法人 大学入試センター",
+ "pageDir": "pages/",
+ "sections": [
+  {
+   "id": "P1",
+   "label": "第1問",
+   "points": 6,
+   "qs": [
+    1,
+    2,
+    3
+   ],
+   "pages": [
+    1,
+    2
+   ]
+  },
+  {
+   "id": "P2",
+   "label": "第2問",
+   "points": 12,
+   "qs": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "pages": [
+    3,
+    4,
+    5
+   ]
+  },
+  {
+   "id": "P3",
+   "label": "第3問",
+   "points": 9,
+   "qs": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+   ],
+   "pages": [
+    6,
+    7
+   ]
+  },
+  {
+   "id": "P4",
+   "label": "第4問",
+   "points": 12,
+   "qs": [
+    14,
+    15,
+    16,
+    17
+   ],
+   "pages": [
+    8,
+    9,
+    10
+   ]
+  },
+  {
+   "id": "P5",
+   "label": "第5問",
+   "points": 16,
+   "qs": [
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+   ],
+   "pages": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "P6",
+   "label": "第6問",
+   "points": 12,
+   "qs": [
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "pages": [
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "id": "P7",
+   "label": "第7問",
+   "points": 16,
+   "qs": [
+    32,
+    33,
+    34,
+    35,
+    36,
+    37
+   ],
+   "pages": [
+    20,
+    21,
+    22,
+    23,
+    24
+   ]
+  },
+  {
+   "id": "P8",
+   "label": "第8問",
+   "points": 17,
+   "qs": [
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44
+   ],
+   "pages": [
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ]
+  }
+ ],
+ "allOrNothing": [
+  [
+   10,
+   11,
+   12,
+   13
+  ],
+  [
+   18,
+   19
+  ],
+  [
+   25,
+   26,
+   27,
+   28
+  ],
+  [
+   29,
+   30
+  ],
+  [
+   34,
+   35
+  ],
+  [
+   40,
+   41,
+   42
+  ]
+ ],
+ "questions": [
+  {
+   "no": 1,
+   "pages": [
+    1,
+    2
+   ],
+   "n": 4,
+   "stem": "If you choose Tour ___, you will ___.",
+   "choices": [
+    "hear about the origins of regional foods",
+    "join a workshop in the morning",
+    "play a musical instrument after lunch",
+    "take a river trip through Hobston"
+   ]
+  },
+  {
+   "no": 2,
+   "pages": [
+    1,
+    2
+   ],
+   "n": 4,
+   "stem": "Tour ___ is more likely to appeal to students who are interested in a career as ___.",
+   "choices": [
+    "a chef",
+    "a guide",
+    "a historian",
+    "an artist"
+   ]
+  },
+  {
+   "no": 3,
+   "pages": [
+    1,
+    2
+   ],
+   "n": 4,
+   "stem": "Which activity is common to both schedules?",
+   "choices": [
+    "Cooking special foods",
+    "Interviewing a musician",
+    "Looking at the city landscape",
+    "Watching a traditional show"
+   ]
+  },
+  {
+   "no": 4,
+   "pages": [
+    3,
+    4,
+    5
+   ],
+   "n": 4,
+   "stem": "Why did the University decide to end bicycle hire services?",
+   "choices": [
+    "The fees paid by students for the service kept on rising.",
+    "The students’ security deposits were being stolen.",
+    "The University lacked staff to maintain the bicycles.",
+    "The University was losing money by providing the service."
+   ]
+  },
+  {
+   "no": 5,
+   "pages": [
+    3,
+    4,
+    5
+   ],
+   "n": 4,
+   "stem": "Which is true about the bicycle hire alternatives?",
+   "choices": [
+    "Bob’s Bikes is nearer to the University than Pedals & Wheels.",
+    "Electric bicycles can be hired from two of the three shops.",
+    "Pedals & Wheels is the most expensive for each type of bicycle.",
+    "The security deposit at XPower Bikes is the lowest of the three shops."
+   ]
+  },
+  {
+   "no": 6,
+   "pages": [
+    3,
+    4,
+    5
+   ],
+   "n": 4,
+   "stem": "Which option expresses Gordon’s opinion?",
+   "choices": [
+    "He has hired bicycles from two of the three shops in the past.",
+    "Pedals & Wheels should keep customers’ deposits for minor damage.",
+    "The University isn’t doing its best to offer students essential services.",
+    "The University stopped providing free copy services at the library."
+   ]
+  },
+  {
+   "no": 7,
+   "pages": [
+    3,
+    4,
+    5
+   ],
+   "n": 4,
+   "stem": "According to Mandy, which is true?",
+   "choices": [
+    "Most local students are getting worried about the end of the service.",
+    "The announcement impacts short-term exchange students the most.",
+    "XPower Bikes is closed for business on the weekends.",
+    "XPower Bikes’ strength is that it offers trendy bicycles."
+   ]
+  },
+  {
+   "no": 8,
+   "pages": [
+    6,
+    7
+   ],
+   "n": 4,
+   "stem": "According to the story, small pieces of plastic were ___.",
+   "choices": [
+    "affecting the climate of the Earth",
+    "causing changes to the eggs of some fish",
+    "gradually absorbed into the Yukarry Sea",
+    "used for improving organic materials"
+   ]
+  },
+  {
+   "no": 9,
+   "pages": [
+    6,
+    7
+   ],
+   "n": 4,
+   "stem": "Based on the second and third paragraphs, people’s feelings toward the fish most likely changed from ___.",
+   "choices": [
+    "angry to frightened",
+    "grateful to shocked",
+    "honored to satisfied",
+    "scared to hopeful"
+   ]
+  },
+  {
+   "no": 10,
+   "pages": [
+    6,
+    7
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order",
+   "choices": [
+    "A novel species was born in the ocean.",
+    "Catching plastic fish was banned.",
+    "Governments made earth-friendly laws.",
+    "Scientists found that the fish have a limited life cycle.",
+    "The hero fish consumed a lot of sea garbage."
+   ]
+  },
+  {
+   "no": 11,
+   "pages": [
+    6,
+    7
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order",
+   "choices": [
+    "A novel species was born in the ocean.",
+    "Catching plastic fish was banned.",
+    "Governments made earth-friendly laws.",
+    "Scientists found that the fish have a limited life cycle.",
+    "The hero fish consumed a lot of sea garbage."
+   ]
+  },
+  {
+   "no": 12,
+   "pages": [
+    6,
+    7
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order",
+   "choices": [
+    "A novel species was born in the ocean.",
+    "Catching plastic fish was banned.",
+    "Governments made earth-friendly laws.",
+    "Scientists found that the fish have a limited life cycle.",
+    "The hero fish consumed a lot of sea garbage."
+   ]
+  },
+  {
+   "no": 13,
+   "pages": [
+    6,
+    7
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order",
+   "choices": [
+    "A novel species was born in the ocean.",
+    "Catching plastic fish was banned.",
+    "Governments made earth-friendly laws.",
+    "Scientists found that the fish have a limited life cycle.",
+    "The hero fish consumed a lot of sea garbage."
+   ]
+  },
+  {
+   "no": 14,
+   "pages": [
+    8,
+    9,
+    10
+   ],
+   "n": 4,
+   "stem": "Based on Comment , choose the best sentence to add after the",
+   "choices": [
+    "Some people experience anxiety when music is loud.",
+    "Some people feel relaxed without listening to music.",
+    "Some people focus better on their studies with some music on.",
+    "Some people lose confidence when hearing unfamiliar music."
+   ]
+  },
+  {
+   "no": 15,
+   "pages": [
+    8,
+    9,
+    10
+   ],
+   "n": 4,
+   "stem": "Based on Comment , choose the best sentence to replace the underlined",
+   "choices": [
+    "Fans can exchange different interests through social media.",
+    "Fans can form closer relationships online than offline.",
+    "Fans can get acquainted in the virtual and physical worlds.",
+    "Fans can make more friends at concert halls."
+   ]
+  },
+  {
+   "no": 16,
+   "pages": [
+    8,
+    9,
+    10
+   ],
+   "n": 4,
+   "stem": "Based on Comment , choose the best sentence to add after the",
+   "choices": [
+    "Some fans of musicians protested against racial discrimination.",
+    "Some listeners became musicians to entertain audiences.",
+    "Some musicians donated a lot of money to improve society.",
+    "Some people stopped following musicians’ social media accounts."
+   ]
+  },
+  {
+   "no": 17,
+   "pages": [
+    8,
+    9,
+    10
+   ],
+   "n": 4,
+   "stem": "Based on Comment , choose the best phrase to replace the underlined",
+   "choices": [
+    "encourage friendships among musicians and fans",
+    "enhance unity among artists of all generations",
+    "inspire people to stand up for social reforms",
+    "motivate people to pursue their own goals"
+   ]
+  },
+  {
+   "no": 18,
+   "pages": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "n": 5,
+   "stem": "Which two parts of the blog is Jenny most interested in? (The order does",
+   "choices": [
+    "The common Japanese saying",
+    "The low serious crime rate",
+    "The meaning of the English saying",
+    "The number of police officers",
+    "The percentage of lost items returned"
+   ]
+  },
+  {
+   "no": 19,
+   "pages": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "n": 5,
+   "stem": "Which two parts of the blog is Jenny most interested in? (The order does",
+   "choices": [
+    "The common Japanese saying",
+    "The low serious crime rate",
+    "The meaning of the English saying",
+    "The number of police officers",
+    "The percentage of lost items returned"
+   ]
+  },
+  {
+   "no": 20,
+   "pages": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "n": 4,
+   "stem": "What was the outcome of the story about Jenny’s uncle?",
+   "choices": [
+    "He was contacted by email by the finder.",
+    "His wallet was returned without any money in it.",
+    "The finder returned the lost wallet to him.",
+    "The police called him when they found his wallet."
+   ]
+  },
+  {
+   "no": 21,
+   "pages": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "n": 6,
+   "stem": "According to the blog, which combination best describes the reasons for the high return rate of lost property in Japan?",
+   "choices": [
+    "Ａ and Ｂ",
+    "Ａ and Ｃ",
+    "Ａ and Ｄ",
+    "Ｂ and Ｃ",
+    "Ｂ and Ｄ",
+    "Ｃ and Ｄ"
+   ]
+  },
+  {
+   "no": 22,
+   "pages": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "n": 6,
+   "stem": "Based on the blog comments, which two items were returned to their",
+   "choices": [
+    "Glove and passport",
+    "Glove and ring",
+    "Glove and umbrella",
+    "Passport and ring",
+    "Passport and umbrella",
+    "Ring and umbrella"
+   ]
+  },
+  {
+   "no": 23,
+   "pages": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "n": 4,
+   "stem": "Your group and Jenny have different opinions on ___.",
+   "choices": [
+    "how people pay attention to possessions",
+    "the interpretation of the English saying",
+    "what happened regarding Jenny’s uncle",
+    "why people in Japan hand in lost items"
+   ]
+  },
+  {
+   "no": 24,
+   "pages": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "n": 4,
+   "stem": "Choose the best option for ___.",
+   "choices": [
+    "delightful but careless",
+    "earnest but self-conscious",
+    "generous and delightful",
+    "self-conscious and careless"
+   ]
+  },
+  {
+   "no": 25,
+   "pages": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order they happened to Ken. ___ → ___ → ___ → ___",
+   "choices": [
+    "He approached the awkward man and learned his name.",
+    "He attended yoga lessons but did not feel better.",
+    "He was not appointed to lead the new project.",
+    "His boss transferred him to a new division.",
+    "His dream job was becoming stressful and exhausting."
+   ]
+  },
+  {
+   "no": 26,
+   "pages": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order they happened to Ken. ___ → ___ → ___ → ___",
+   "choices": [
+    "He approached the awkward man and learned his name.",
+    "He attended yoga lessons but did not feel better.",
+    "He was not appointed to lead the new project.",
+    "His boss transferred him to a new division.",
+    "His dream job was becoming stressful and exhausting."
+   ]
+  },
+  {
+   "no": 27,
+   "pages": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order they happened to Ken. ___ → ___ → ___ → ___",
+   "choices": [
+    "He approached the awkward man and learned his name.",
+    "He attended yoga lessons but did not feel better.",
+    "He was not appointed to lead the new project.",
+    "His boss transferred him to a new division.",
+    "His dream job was becoming stressful and exhausting."
+   ]
+  },
+  {
+   "no": 28,
+   "pages": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "n": 5,
+   "stem": "Choose four out of the five options(!〜%)and put them in the order they happened to Ken. ___ → ___ → ___ → ___",
+   "choices": [
+    "He approached the awkward man and learned his name.",
+    "He attended yoga lessons but did not feel better.",
+    "He was not appointed to lead the new project.",
+    "His boss transferred him to a new division.",
+    "His dream job was becoming stressful and exhausting."
+   ]
+  },
+  {
+   "no": 29,
+   "pages": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "n": 5,
+   "stem": "Choose the best options for ___ and ___. (The order does not",
+   "choices": [
+    "His acceptance of valuable advice from his boss",
+    "His conscious effort to get praised by his classmates",
+    "His decision to be better than Hiro in yoga class",
+    "His gradual improvement of his yoga technique",
+    "His observation of and subsequent conversation with Hiro"
+   ]
+  },
+  {
+   "no": 30,
+   "pages": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "n": 5,
+   "stem": "Choose the best options for ___ and ___. (The order does not",
+   "choices": [
+    "His acceptance of valuable advice from his boss",
+    "His conscious effort to get praised by his classmates",
+    "His decision to be better than Hiro in yoga class",
+    "His gradual improvement of his yoga technique",
+    "His observation of and subsequent conversation with Hiro"
+   ]
+  },
+  {
+   "no": 31,
+   "pages": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "n": 4,
+   "stem": "Choose the best option for ___.",
+   "choices": [
+    "how to get refreshed by focusing on balancing his work and lifestyle",
+    "how to improve his yoga poses and get promoted in his department",
+    "to be concerned with how he is perceived and improve his quality of life",
+    "to stop comparing himself to others and concentrate on his abilities"
+   ]
+  },
+  {
+   "no": 32,
+   "pages": [
+    20,
+    21,
+    22,
+    23,
+    24
+   ],
+   "n": 4,
+   "stem": "Choose the best option for ___.",
+   "choices": [
+    "bite more than 600，",
+    "disturb popular outdoor activities",
+    "reduce the number of species to 3，",
+    "spread fatal diseases to human beings"
+   ]
+  },
+  {
+   "no": 33,
+   "pages": [
+    20,
+    21,
+    22,
+    23,
+    24
+   ],
+   "n": 4,
+   "stem": "Choose the best option for ___.",
+   "choices": [
+    "apply traditional methods of mosquito control, rather than modern ones",
+    "establish new standards and laws to control the mosquito population",
+    "focus on mosquito monitoring and control, as well as public education",
+    "provide private companies with funding for mosquito control research"
+   ]
+  },
+  {
+   "no": 34,
+   "pages": [
+    20,
+    21,
+    22,
+    23,
+    24
+   ],
+   "n": 5,
+   "stem": "Choose the best options for ___ and ___. (The order does not",
+   "choices": [
+    "covers the mosquito with a wax",
+    "destroys bacteria in the mosquito’s body",
+    "interferes with the mosquito’s breathing",
+    "prevents the mosquito from flying",
+    "stops chemicals from harming the mosquito"
+   ]
+  },
+  {
+   "no": 35,
+   "pages": [
+    20,
+    21,
+    22,
+    23,
+    24
+   ],
+   "n": 5,
+   "stem": "Choose the best options for ___ and ___. (The order does not",
+   "choices": [
+    "covers the mosquito with a wax",
+    "destroys bacteria in the mosquito’s body",
+    "interferes with the mosquito’s breathing",
+    "prevents the mosquito from flying",
+    "stops chemicals from harming the mosquito"
+   ]
+  },
+  {
+   "no": 36,
+   "pages": [
+    20,
+    21,
+    22,
+    23,
+    24
+   ],
+   "n": 6,
+   "stem": "Choose the correct order of steps that scientists take to control the",
+   "choices": [
+    "Ａ→Ｃ→Ｄ→Ｂ",
+    "Ａ→Ｅ→Ｂ→Ｃ",
+    "Ｅ→Ａ→Ｄ→Ｂ",
+    "Ｅ→Ｄ→Ｆ→Ｃ",
+    "Ｆ→Ｂ→Ｅ→Ｄ",
+    "Ｆ→Ｅ→Ｃ→Ｄ"
+   ]
+  },
+  {
+   "no": 37,
+   "pages": [
+    20,
+    21,
+    22,
+    23,
+    24
+   ],
+   "n": 4,
+   "stem": "Choose the best option for ___.",
+   "choices": [
+    "Humans are making advances to reduce the mosquito population to",
+    "Humans have eliminated mosquito-borne diseases through mosquito",
+    "Humans should control mosquito-borne diseases mainly through genetic",
+    "Humans will resolve issues related to mosquito control in the next few"
+   ]
+  },
+  {
+   "no": 38,
+   "pages": [
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "n": 4,
+   "stem": "Which of the following best summarizes Joseph’s opinion?",
+   "choices": [
+    "Older generations may benefit from the ease of an online voting system.",
+    "Online voting may affect different generations in different ways.",
+    "People born in the digital age are unfamiliar with paper ballots.",
+    "The online system will make smartphones essential in elections."
+   ]
+  },
+  {
+   "no": 39,
+   "pages": [
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "n": 4,
+   "stem": "Both Alex and Irina mention ___.",
+   "choices": [
+    "the financial aspect of online voting",
+    "the identification issues of online voting",
+    "the potential errors in counting the online votes",
+    "the security issues of conducting elections online"
+   ]
+  },
+  {
+   "no": 40,
+   "pages": [
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "n": 5,
+   "stem": "With the above opinions in mind, you have taken a position on online",
+   "choices": [
+    "Alex",
+    "Irina",
+    "Joseph",
+    "Kana",
+    "Sarah"
+   ]
+  },
+  {
+   "no": 41,
+   "pages": [
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "n": 5,
+   "stem": "With the above opinions in mind, you have taken a position on online",
+   "choices": [
+    "Alex",
+    "Irina",
+    "Joseph",
+    "Kana",
+    "Sarah"
+   ]
+  },
+  {
+   "no": 42,
+   "pages": [
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "n": 4,
+   "stem": "With the above opinions in mind, you have taken a position on online",
+   "choices": [
+    "computers function more effectively than humans",
+    "online voting systems will save time",
+    "the physically challenged benefit from online systems",
+    "voting online can promote digital device use"
+   ]
+  },
+  {
+   "no": 43,
+   "pages": [
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "n": 4,
+   "stem": "Based on Source A, which of the following is the most appropriate for",
+   "choices": [
+    "Estonia has used online voting for more than three decades.",
+    "Online voting offers flexibility while providing relevant safeguards.",
+    "People get more information on candidates thanks to the online system.",
+    "The principle of “one person, one vote” is secured in paper elections."
+   ]
+  },
+  {
+   "no": 44,
+   "pages": [
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "n": 4,
+   "stem": "Based on Source B, which of the following best supports REASON ___ in the",
+   "choices": [
+    "Although some residents felt online voting has security issues, its",
+    "More than half the people answered it was easy to cast their votes",
+    "The age range of the lowest voting rate is 20―24. According to the",
+    "The overall voting rate is more than 50％. Among the age groups, the"
+   ]
+  }
+ ]
+}
