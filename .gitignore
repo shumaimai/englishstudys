@@ -13,6 +13,9 @@
 # 使う1本だけを明示的に通す。
 !practice/data/r8-listening/audio/r8-listening.mp3
 
+# 自作の読解（今回は演習に入れない。手元にだけ残す）
+practice/data/orig-reading-1/
+
 # 古い重複・作りかけのゴミは公開しない（この環境では消せないため gitignore で除外）
 practice/data/answers.json
 **/answers2.json

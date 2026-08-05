@@ -105,6 +105,17 @@
         background:var(--card);font-weight:700;color:var(--ink);cursor:pointer}
   .pick:hover{border-color:var(--live);border-style:solid}
   .intro .shelf + .pick{margin-top:14px}
+  /* 音源の選び方（共通テスト / 手元） */
+  .srcpick{display:grid;gap:10px;margin-top:4px}
+  .srcbtn{display:block;width:100%;text-align:left;background:var(--card);border:1.5px solid var(--rule);
+          padding:16px 16px;cursor:pointer;color:var(--ink)}
+  .srcbtn:hover{border-color:var(--ink)}
+  .srcbtn b{display:block;font-size:15px;font-weight:800}
+  .srcbtn small{display:block;font-size:11.5px;color:var(--graphite);margin-top:3px}
+  .srcback{margin-bottom:6px}
+  .backlink{background:transparent;border:1px solid var(--rule);color:var(--ink);font:inherit;
+            font-size:12px;padding:7px 12px;cursor:pointer}
+  .backlink:hover{border-color:var(--ink)}
   .pick small{display:block;font-weight:400;font-size:11px;color:var(--graphite);margin-top:5px}
   input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
   .notice{background:var(--card);border-left:3px solid var(--graphite);padding:11px 13px;
@@ -318,22 +329,35 @@
 
 <main>
   <section class="intro" id="intro">
-    <p>共通テストの過去問の音声を再生できます。また、手元の音声ファイルを入れて、
-       音楽再生プレイヤーのように巻き戻すことができます。</p>
+    <p>音声を音楽プレイヤーのように巻き戻して聞けます。どちらの音源で始めますか。</p>
+
+    <!-- どの音源で始めるか -->
+    <div class="srcpick" id="srcpick">
+      <button class="srcbtn" data-src="exam">
+        <b>共通テストの過去問</b><small>センターの音源を取り込む。台本つき</small></button>
+      <button class="srcbtn" data-src="file">
+        <b>手元の音源を読み込む</b><small>自分の音声ファイルを入れる。文字起こしできる</small></button>
+    </div>
+
+    <div class="srcback" id="srcback" hidden>
+      <button class="backlink" id="srcReset">← 音源を選び直す</button>
+    </div>
 
     <div class="shelf" id="shelf" hidden>
       <h3>共通テストの音源</h3>
       <ul id="shelfList"></ul>
       <p class="foot">押すと取ってきて、そのまま再生できます。一度取れば端末に残ります。台本つき。<br>
-        出典：独立行政法人 大学入試センター（利用許諾を得て掲載）。区切り表示など学習用に再構成しています。</p>
+        出典：「大学入学共通テスト 英語（リスニング）」（大学入試センター
+        <a href="https://www.dnc.ac.jp/" target="_blank" rel="noopener">https://www.dnc.ac.jp/</a>）を、
+        興國高等学校 橋口周平が利用許諾を得て加工して作成。区切り表示など学習用の加工を含みます。</p>
     </div>
 
-    <label class="pick" for="file">手元の音声ファイルを選ぶ
+    <label class="pick" for="file" id="pickLabel" hidden>手元の音声ファイルを選ぶ
       <small>まとめて選べます。ファイル名の数字順に並びます</small></label>
     <input type="file" id="file" multiple accept="audio/*,.mp3,.m4a,.wav,.aac,.ogg,.flac">
 
     <div class="notice" id="limits" hidden></div>
-    <div class="notice">音声は端末の外に出ません。手元のファイルは、文字に起こせば一文ずつ聞き直せます
+    <div class="notice" id="privacyNote" hidden>音声は端末の外に出ません。手元のファイルは、文字に起こせば一文ずつ聞き直せます
       （そのときだけ、初回に音声認識モデルを受け取ります）。</div>
   </section>
 
@@ -1817,7 +1841,7 @@ async function loadCatalog(){
         + '簡易サーバー（<code>python -m http.server</code>）か、公開したページから開いてください。'
       : `用意してある音源の一覧を読み込めませんでした（${esc(err.message)}）。`;
     $('shelfList').innerHTML = `<li style="padding:12px 13px;font-size:12px;line-height:1.75;color:var(--graphite)">${why}</li>`;
-    $('shelf').hidden = false;
+    if (srcMode === 'exam') $('shelf').hidden = false;   // 共通テストを選んでいるときだけ出す
   }
 }
 
@@ -1835,9 +1859,37 @@ function shelfInto(ul){
   }
 }
 function drawShelf(){
-  shelfInto($('shelfList'));  $('shelf').hidden = false;
+  shelfInto($('shelfList'));   // 中身だけ用意。表示は音源の選び方で切り替える
   shelfInto($('getShelf'));   $('getShelfBox').hidden = false;
+  if (srcMode === 'exam') $('shelf').hidden = false;
 }
+
+// ---------- どの音源で始めるか ----------
+// 共通テスト / 手元 を最初に選ばせる。選んだ側だけを出す。
+let srcMode = null;
+function chooseSrc(mode){
+  srcMode = mode;
+  $('srcpick').hidden = true;
+  $('srcback').hidden = false;
+  $('shelf').hidden = mode !== 'exam';
+  $('pickLabel').hidden = mode !== 'file';
+  $('privacyNote').hidden = mode !== 'file';
+  if (mode === 'exam' && !catalog) {
+    // まだ一覧を読めていない。読み込んでから出す。
+    $('shelfList').innerHTML = '<li style="padding:12px 13px;font-size:12px;color:var(--graphite)">読み込んでいます…</li>';
+  }
+}
+function resetSrc(){
+  srcMode = null;
+  $('srcpick').hidden = false;
+  $('srcback').hidden = true;
+  $('shelf').hidden = true;
+  $('pickLabel').hidden = true;
+  $('privacyNote').hidden = true;
+}
+document.querySelectorAll('.srcbtn').forEach(b =>
+  b.addEventListener('click', () => chooseSrc(b.dataset.src)));
+$('srcReset').addEventListener('click', resetSrc);
 
 async function grab(it, btn){
   const url = (catalog.base || '') + it.url;
@@ -1957,8 +2009,9 @@ function drawSheet(force){
   sheetBlock = at;
   const b = s.blocks[at];
   $('sheetTitle').textContent = `台本　${b.label}`;
-  $('sheetSrc').textContent = `出典：${s.source}（${s.holder}）。利用許諾を得て掲載。`
-    + `この台本は学習用に区切って表示したもので、試験問題そのものではありません。`;
+  $('sheetSrc').textContent = `出典：「${s.source}」（${s.holder} https://www.dnc.ac.jp/）を、`
+    + `興國高等学校 橋口周平が利用許諾を得て加工して作成。`
+    + `この台本は学習用に区切って表示したもので、大学入試センターが作成・公表したものではありません。`;
   const box = $('sheetLines'); box.innerHTML = '';
   b.lines.forEach((l, k) => {
     const row = document.createElement('div');

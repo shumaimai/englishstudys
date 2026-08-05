@@ -39,6 +39,14 @@
   .card .go{display:inline-block;margin-top:12px;font-size:12px;font-weight:700;color:var(--live)}
   .card.soon{opacity:.62;pointer-events:none}
   .card.soon .go{color:var(--graphite)}
+  button.card{width:100%;text-align:left;cursor:pointer;font:inherit}
+  .menuq{font-size:12px;letter-spacing:.14em;color:var(--graphite);margin-bottom:12px}
+  .backrow{margin-bottom:12px}
+  .backlink{background:transparent;border:1px solid var(--rule);color:var(--ink);
+            font:inherit;font-size:12px;padding:7px 13px;cursor:pointer}
+  .backlink:hover{border-color:var(--ink)}
+  .card .tag{display:inline-block;font-family:var(--mono);font-size:10px;color:var(--live);
+             border:1px solid var(--live);padding:1px 7px;margin-left:8px;vertical-align:2px;letter-spacing:.08em}
 
   .facts{padding:34px 0;border-top:1px solid var(--rule);margin-top:30px}
   .facts h3{font-size:11px;letter-spacing:.18em;color:var(--graphite);margin-bottom:14px}
@@ -70,21 +78,57 @@
   </section>
 
   <section class="cards">
-    <a class="card" href="./listening/">
-      <span class="n">01</span>
-      <h2>リスニングプレイヤー</h2>
-      <p>共通テストの過去問の音声を再生できます。また、手元の音声ファイルを入れて、
-         音楽再生プレイヤーのように巻き戻すことができます。</p>
-      <span class="go">はじめる →</span>
-    </a>
+    <!-- 教科を選ぶ -->
+    <div id="subjects">
+      <p class="menuq">まず教科を選んでください</p>
+      <button class="card" data-go="listen">
+        <span class="n">LISTENING</span>
+        <h2>リスニング</h2>
+        <p>音声を聞いて学ぶ。一問一答・プレイヤー・ディクテーションの3つの練習ができます。</p>
+        <span class="go">選ぶ →</span>
+      </button>
+      <button class="card" data-go="read">
+        <span class="n">READING</span>
+        <h2>リーディング</h2>
+        <p>長文を読んで解く。共通テストのリーディングを1問ずつ。</p>
+        <span class="go">選ぶ →</span>
+      </button>
+    </div>
 
-    <a class="card" href="./practice/">
-      <span class="n">02</span>
-      <h2>一問一答</h2>
-      <p>共通テストのリスニングとリーディングを1問ずつ解きます。答えた瞬間に○×と正解が出るので、
-         その場で確かめられます。途中で降りても、次に開けば続きから。</p>
-      <span class="go">はじめる →</span>
-    </a>
+    <!-- リスニングのモード -->
+    <div id="listenModes" hidden>
+      <div class="backrow"><button class="backlink" data-back>← 教科を選ぶ</button></div>
+      <a class="card" href="./practice/?s=listening">
+        <span class="n">01</span>
+        <h2>一問一答</h2>
+        <p>共通テストのリスニングを1問ずつ。答えた瞬間に○×と正解が出ます。電車でも続きから。</p>
+        <span class="go">はじめる →</span>
+      </a>
+      <a class="card" href="./listening/">
+        <span class="n">02</span>
+        <h2>リスニングプレイヤー<span class="tag">シャドーイング</span></h2>
+        <p>音声を音楽プレイヤーのように巻き戻して聞けます。台本を見ながらのシャドーイング付き。
+           共通テストの過去問と、手元の音源のどちらでも。</p>
+        <span class="go">はじめる →</span>
+      </a>
+      <a class="card" href="./dictation/">
+        <span class="n">03</span>
+        <h2>ディクテーション<span class="tag">新設</span></h2>
+        <p>聞こえた英文を打ち込んで、どこを聞き落としたかを1文ずつ照らし合わせます。</p>
+        <span class="go">はじめる →</span>
+      </a>
+    </div>
+
+    <!-- リーディングのモード -->
+    <div id="readModes" hidden>
+      <div class="backrow"><button class="backlink" data-back>← 教科を選ぶ</button></div>
+      <a class="card" href="./practice/?s=reading">
+        <span class="n">01</span>
+        <h2>一問一答</h2>
+        <p>共通テストのリーディングを1問ずつ。設問文と選択肢を読んで番号で答え、その場で採点します。</p>
+        <span class="go">はじめる →</span>
+      </a>
+    </div>
   </section>
 
   <section class="facts">
@@ -100,13 +144,22 @@
 </div>
 
 <footer><div class="wrap">
-  <p><b>出典</b>　令和8年度 大学入学共通テスト 英語（リスニング・リーディング）／
-     独立行政法人 大学入試センター。同センターの利用許諾を得て掲載しています。</p>
-  <p>本サイトの演習は、上記の試験問題をもとに学習用に<b>再構成したもの</b>（設問ごとの分割、
-     出題順の変更、音声の区切り、日本語案内の要約表示など）で、試験問題そのものではありません。
-     第三者が権利を持つ部分の利用については、その責任は本サイトにあります。</p>
+  <p><b>出典</b>　「令和8年度 大学入学共通テスト 英語（リスニング・リーディング）」
+     （独立行政法人 大学入試センター <a href="https://www.dnc.ac.jp/" target="_blank" rel="noopener">https://www.dnc.ac.jp/</a>）を、
+     <b>興國高等学校 橋口周平</b>が利用許諾を得て加工・作成しました。</p>
+  <p>本サイトの演習は、上記の試験問題をもとに学習用へ<b>加工して作成</b>したもの（設問ごとの分割、
+     出題順の変更、音声の区切り、日本語案内の要約表示など）であり、大学入試センターが作成・公表したもの
+     ではありません。第三者が権利を持つ部分の利用については、その責任は本サイトにあります。</p>
   <p>設計と検証の記録は <a href="./docs/DECISIONS.md">docs/DECISIONS.md</a> にあります。</p>
 </div></footer>
 
+<script>
+  const panels = ['subjects','listenModes','readModes'];
+  const show = id => panels.forEach(p => document.getElementById(p).hidden = p !== id);
+  document.querySelectorAll('[data-go]').forEach(b =>
+    b.addEventListener('click', () => show(b.dataset.go === 'listen' ? 'listenModes' : 'readModes')));
+  document.querySelectorAll('[data-back]').forEach(b =>
+    b.addEventListener('click', () => show('subjects')));
+</script>
 </body>
 </html>

@@ -1,0 +1,58 @@
+{
+ "note": "端末内蔵の音声読み上げ（TTS）で出題する自作のディクテーション。音声ファイルは持たない。",
+ "source": "Englishstudy オリジナル問題（自作）",
+ "sets": [
+  {
+   "id": "tts-easy",
+   "title": "やさしい英文（自作）",
+   "level": "やさしい・身の回り",
+   "tts": true,
+   "sentences": [
+    "I usually walk to school with my friends.",
+    "Could you tell me how to get to the station?",
+    "She has been studying English for three years.",
+    "We are going to visit my grandmother this weekend.",
+    "Please turn off the lights before you leave the room.",
+    "The train was late because of the heavy rain.",
+    "I don't think we have enough time to finish it today.",
+    "He asked me whether I wanted something to drink.",
+    "There is a small park in front of my house.",
+    "Let's meet at the library at four o'clock tomorrow."
+   ]
+  },
+  {
+   "id": "tts-school",
+   "title": "学校生活（自作）",
+   "level": "ふつう・学校生活",
+   "tts": true,
+   "sentences": [
+    "Our teacher told us to hand in the report by Friday.",
+    "If it rains tomorrow, the sports day will be postponed.",
+    "I was so nervous that I almost forgot my speech.",
+    "The science club is looking for new members this month.",
+    "She practices the piano every day after finishing her homework.",
+    "We should decide who will bring the drinks for the trip.",
+    "Although the test was difficult, most students did quite well.",
+    "He suggested that we study together before the exam.",
+    "The festival was a great success thanks to everyone's help.",
+    "I wish I had started preparing for it a little earlier."
+   ]
+  },
+  {
+   "id": "tts-test",
+   "title": "共通テスト風（自作）",
+   "level": "やや難・説明文",
+   "tts": true,
+   "sentences": [
+    "According to the graph, the number of visitors increased sharply in summer.",
+    "The speaker suggests that reducing plastic waste should be everyone's responsibility.",
+    "Unlike the first plan, the new one requires less money and less time.",
+    "Researchers found that people who slept well remembered more of what they learned.",
+    "The main point of the lecture is that small daily habits lead to big changes.",
+    "While both methods have advantages, the second one is easier for beginners.",
+    "You are asked to choose the option that best matches the situation.",
+    "The writer concludes that technology should support learning, not replace it."
+   ]
+  }
+ ]
+}

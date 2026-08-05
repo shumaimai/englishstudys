@@ -118,6 +118,10 @@
               padding:14px;font-size:13.5px;border-radius:2px}
   .seeimg.big:hover{opacity:.9}
   .shared{font-size:11px;color:var(--graphite);margin:-6px 0 12px}
+  /* 自作読解の本文（画像ではなくその場に文字で出す） */
+  .passage{background:var(--card);border:1px solid var(--rule);padding:14px 15px;margin-bottom:14px;
+           font-family:var(--en);font-size:15.5px;line-height:1.85;white-space:pre-wrap}
+  .passage .ptitle{display:block;font-weight:800;margin-bottom:8px}
 
   .foot{position:sticky;bottom:0;background:var(--card);border-top:1.5px solid var(--ink);
         padding:9px 12px;padding-bottom:calc(9px + env(safe-area-inset-bottom));flex-shrink:0}
@@ -179,8 +183,10 @@
       問題も答えた記録も、この端末の中だけで動きます。
     </div>
     <p class="credit">
-      出典：令和8年度 大学入学共通テスト 英語／独立行政法人 大学入試センター（利用許諾を得て掲載）。
-      この演習は試験問題をもとに学習用へ再構成したもので、試験問題そのものではありません。
+      出典：「令和8年度 大学入学共通テスト 英語」（大学入試センター
+      <a href="https://www.dnc.ac.jp/" target="_blank" rel="noopener">https://www.dnc.ac.jp/</a>）を、
+      興國高等学校 橋口周平が利用許諾を得て加工して作成。
+      大学入試センターが作成・公表したものではありません。
     </p>
   </section>
 
@@ -203,14 +209,17 @@
       日本語の試験案内は流しません。かわりに要点を上に書いてあります。
     </div>
     <p class="credit">
-      出典：令和8年度 大学入学共通テスト 英語／独立行政法人 大学入試センター（利用許諾を得て掲載）。
-      この演習は試験問題をもとに学習用へ再構成したもので、試験問題そのものではありません。
+      出典：「令和8年度 大学入学共通テスト 英語」（大学入試センター
+      <a href="https://www.dnc.ac.jp/" target="_blank" rel="noopener">https://www.dnc.ac.jp/</a>）を、
+      興國高等学校 橋口周平が利用許諾を得て加工して作成。
+      大学入試センターが作成・公表したものではありません。
     </p>
   </section>
 
   <!-- 設問 -->
   <section class="wrap" id="quiz" hidden>
     <p class="crumb"><span id="crumb"></span><span class="of" id="of"></span></p>
+    <div class="passage" id="passage" hidden></div>
     <div class="guide" id="guide" hidden></div>
     <div class="situ" id="situ" hidden></div>
     <p class="shared" id="shared" hidden></p>
@@ -243,7 +252,7 @@
 
 <div class="viewer" id="viewer" hidden>
   <div class="vhead"><b id="vtitle">問題冊子</b><button class="vbtn" id="vclose">閉じる</button></div>
-  <p class="vcredit">出典：令和8年度 大学入学共通テスト 英語／独立行政法人 大学入試センター（利用許諾を得て掲載）</p>
+  <p class="vcredit">出典：「令和8年度 大学入学共通テスト 英語」（大学入試センター https://www.dnc.ac.jp/）を、興國高等学校 橋口周平が利用許諾を得て加工して作成</p>
   <div class="vbody" id="vbody"></div>
 </div>
 
@@ -325,10 +334,18 @@ function scoreOf(qs){
   return { got, full };
 }
 
+// 教科でしぼり込む。最初の画面（トップ）で選んだ教科が ?s= で渡ってくる。
+const SUBJECT = new URLSearchParams(location.search).get('s');   // 'listening' | 'reading' | null
+let visibleExams = [];
+
 // ---------- 読み込み ----------
 async function boot(){
   try {
     list = await (await fetch('exams.json')).json();
+    visibleExams = list.exams.filter(e => !SUBJECT || e.kind === SUBJECT);
+    if (!visibleExams.length) visibleExams = list.exams;   // 念のため
+    // 教科が指定されていて、その教科の回が1つだけなら、回選びを飛ばして直接開く
+    if (SUBJECT && visibleExams.length === 1) { openExam(visibleExams[0]); return; }
     drawExams();
   } catch (err) {
     noData(err);
@@ -342,12 +359,16 @@ function noData(err){
   show('home');
 }
 
+const subjectLabel = () => SUBJECT === 'reading' ? 'リーディング' : SUBJECT === 'listening' ? 'リスニング' : '';
+
 // 収録している回を並べる
 function drawExams(){
   show('exams');
-  $('exLead').textContent = '解きたい教科を選んでください。1問ずつ出して、答えた瞬間に○×がつきます。';
+  $('exLead').textContent = SUBJECT
+    ? `${subjectLabel()}の回を選んでください。1問ずつ出して、答えた瞬間に○×がつきます。`
+    : '解きたい教科・回を選んでください。1問ずつ出して、答えた瞬間に○×がつきます。';
   const box = $('exList'); box.innerHTML = '';
-  for (const it of list.exams) {
+  for (const it of visibleExams) {
     const b = document.createElement('button');
     b.className = 'sec';
     let done = 0, total = 0;
@@ -449,9 +470,13 @@ function show(which){
   $('result').hidden = which !== 'result';
   $('foot').hidden   = which !== 'quiz';
   // 左上の「← 最初の画面」はいつでもサイトの入口へ戻る（常設）。
-  // この◁ボタンはアプリの中での一段戻り。教科選択の画面では出さない。
-  $('back').hidden   = which === 'exams';
-  $('back').textContent = which === 'home' ? '◁ 教科' : '◁ 一覧';
+  // この◁ボタンはアプリの中での一段戻り。
+  //   ・回選び（exams）の画面では出さない
+  //   ・教科が渡ってきて回が1つだけのとき（回選びを飛ばした）は、大問一覧でも出さない
+  //     （戻る先が無い。左上の「最初の画面」で教科選びへ戻る）
+  const autoSubject = SUBJECT && visibleExams.length === 1;
+  $('back').hidden = which === 'exams' || (which === 'home' && autoSubject);
+  $('back').textContent = which === 'home' ? (SUBJECT ? '◁ 回' : '◁ 教科') : '◁ 一覧';
   stop();
   const m = document.querySelector('main'); if (m) m.scrollTop = 0;
 }
@@ -493,9 +518,18 @@ function drawQ(){
   $('shared').hidden = !note.length;
   $('shared').textContent = note.join('　');
 
-  // リーディングは本文を読むのが起点。ボタンを大きく、設問の上に置く。
+  // 本文の見せ方は2通り。
+  //   ・共通テスト … 冊子のページ画像（ボタンで開く）
+  //   ・自作読解 … その場に文字で出す（section.passage）。画像ボタンは出さない
+  const passage = !isListening() ? (secOf(n) && secOf(n).passage) : null;
+  $('passage').hidden = !passage;
+  if (passage) {
+    const [head, ...rest] = passage.split('\n\n');
+    $('passage').innerHTML = `<span class="ptitle">${esc(head)}</span>` + esc(rest.join('\n\n'));
+  }
+  $('seeimg').hidden = !isListening() && !!passage;   // 自作読解では画像ボタンを消す
   $('seeimg').textContent = isListening() ? '問題冊子のページを見る' : '本文と選択肢を開く';
-  $('seeimg').classList.toggle('big', !isListening());
+  $('seeimg').classList.toggle('big', !isListening() && !passage);
   $('foot').classList.toggle('reading', !isListening());
 
   $('qno').textContent = '問' + n;
@@ -535,7 +569,9 @@ function drawQ(){
     $('ftxt').textContent = s.repeat === 2 ? '本番でも音声が2回流れます' : '本番では音声が1回だけです';
     $('pbar').style.width = '0%';
   } else {
-    $('ftxt').textContent = '本文は「本文と選択肢を開く」から。指で広げて読めます';
+    $('ftxt').textContent = passage
+      ? '本文は上に表示しています。読んでから番号を選んでください'
+      : '本文は「本文と選択肢を開く」から。指で広げて読めます';
   }
   paint(n);
 }

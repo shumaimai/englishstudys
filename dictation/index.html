@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ディクテーション</title>
+<style>
+  :root{
+    --ink:#16202B; --sheet:#E3E9E5; --card:#F3F6F3; --rule:#AEBDB7;
+    --graphite:#56655F; --mark:#4B3A8F; --live:#1D6B58; --danger:#8A2018;
+    --ja:"Hiragino Sans","Noto Sans JP","Yu Gothic",system-ui,sans-serif;
+    --en:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  [hidden]{display:none!important}
+  html,body{height:100%}
+  body{background:var(--sheet);color:var(--ink);font-family:var(--ja);font-size:15px;
+       line-height:1.7;display:flex;flex-direction:column;
+       padding-bottom:env(safe-area-inset-bottom)}
+  button,select,textarea{font:inherit;color:inherit}
+  button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--live);outline-offset:2px}
+
+  header{padding:10px 12px;border-bottom:1.5px solid var(--ink);display:flex;
+         align-items:center;justify-content:space-between;gap:8px;flex-shrink:0}
+  h1{font-size:15px;font-weight:800;letter-spacing:.04em;flex:1;text-align:center;
+     white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hbtn{height:32px;min-width:32px;padding:0 10px;border:1px solid var(--rule);background:transparent;
+        cursor:pointer;font-size:12px;line-height:1;white-space:nowrap;text-decoration:none;
+        color:var(--ink);display:inline-flex;align-items:center;flex-shrink:0}
+  .hbtn:hover{border-color:var(--ink)}
+  .hbtn.home{border-color:var(--ink);font-weight:700}
+  .hbtn.home:hover{background:var(--ink);color:var(--card)}
+  #back[hidden]{visibility:hidden;display:inline-flex!important}
+  main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .wrap{padding:16px 14px 28px;max-width:640px;margin:0 auto}
+  .lead{font-size:12.5px;color:var(--graphite);line-height:1.8;margin-bottom:16px}
+  .fatal{background:var(--danger);color:#fff;padding:10px 14px;font-size:12px;line-height:1.6}
+
+  .pickitem{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--rule);
+            padding:14px;margin-bottom:8px;cursor:pointer}
+  .pickitem:hover{border-color:var(--ink)}
+  .pickitem b{font-size:14.5px;font-weight:800}
+  .pickitem small{display:block;font-size:11.5px;color:var(--graphite);margin-top:4px}
+  .memo{background:var(--card);border-left:3px solid var(--graphite);padding:11px 13px;
+        font-size:12px;color:var(--graphite);line-height:1.75;margin-top:18px}
+  .credit{font-size:10.5px;color:var(--graphite);line-height:1.7;margin-top:14px;
+          border-top:1px solid var(--rule);padding-top:10px}
+
+  .crumb{font-size:11px;letter-spacing:.14em;color:var(--graphite);margin-bottom:8px;
+         display:flex;align-items:center;gap:8px}
+  .crumb .of{margin-left:auto;font-family:var(--mono);letter-spacing:0}
+  .hint{font-size:12px;color:var(--graphite);line-height:1.7;margin-bottom:12px}
+  .type{width:100%;min-height:120px;border:1.5px solid var(--rule);background:var(--card);
+        padding:12px;font-size:16px;line-height:1.7;font-family:var(--en);resize:vertical}
+  .type:focus{border-color:var(--ink);outline:none}
+  .type:disabled{color:var(--graphite)}
+
+  .score{display:flex;align-items:baseline;gap:10px;margin:14px 0 4px}
+  .score b{font-size:30px;font-family:var(--mono);font-weight:700;line-height:1}
+  .score span{font-size:12px;color:var(--graphite)}
+  .diff{font-family:var(--en);font-size:18px;line-height:2.2;margin-top:8px;
+        background:var(--card);border:1px solid var(--rule);padding:12px}
+  .d-ok{}
+  .d-sub{background:rgba(75,58,143,.13);border-bottom:2px solid var(--mark);padding:1px 2px}
+  .d-sub i{font-family:var(--mono);font-style:normal;font-size:11px;color:var(--mark);vertical-align:2px}
+  .d-miss{color:var(--graphite);border-bottom:2px dotted var(--danger);padding:1px 2px}
+  .d-extra{font-family:var(--mono);font-size:12px;color:var(--rule);text-decoration:line-through}
+  .legend{font-size:11.5px;color:var(--graphite);line-height:1.9;margin-top:10px}
+  .legend b{color:var(--ink)}
+  .answer{font-family:var(--en);font-size:17px;line-height:1.9;margin-top:10px;
+          background:var(--card);border-left:3px solid var(--live);padding:11px 13px}
+  .answer .who{font-family:var(--mono);font-size:11px;color:var(--graphite);margin-right:6px}
+  .actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .btn{flex:1;min-width:130px;padding:13px;border:1.5px solid var(--ink);background:transparent;
+       font-weight:700;font-size:13px;cursor:pointer}
+  .btn:hover{background:var(--ink);color:var(--card)}
+  .btn.pri{background:var(--ink);color:var(--card)}
+  .btn.pri:hover{opacity:.9}
+
+  .foot{position:sticky;bottom:0;background:var(--card);border-top:1.5px solid var(--ink);
+        padding:9px 12px;padding-bottom:calc(9px + env(safe-area-inset-bottom));flex-shrink:0}
+  .pbar{height:3px;background:var(--rule);margin:-9px -12px 9px;overflow:hidden}
+  .pbar i{display:block;height:100%;background:var(--live);width:0}
+  .frow{display:flex;align-items:center;gap:8px;max-width:640px;margin:0 auto}
+  .play{flex:1;min-height:52px;border:1.5px solid var(--ink);background:var(--ink);color:var(--card);
+        font-weight:800;font-size:14px;letter-spacing:.04em;cursor:pointer}
+  .play.ghost{background:transparent;color:var(--ink)}
+  .nav{min-width:60px;min-height:52px;border:1.5px solid var(--rule);background:transparent;
+       cursor:pointer;font-size:12.5px;font-weight:700}
+  .nav:hover{border-color:var(--ink)}
+  .nav:disabled{color:var(--rule);cursor:default}
+  .nav.go{border-color:var(--ink);background:var(--ink);color:var(--card)}
+  .prow{display:flex;align-items:center;gap:8px;max-width:640px;margin:6px auto 0;justify-content:center}
+  .mini{border:1px solid var(--rule);background:transparent;font-size:11.5px;padding:6px 11px;cursor:pointer}
+  .mini:hover{border-color:var(--ink)}
+  .mini.on{background:var(--live);border-color:var(--live);color:var(--card)}
+</style>
+</head>
+<body>
+<div class="fatal" id="fatal" hidden></div>
+
+<header>
+  <a class="hbtn home" href="../" aria-label="最初の画面へもどる">← 最初の画面</a>
+  <h1>ディクテーション</h1>
+  <button class="hbtn" id="back" hidden>◁ 音源</button>
+</header>
+
+<main>
+  <!-- 音源を選ぶ -->
+  <section class="wrap" id="pick">
+    <p class="lead" id="pickLead">読み込んでいます…</p>
+    <div id="pickList"></div>
+    <div class="memo">
+      聞こえた英文を打ち込んで、答え合わせで<b>どこを聞き落としたか</b>を1文ずつ確かめます。<br>
+      音声は問題ごとに区切ってあります。何度でも聞き直せます。<br>
+      台本のある音源だけがディクテーションできます。
+    </div>
+    <p class="credit" id="pickCredit"></p>
+  </section>
+
+  <!-- ディクテーション -->
+  <section class="wrap" id="quiz" hidden>
+    <p class="crumb"><span id="crumb"></span><span class="of" id="of"></span></p>
+    <p class="hint">音声を聞いて、聞こえた英語をそのまま打ち込んでください。分からないところは飛ばして構いません。</p>
+    <textarea class="type" id="type" placeholder="ここに聞こえた英語を入力…" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
+    <div class="actions">
+      <button class="btn pri" id="check">答え合わせ</button>
+      <button class="btn" id="reveal">答えを見る</button>
+    </div>
+    <div id="result"></div>
+  </section>
+</main>
+
+<div class="foot" id="foot" hidden>
+  <div class="pbar"><i id="pbar"></i></div>
+  <div class="frow">
+    <button class="nav" id="prev">← 前</button>
+    <button class="play" id="play">聞く</button>
+    <button class="nav" id="next">次 →</button>
+  </div>
+  <div class="prow">
+    <button class="mini" id="again">もう一度</button>
+    <button class="mini" id="slow">ゆっくり（0.75×）</button>
+  </div>
+</div>
+
+<audio id="audio" preload="metadata"></audio>
+<script type="module">
+const $ = id => document.getElementById(id);
+const esc = t => String(t).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+const audio = $('audio');
+// catalog.json は listening/ にあり、その中のパスは listening/ を基準にしている。
+// dictation/ から見るときは listening/ を基準に解決する。
+const LBASE = new URL('../listening/', location.href);
+let catalog = null, ttsSets = null, cur = null;   // cur = 選んだ音源
+let mode = 'audio';                  // 'audio'（録音音源）| 'tts'（読み上げ）
+let items = [], qi = 0, region = null, seekTo = null, rate = 1;
+const hasTTS = 'speechSynthesis' in window;
+let saved = {};
+const KEY = () => 'kknote:dictation:' + (cur ? cur.id : '');
+const persist = () => { try { localStorage.setItem(KEY(), JSON.stringify(saved)); } catch {} };
+
+// ---------- 読み込み ----------
+async function boot(){
+  // 2種類の音源をそれぞれ読む。片方が無くても、もう片方だけで動く。
+  try { const r = await fetch(new URL('catalog.json', LBASE), { cache:'no-cache' });
+        if (r.ok) catalog = await r.json(); } catch {}
+  try { const r = await fetch('sets.json', { cache:'no-cache' });
+        if (r.ok) ttsSets = await r.json(); } catch {}
+  if (!catalog && !ttsSets && location.protocol === 'file:') {
+    $('pickLead').innerHTML = 'ファイルとして直接開くと、ブラウザの決まりで問題を読み込めません。'
+      + '簡易サーバー（<code>python -m http.server</code>）か公開ページから開いてください。';
+    return;
+  }
+  drawPick();
+}
+
+function drawPick(){
+  const audioItems = (catalog && catalog.items || []).filter(it => it.script);
+  const tsets = (ttsSets && ttsSets.sets || []);
+  const box = $('pickList'); box.innerHTML = '';
+  $('pickLead').textContent = (audioItems.length || tsets.length)
+    ? 'どれでディクテーションしますか。' : 'ディクテーションできる問題がまだありません。';
+
+  // 共通テストの音源（本命）。実際の試験音声を1問ずつ聞いて書き取る。
+  if (audioItems.length) {
+    box.appendChild(head('共通テストの音源（実際の試験音声）'));
+    for (const it of audioItems)
+      box.appendChild(item(it.short || it.title, `${it.holder || ''}${it.seconds ? '　'+fmt(it.seconds) : ''}`, () => openAudio(it)));
+  }
+  // オリジナル（自作）— 音声ファイル不要。端末が読み上げる。共通テストとは別枠。
+  if (tsets.length) {
+    box.appendChild(head('オリジナル（自作・端末の読み上げ）'));
+    for (const s of tsets) {
+      if (!hasTTS) { box.appendChild(note('この端末は音声読み上げに対応していないため、自作のディクテーションは使えません。')); break; }
+      box.appendChild(item(s.title, `${s.level || ''}　${(s.sentences||[]).length}文`, () => openTTS(s)));
+    }
+  }
+  $('pickCredit').innerHTML = (tsets.length ? '自作の英文は Englishstudy のオリジナルです。' : '')
+    + (audioItems.length ? '　共通テストの音源の出典：「大学入学共通テスト 英語（リスニング）」（大学入試センター https://www.dnc.ac.jp/）を、興國高等学校 橋口周平が利用許諾を得て加工して作成。' : '');
+}
+function head(t){ const p = document.createElement('p');
+  p.style.cssText = 'font-size:10px;letter-spacing:.16em;color:var(--graphite);margin:16px 0 8px'; p.textContent = t; return p; }
+function note(t){ const p = document.createElement('p'); p.className = 'lead'; p.textContent = t; return p; }
+function item(title, sub, fn){
+  const b = document.createElement('button'); b.className = 'pickitem';
+  b.innerHTML = `<b>${esc(title)}</b><small>${esc(sub)}</small>`;
+  b.addEventListener('click', fn); return b;
+}
+
+const fmt = s => `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+
+function startSource(it, built, m){
+  cur = it; mode = m; items = built;
+  try { saved = JSON.parse(localStorage.getItem(KEY()) || '{}'); } catch { saved = {}; }
+  saved.typed = saved.typed || {};
+  qi = items.findIndex((_,i) => saved.typed[i] == null);
+  if (qi < 0) qi = 0;
+  show('quiz'); drawQ();
+}
+
+// 録音音源：1問＝1ブロック。区切りは実測ずみで正確なので、丸ごと聞いて丸ごと書く。
+// 長い講義・モノローグ（1問で2分超など）は書き取りに向かないので、短めの設問だけにする。
+const DICT_MAX_SEC = 55;
+async function openAudio(it){
+  try {
+    const sc = await (await fetch(new URL((catalog.base||'') + it.script, LBASE))).json();
+    const built = (sc.blocks || [])
+      .filter(b => (b.lines||[]).length && (b.end - b.start) <= DICT_MAX_SEC)
+      .map(b => ({
+        label: b.label, start: b.start, end: b.end, lines: b.lines,
+        text: b.lines.map(l => l.text).join(' '),
+      }));
+    if (!built.length) throw new Error('この音源には書き取り向きの設問がありません');
+    audio.src = new URL((catalog.base||'') + it.url, LBASE).href; audio.load();
+    startSource(it, built, 'audio');
+  } catch (err) { $('fatal').textContent = '音源を用意できませんでした：' + err.message; $('fatal').hidden = false; }
+}
+
+// 自作：1問＝1文。端末の読み上げで出題する。
+function openTTS(s){
+  const built = (s.sentences || []).map((t, i) => ({
+    label: `第${i+1}問`, text: t, lines: [{ who:'', text:t }],
+  }));
+  if (!built.length) { $('fatal').textContent = 'この問題集には英文がありません。'; $('fatal').hidden = false; return; }
+  startSource(s, built, 'tts');
+}
+
+// ---------- 画面 ----------
+function show(which){
+  $('pick').hidden = which !== 'pick';
+  $('quiz').hidden = which !== 'quiz';
+  $('foot').hidden = which !== 'quiz';
+  $('back').hidden = which !== 'quiz';
+  stop();
+  const m = document.querySelector('main'); if (m) m.scrollTop = 0;
+}
+$('back').addEventListener('click', () => { show('pick'); drawPick(); });
+
+// ---------- 各問 ----------
+function drawQ(){
+  const it = items[qi];
+  $('crumb').textContent = `${cur.short || cur.title || ''}　${it.label}`;
+  $('of').textContent = `${qi+1} / ${items.length}`;
+  $('type').value = saved.typed[qi] || '';
+  $('type').disabled = false;
+  $('result').innerHTML = '';
+  $('prev').disabled = qi === 0;
+  $('next').textContent = qi === items.length - 1 ? '最後' : '次 →';
+  $('next').classList.toggle('go', saved.typed[qi] != null);
+  $('slow').classList.toggle('on', rate !== 1);
+  $('slow').textContent = rate === 1 ? 'ゆっくり（0.75×）' : 'もとの速さ';
+  $('pbar').parentElement.hidden = mode === 'tts';   // 読み上げでは進みバーは出さない
+  setPlay('聞く'); $('pbar').style.width = '0%';
+  if (saved.typed[qi] != null) showResult();   // 答え合わせ済みなら結果を出す
+}
+
+// ---------- 音声（頭出しは、読み込みを待ってから。効かないときは催促） ----------
+function setPlay(t, ghost){ $('play').textContent = t; $('play').classList.toggle('ghost', !!ghost); }
+function unmute(){ audio.muted = false; }
+function stop(){ audio.pause(); region = null; $('pbar').style.width = '0%';
+  if (seekTo){ clearInterval(seekTo.iv); clearTimeout(seekTo.to); seekTo = null; } unmute();
+  if (hasTTS) speechSynthesis.cancel(); }
+
+// 自作は端末の読み上げで出す
+function speak(){
+  if (!hasTTS) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(items[qi].text);
+  u.lang = 'en-US'; u.rate = rate;
+  u.onstart = () => setPlay('読み上げ中…', true);
+  u.onend = () => setPlay('もう一度聞く');
+  speechSynthesis.speak(u);
+}
+function armSeek(t){
+  if (seekTo){ clearInterval(seekTo.iv); clearTimeout(seekTo.to); seekTo = null; }
+  const done = () => { if (audio.readyState < 1) return false;
+    try { audio.currentTime = t; } catch { return false; }
+    return Math.abs(audio.currentTime - t) < 1.5; };
+  if (done()){ unmute(); return; }
+  audio.muted = true;
+  const iv = setInterval(() => { if (done()){ clearInterval(iv); clearTimeout(to); seekTo = null; unmute(); } }, 100);
+  const to = setTimeout(() => { clearInterval(iv); seekTo = null; unmute(); }, 5000);
+  seekTo = { iv, to };
+}
+function playRegion(fresh){
+  const it = items[qi];
+  audio.playbackRate = rate;
+  region = { start: it.start, end: it.end };
+  if (fresh) armSeek(it.start);
+  audio.play().then(() => setPlay('止める', true)).catch(e => { unmute(); });
+}
+$('play').addEventListener('click', () => {
+  if (mode === 'tts') {   // 読み上げ：鳴っていれば止める、止まっていれば読む
+    if (hasTTS && speechSynthesis.speaking) { speechSynthesis.cancel(); setPlay('もう一度聞く'); }
+    else speak();
+    return;
+  }
+  unmute();
+  if (!audio.paused){ audio.pause(); setPlay('つづき', true); return; }
+  const it = items[qi];
+  const fresh = !region || audio.currentTime < it.start - 0.5 || audio.currentTime >= it.end;
+  playRegion(fresh);
+});
+$('again').addEventListener('click', () => {
+  if (mode === 'tts') { speak(); return; }
+  unmute(); playRegion(true);
+});
+$('slow').addEventListener('click', () => { rate = rate === 1 ? 0.75 : 1;
+  if (mode !== 'tts') audio.playbackRate = rate; drawQ(); });
+audio.addEventListener('timeupdate', () => {
+  if (!region) return;
+  if (audio.currentTime >= region.start - 0.5) unmute();
+  const p = (audio.currentTime - region.start) / (region.end - region.start);
+  $('pbar').style.width = Math.max(0, Math.min(1, p)) * 100 + '%';
+  if (audio.currentTime >= region.end){ audio.pause(); region = null;
+    $('pbar').style.width = '100%'; setPlay('もう一度聞く'); }
+});
+audio.addEventListener('pause', () => { if (region) setPlay('つづき', true); });
+
+// ---------- 答え合わせ ----------
+const cmpKey = w => w.toLowerCase().replace(/[^a-z']/g,'').replace(/'/g,'');
+function tokens(s){ return String(s||'').trim().split(/\s+/).filter(Boolean); }
+function align(a, b){
+  const A = a.length, B = b.length;
+  const d = Array.from({length:A+1}, (_,i) => Array.from({length:B+1}, (_,j) => i===0?j : j===0?i : 0));
+  for (let i=1;i<=A;i++) for (let j=1;j<=B;j++)
+    d[i][j] = a[i-1]===b[j-1] ? d[i-1][j-1] : 1+Math.min(d[i-1][j-1], d[i-1][j], d[i][j-1]);
+  let i=A, j=B; const ops=[];
+  while (i>0 || j>0){
+    if (i>0 && j>0 && a[i-1]===b[j-1]){ ops.push(['eq',i-1,j-1]); i--; j--; }
+    else if (i>0 && j>0 && d[i][j]===d[i-1][j-1]+1){ ops.push(['sub',i-1,j-1]); i--; j--; }
+    else if (i>0 && d[i][j]===d[i-1][j]+1){ ops.push(['miss',i-1,-1]); i--; }
+    else { ops.push(['extra',-1,j-1]); j--; }
+  }
+  return ops.reverse();
+}
+function showResult(){
+  const it = items[qi];
+  const ref = tokens(it.text), said = tokens(saved.typed[qi] || '');
+  const ops = align(ref.map(cmpKey), said.map(cmpKey));
+  let eq = 0;
+  const html = ops.map(([k, ri, si]) => {
+    if (k === 'eq'){ eq++; return `<span class="d-ok">${esc(ref[ri])}</span>`; }
+    if (k === 'sub') return `<span class="d-sub">${esc(ref[ri])}<i>（${esc(said[si])}）</i></span>`;
+    if (k === 'miss') return `<span class="d-miss">${esc(ref[ri])}</span>`;
+    return `<span class="d-extra">${esc(said[si])}</span>`;
+  }).join(' ');
+  const rate2 = ref.length ? Math.round(eq / ref.length * 100) : 0;
+  const miss = ops.filter(o => o[0]==='miss').length, sub = ops.filter(o => o[0]==='sub').length;
+  const ansHtml = it.lines.map(l =>
+    `<div>${l.who ? `<span class="who">${esc(l.who)}</span>` : ''}${esc(l.text)}</div>`).join('');
+  $('result').innerHTML =
+    `<div class="score"><b>${rate2}%</b><span>${ref.length}語のうち ${eq}語 が一致　／　聞き違い ${sub}　／　抜け ${miss}</span></div>`
+    + `<div class="diff">${html}</div>`
+    + `<div class="legend"><b>下線と括弧</b>＝聞き違い（括弧内があなたの入力）　／　`
+    + `<b>点線</b>＝抜けた語　／　<b>取り消し線</b>＝入れすぎた語</div>`
+    + `<div class="answer"><div style="font-size:11px;color:var(--graphite);margin-bottom:4px">正しい英文</div>${ansHtml}</div>`;
+  $('type').disabled = true;
+}
+function doCheck(){
+  saved.typed[qi] = $('type').value || '';
+  persist();
+  showResult();
+  $('next').classList.add('go');
+  $('result').scrollIntoView && $('result').scrollIntoView({ block:'nearest', behavior:'smooth' });
+}
+$('check').addEventListener('click', doCheck);
+$('reveal').addEventListener('click', () => {
+  if (saved.typed[qi] == null){ saved.typed[qi] = $('type').value || ''; persist(); }
+  showResult();
+});
+
+// ---------- 前後 ----------
+$('prev').addEventListener('click', () => { if (qi > 0){ qi--; drawQ(); } });
+$('next').addEventListener('click', () => { if (qi < items.length - 1){ qi++; drawQ(); } });
+
+window.addEventListener('error', e => { $('fatal').textContent = '動作に問題が起きました：' + e.message; $('fatal').hidden = false; });
+boot();
+</script>
+</body>
+</html>
